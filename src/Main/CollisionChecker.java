@@ -188,7 +188,7 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                         }
                         if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-                            entity.npcIndex = i;
+                            index = i;
                             entity.interactRange = true;
                         }
                         break;
@@ -198,7 +198,7 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                         }
                         if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-                            entity.npcIndex = i;
+                            index = i;
                             entity.interactRange = true;
                         }
                         break;
@@ -208,7 +208,7 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                         }
                         if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-                            entity.npcIndex = i;
+                            index = i;
                             entity.interactRange = true;
                         }
                         break;
@@ -221,7 +221,7 @@ public class CollisionChecker {
                         break;
                         }
                 if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-                    entity.npcIndex = i;
+                    index = i;
                     entity.interactRange = true;
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
@@ -233,7 +233,7 @@ public class CollisionChecker {
             }
         }
 
-        return entity.npcIndex;
+        return index;
     }
     public void checkPlayer(Entity entity) {
         //get entity solid area position

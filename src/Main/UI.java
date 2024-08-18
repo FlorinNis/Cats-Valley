@@ -27,7 +27,7 @@ public class UI {
     GamePanel gp;
     Font Ancient_Modern_Tales, maruMonica;
 
-    BufferedImage heart_full, heart_half, heart_blank, bg, inventory_Slot;
+    BufferedImage heart_full, heart_half, heart_blank, bg, inventory_Slot, textBoxImage;
 
     public boolean messageOn = false;
     public String message = "";
@@ -65,6 +65,7 @@ public class UI {
 
         Entity inventorySlot = new InventorySlot(gp);
         inventory_Slot = inventorySlot.image;
+        textBoxImage = setup("/UI/text_box_npc.png");
     }
 
     public void showMessage(String text) {
@@ -85,6 +86,7 @@ public class UI {
         if(gp.gameState == gp.playState) {
             drawPlayerLife();
             drawItemHolding();
+            drawDialogueBoxNPC();
         }
         //dialogueState
         if(gp.gameState == gp.dialogueState) {
@@ -111,6 +113,19 @@ public class UI {
         if(gp.gameState == gp.inventoryState) {
             drawInventoryScreen();
         }
+    }
+
+    public void drawDialogueBoxNPC() {
+        if (gp.player.npcIndex == 999) return; // No NPC nearby, exit early
+
+        Entity targetNPC = gp.npc[gp.currentMap][gp.player.npcIndex];
+
+        int boxX = targetNPC.worldX - textBoxImage.getWidth(null) / 2;
+        int boxY = targetNPC.worldY - 80; // Adjust this value as needed
+
+        // Draw the dialogue box
+        g2.drawImage(textBoxImage, boxX, boxY, null);
+
     }
 
 

@@ -133,7 +133,7 @@ public class Player extends Entity{
             pickUpObject(objIndex, gp.dialogueState);
 
             //check npc collision
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
             System.out.println(npcIndex);
 
@@ -519,6 +519,7 @@ public class Player extends Entity{
         if(invincible == true) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
+
         g2.drawImage(image, screenX, screenY, null);
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

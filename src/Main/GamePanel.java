@@ -321,27 +321,27 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void dialogueBoxNPC(Entity entity, Graphics2D g2) {
-        // Position above NPC
-        int boxWidth = 120;
-        int boxHeight = 40;
-        int boxX = entity.worldX + (tileSize - boxWidth) / 2;
-        int boxY = entity.worldY - boxHeight - 10;
-
-        // Draw the box
-        g2.setColor(new Color(0, 0, 0, 150)); // Black background with some transparency
-        g2.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
-
-        // Draw the border
-        g2.setColor(Color.WHITE); // White border
-        g2.drawRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
-
-        // Draw the text
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 12F));
-        g2.setColor(Color.WHITE); // White text
-        String message = "Press E to interact...";
-        int textX = boxX + 10; // Padding from the left side
-        int textY = boxY + 25; // Padding from the top
-        g2.drawString(message, textX, textY);
-    }
+//    public void dialogueBoxNPC(Entity entity, Graphics2D g2) {
+//        // Position above NPC
+//        int boxWidth = 120;
+//        int boxHeight = 40;
+//        int boxX = entity.worldX + (tileSize - boxWidth) / 2;
+//        int boxY = entity.worldY - boxHeight - 10;
+//
+//        // Draw the box
+//        g2.setColor(new Color(0, 0, 0, 150)); // Black background with some transparency
+//        g2.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
+//
+//        // Draw the border
+//        g2.setColor(Color.WHITE); // White border
+//        g2.drawRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
+//
+//        // Draw the text
+//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 12F));
+//        g2.setColor(Color.WHITE); // White text
+//        String message = "Press E to interact...";
+//        int textX = boxX + 10; // Padding from the left side
+//        int textY = boxY + 25; // Padding from the top
+//        g2.drawString(message, textX, textY);
+//    }
 }
