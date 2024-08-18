@@ -40,6 +40,7 @@ public class UI {
     int subState = 0;
     public BufferedImage backgroundImage;
     public int selectedSlotIndex = 0;
+    public int lastNpcIndex = 0;
 
     public UI(GamePanel gp) {
 
@@ -65,7 +66,7 @@ public class UI {
 
         Entity inventorySlot = new InventorySlot(gp);
         inventory_Slot = inventorySlot.image;
-        textBoxImage = setup("/UI/text_box_npc.png");
+        textBoxImage = setupWithoutScale("/UI/text_box_npc");
     }
 
     public void showMessage(String text) {
@@ -84,9 +85,9 @@ public class UI {
 
         //playState
         if(gp.gameState == gp.playState) {
+            drawDialogueBoxNPC();
             drawPlayerLife();
             drawItemHolding();
-            drawDialogueBoxNPC();
         }
         //dialogueState
         if(gp.gameState == gp.dialogueState) {
@@ -115,16 +116,43 @@ public class UI {
         }
     }
 
-    public void drawDialogueBoxNPC() {
-        if (gp.player.npcIndex == 999) return; // No NPC nearby, exit early
+    private void drawDialogueBoxNPC() {
+        System.out.println("Player index dialog: " + gp.player.npcIndex);
+        System.out.println("Ajunge in dialogueBox dar nu il afiseaza");
+        if (gp.player.npcIndex == 999 && gp.currentMap == 0) {
+            gp.npc[gp.currentMap][lastNpcIndex].speed = 1;
+            return;
+        }
+        else if(gp.currentMap == 0){
+            lastNpcIndex = gp.player.npcIndex;
+            gp.npc[gp.currentMap][gp.player.npcIndex].speed = 0;
+            // Get NPC's world position
+            int worldX = gp.npc[gp.currentMap][gp.player.npcIndex].worldX;
+            int worldY = gp.npc[gp.currentMap][gp.player.npcIndex].worldY;
 
-        Entity targetNPC = gp.npc[gp.currentMap][gp.player.npcIndex];
+            // Convert to screen position based on player's position
+            int screenX = worldX - gp.player.worldX + gp.player.screenX;
+            int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        int boxX = targetNPC.worldX - textBoxImage.getWidth(null) / 2;
-        int boxY = targetNPC.worldY - 80; // Adjust this value as needed
+            // Calculate the position for the dialogue box
+            int boxX = screenX + 20;
+            int boxY = screenY - gp.tileSize + 15;
+            System.out.println(boxX + " y = " + boxY);
 
-        // Draw the dialogue box
-        g2.drawImage(textBoxImage, boxX, boxY, null);
+            // Draw the dialogue box
+            g2.drawImage(textBoxImage, boxX, boxY, null);
+
+            int x;
+            int y;
+            String text;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 12f));
+
+            text = "Press e to interact...";
+            g2.setColor(Color.white);
+            x = boxX + 10;
+            y = boxY + 20;
+            g2.drawString(text, x, y);
+        }
 
     }
 
@@ -717,6 +745,20 @@ public class UI {
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+
+    public BufferedImage setupWithoutScale(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
         }catch(IOException e) {
             e.printStackTrace();
         }

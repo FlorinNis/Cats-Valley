@@ -3,6 +3,7 @@ package Main;
 import Entity.Entity;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class CollisionChecker {
 
@@ -152,6 +153,55 @@ public class CollisionChecker {
                             }
                         }
                         break;
+                        //diagonal collision
+                    case "upleft":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
+                            if(gp.obj[gp.currentMap][i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if(player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "upright":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x += entity.speed;
+                        if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
+                            if(gp.obj[gp.currentMap][i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if(player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "downleft":
+                        entity.solidArea.y += entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
+                            if(gp.obj[gp.currentMap][i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if(player) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "downright":
+                        entity.solidArea.y += entity.speed;
+                        entity.solidArea.x += entity.speed;
+                        if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
+                            if(gp.obj[gp.currentMap][i].collision) {
+                                entity.collisionOn = true;
+                            }
+                            if(player) {
+                                index = i;
+                            }
+                        }
+                        break;
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
@@ -219,11 +269,44 @@ public class CollisionChecker {
                             entity.interactRange = true;
                         }
                         break;
+                    case "upleft":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
                         }
-                if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-                    index = i;
-                    entity.interactRange = true;
+                        break;
+                    case "upright":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x += entity.speed;
+                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "downleft":
+                        entity.solidArea.y += entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "downright":
+                        entity.solidArea.y += entity.speed;
+                        entity.solidArea.x += entity.speed;
+                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
                 }
+//                if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
+//                    index = i;
+//                    entity.interactRange = true;
+//                }
+//                break;
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].solidAreaDefaultX;
@@ -242,6 +325,8 @@ public class CollisionChecker {
         //get player solid area pos
         gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+
+        if(Objects.equals(entity.name, "Green Slime")) entity.isEnemy = true;
 
 
         switch (entity.direction) {
@@ -273,6 +358,39 @@ public class CollisionChecker {
                     entity.hitPlayer = true;
                 }
                 break;
+            case "upleft":
+                entity.solidArea.y -= entity.speed;
+                entity.solidArea.x -= entity.speed;
+                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+                    entity.hitPlayer = true;
+                }
+                break;
+            case "upright":
+                entity.solidArea.y -= entity.speed;
+                entity.solidArea.x += entity.speed;
+                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+                    entity.hitPlayer = true;
+                }
+                break;
+            case "downleft":
+                entity.solidArea.y += entity.speed;
+                entity.solidArea.x -= entity.speed;
+                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+                    entity.hitPlayer = true;
+                }
+                break;
+            case "downright":
+                entity.solidArea.y += entity.speed;
+                entity.solidArea.x += entity.speed;
+                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+                    entity.hitPlayer = true;
+                }
+                break;
+
         }
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
