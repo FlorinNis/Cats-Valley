@@ -119,22 +119,24 @@ public class UI {
     private void drawDialogueBoxNPC() {
         System.out.println("Player index dialog: " + gp.player.npcIndex);
         System.out.println("Ajunge in dialogueBox dar nu il afiseaza");
-        if (gp.player.npcIndex == 999 && gp.currentMap == 0) {
+        if (gp.player.npcIndex == 999 && gp.currentMap == 0 && lastNpcIndex != 1) {
             gp.npc[gp.currentMap][lastNpcIndex].speed = 1;
             return;
         }
-        else if(gp.currentMap == 0){
+        else if(gp.currentMap == 0  && gp.player.npcIndex != 999){
             lastNpcIndex = gp.player.npcIndex;
-            gp.npc[gp.currentMap][gp.player.npcIndex].speed = 0;
-            // Get NPC's world position
+            if(gp.player.npcIndex != 1)
+                gp.npc[gp.currentMap][gp.player.npcIndex].speed = 0;
+
+            // Poz npc
             int worldX = gp.npc[gp.currentMap][gp.player.npcIndex].worldX;
             int worldY = gp.npc[gp.currentMap][gp.player.npcIndex].worldY;
 
-            // Convert to screen position based on player's position
+            // Gasesc pozitia pe ecran relativ cu pozitia player-ului
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            // Calculate the position for the dialogue box
+            // Calibrez pozitia cu un mic offset
             int boxX = screenX + 20;
             int boxY = screenY - gp.tileSize + 15;
             System.out.println(boxX + " y = " + boxY);

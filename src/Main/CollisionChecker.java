@@ -268,45 +268,65 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                             entity.interactRange = true;
                         }
+                        if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
+                            index = i;
+                            entity.interactRange = true;
+                        }
                         break;
+                    //diagonal collision
                     case "upleft":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x -= entity.speed;
-                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                             entity.collisionOn = true;
+                            entity.interactRange = true;
+                        }
+                        if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
                             index = i;
+                            entity.interactRange = true;
                         }
                         break;
                     case "upright":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x += entity.speed;
-                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                             entity.collisionOn = true;
+                            entity.interactRange = true;
+                        }
+                        if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
                             index = i;
+                            entity.interactRange = true;
                         }
                         break;
                     case "downleft":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x -= entity.speed;
-                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                             entity.collisionOn = true;
+                            entity.interactRange = true;
+                        }
+                        if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
                             index = i;
+                            entity.interactRange = true;
                         }
                         break;
                     case "downright":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x += entity.speed;
-                        if(entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                             entity.collisionOn = true;
+                            entity.interactRange = true;
+                        }
+                        if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
                             index = i;
+                            entity.interactRange = true;
                         }
                         break;
                 }
-//                if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
-//                    index = i;
-//                    entity.interactRange = true;
-//                }
-//                break;
+                if(entity.solidArea.intersects((target[gp.currentMap][i].checkNPC))) {
+                    index = i;
+                    entity.interactRange = true;
+                }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].solidAreaDefaultX;
@@ -358,10 +378,11 @@ public class CollisionChecker {
                     entity.hitPlayer = true;
                 }
                 break;
+            //diagonal collision
             case "upleft":
                 entity.solidArea.y -= entity.speed;
                 entity.solidArea.x -= entity.speed;
-                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
@@ -369,7 +390,7 @@ public class CollisionChecker {
             case "upright":
                 entity.solidArea.y -= entity.speed;
                 entity.solidArea.x += entity.speed;
-                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
@@ -377,7 +398,7 @@ public class CollisionChecker {
             case "downleft":
                 entity.solidArea.y += entity.speed;
                 entity.solidArea.x -= entity.speed;
-                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
@@ -385,12 +406,11 @@ public class CollisionChecker {
             case "downright":
                 entity.solidArea.y += entity.speed;
                 entity.solidArea.x += entity.speed;
-                if(entity.solidArea.intersects(gp.player.solidArea)) {
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
                 break;
-
         }
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
@@ -456,6 +476,39 @@ public class CollisionChecker {
                         }
                         break;
                     case "right":
+                        entity.solidArea.x += entity.speed;
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    //diagonal collision
+                    case "upleft":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "upright":
+                        entity.solidArea.y -= entity.speed;
+                        entity.solidArea.x += entity.speed;
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "downleft":
+                        entity.solidArea.y += entity.speed;
+                        entity.solidArea.x -= entity.speed;
+                        if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "downright":
+                        entity.solidArea.y += entity.speed;
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
                             entity.collisionOn = true;

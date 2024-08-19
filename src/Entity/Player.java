@@ -238,6 +238,9 @@ public class Player extends Entity{
         //checkTile Collision
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        //checkObject collision
+        int objIndex = gp.cChecker.checkObject(this, true);
+        pickUpObject(objIndex, gp.dialogueState);
 
         //check event
         gp.eHandler.checkEvent();
@@ -277,7 +280,40 @@ public class Player extends Entity{
                     break;
             }
         }
-
+        //ca sa nu se mai blocheze in perete cand dau dash, daca da de o coliziune se da mai in spate cu un pixel
+        else{
+            switch (direction) {
+                case "up":
+                    worldY += speed;
+                    break;
+                case "down":
+                    worldY -= speed;
+                    break;
+                case "left":
+                    worldX += speed;
+                    break;
+                case "right":
+                    worldX -= speed;
+                    break;
+                case "upleft":
+                    worldY += speed / 1.5;
+                    worldX += speed / 1.5;
+                    break;
+                case "upright":
+                    worldY += speed / 1.5;
+                    worldX -= speed / 1.5;
+                    break;
+                case "downleft":
+                    worldY -= speed / 1.5;
+                    worldX += speed / 1.5;
+                    break;
+                case "downright":
+                    worldY -= speed / 1.5;
+                    worldX -= speed / 1.5;
+                    break;
+            }
+        }
+        //contor pentru a nu da dash la infinit
         if (dashCounter >= dashDuration) {
             isDashing = false;
             dashCounter = 0;
