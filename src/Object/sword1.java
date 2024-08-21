@@ -14,5 +14,7 @@ public class sword1 extends Entity {
         down1 = setup("/Player/player_sword_1/sword_1");
         qty = 0;
         itemDescription = "Does it work?";
+        equipable = true;
+        equiped = false;
     }
 }

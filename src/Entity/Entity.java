@@ -25,12 +25,15 @@ public class Entity {
     public boolean hitPlayer = false;
     public boolean isEnemy = false;
     public boolean interactRange = false;
+    public boolean locked = false;
     public int npcIndex = 999;
     public boolean isNPC = false;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage updash, rightdash, leftdash, downdash, rightdiagdash, leftdiagdash, updash1, updash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
+    public BufferedImage closed, open;
+    public boolean playedSound = false;
     public String direction = "down";
 
     public int spriteCounter = 0;
@@ -59,6 +62,7 @@ public class Entity {
     public int ui_InventorySlots;
     public int full_InventorySlots;
     public String itemDescription;
+    public boolean equipable, equiped;
 
     public int life;
     public Entity(GamePanel gp) {

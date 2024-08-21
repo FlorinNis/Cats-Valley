@@ -31,6 +31,7 @@ public class AssetSetter {
         //gp.obj[1].worldY = 26 * gp.tileSize;
 
         gp.obj[0][2] = new Door(gp);
+        gp.obj[0][2].locked = true;
         gp.obj[0][2].worldX = 62 * gp.tileSize;
         gp.obj[0][2].worldY = 13 * gp.tileSize;
 
@@ -49,6 +50,31 @@ public class AssetSetter {
         gp.obj[0][6] = new sword1(gp);
         gp.obj[0][6].worldX = 33 * gp.tileSize;
         gp.obj[0][6].worldY = 47 * gp.tileSize;
+
+        gp.obj[0][7] = new Door(gp);
+        gp.obj[0][7].locked = false;
+        gp.obj[0][7].worldX = 59 * gp.tileSize;
+        gp.obj[0][7].worldY = 60 * gp.tileSize;
+
+        gp.obj[0][8] = new Door(gp);
+        gp.obj[0][8].locked = false;
+        gp.obj[0][8].worldX = 62 * gp.tileSize;
+        gp.obj[0][8].worldY = 56 * gp.tileSize;
+
+        gp.obj[0][9] = new Door(gp);
+        gp.obj[0][9].locked = false;
+        gp.obj[0][9].worldX = 84 * gp.tileSize;
+        gp.obj[0][9].worldY = 76 * gp.tileSize;
+
+        gp.obj[0][10] = new Door(gp);
+        gp.obj[0][10].locked = false;
+        gp.obj[0][10].worldX = 36 * gp.tileSize;
+        gp.obj[0][10].worldY = 76 * gp.tileSize;
+
+        gp.obj[0][11] = new Door(gp);
+        gp.obj[0][11].locked = false;
+        gp.obj[0][11].worldX = 37 * gp.tileSize;
+        gp.obj[0][11].worldY = 47 * gp.tileSize;
     }
     public void setNPC() {
 

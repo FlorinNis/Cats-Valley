@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity{
 
@@ -23,8 +24,10 @@ public class Player extends Entity{
     public final int screenY;
     public int hasKey = 0;
     public Entity[] itemsHeld = new Entity[35];
+    public Entity[] handItem = new Entity[2];
     public int invContor = 0;
     public int itemsHeldSize = 0;
+    public int openDoorIndex = 7;
     int finalDialog = 0;
 
     private Player(GamePanel gp, KeyHandler keyH) {
@@ -143,7 +146,19 @@ public class Player extends Entity{
             //checkObject collision
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex, gp.dialogueState);
-
+            if(objIndex != 999 && gp.obj[gp.currentMap][objIndex] != null){
+                if(Objects.equals(gp.obj[gp.currentMap][objIndex].name, "Door")) {
+                    gp.obj[gp.currentMap][objIndex].down1 = gp.obj[gp.currentMap][objIndex].open;
+                    openDoorIndex = objIndex;
+                    if(!playedSound) {
+                        gp.playSF(3);
+                        playedSound = true;
+                    }
+                }
+            }else {
+                gp.obj[gp.currentMap][openDoorIndex].down1 = gp.obj[gp.currentMap][openDoorIndex].closed;
+                playedSound = false;
+            }
             //check npc collision
             npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
@@ -363,17 +378,23 @@ public class Player extends Entity{
                     itemsHeld[invContor++].qty++;
                     itemsHeldSize++;
                     gp.obj[gp.currentMap][i] = null;
+                    //gp.drawToTempScreen();
                     gp.ui.currentDialogue = "You picked up a key!";
                     break;
                 case "Door":
-                    gp.gameState = gameState;
-                    if(hasKey > 0) {
+                    if(!gp.obj[gp.currentMap][i].locked){
+                        gp.obj[gp.currentMap][i].collision = false;
+                        gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].open;
+                    }
+                    else if(hasKey > 0) {
+                        gp.gameState = gameState;
                         gp.playSF(3);
-                        gp.obj[gp.currentMap][i] =  null;
+                        gp.obj[gp.currentMap][i].locked = false;
                         hasKey--;
                         gp.ui.currentDialogue = "You opened the door!";
                     }
                     else {
+                        gp.gameState = gameState;
                         gp.ui.currentDialogue = "You need a key!";
                     }
                     break;
@@ -395,9 +416,8 @@ public class Player extends Entity{
                     gp.playSF(2);
                     itemsHeld[invContor++] = gp.obj[gp.currentMap][i];
                     itemsHeldSize++;
-                    hasSword = true;
                     gp.obj[gp.currentMap][i] = null;
-                    gp.ui.currentDialogue = "You picked up a SWORD! :O";
+                    gp.ui.currentDialogue = "You picked up a SWORD! :O  Press I to equip it!";
             }
         }
     }
