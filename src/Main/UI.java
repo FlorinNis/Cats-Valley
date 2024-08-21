@@ -243,6 +243,7 @@ public class UI {
             e.printStackTrace();
         }
         g2.drawImage(descriptionBoxImage, infoBoxX, infoBoxY, infoBoxWidth, infoBoxHeight, null);
+        g2.drawString(item.name, infoBoxX +10, infoBoxY+10);
 
         // Draw larger item image
         g2.drawImage(item.down1, infoBoxX + gp.tileSize, infoBoxY + gp.tileSize, gp.tileSize * 2, gp.tileSize * 2, null);

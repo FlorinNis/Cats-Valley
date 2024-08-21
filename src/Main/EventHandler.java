@@ -54,7 +54,7 @@ public class EventHandler {
 
 
         if(canTouchEvent == true) {
-            if (hit(0, 14, 26, "any") == true) {
+            if (hit(0, 70, 10, "any") == true) {
                 gp.playSF(5);
                 teleport(1, 12, 13);
             } else if (hit(1, 12, 13, "any") == true) {
