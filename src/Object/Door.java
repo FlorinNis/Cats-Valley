@@ -14,7 +14,10 @@ public class Door extends Entity {
 
         name = "Door";
         down1 = setup("/Object/door");
+        open = setup("/Object/door_unlocked");
+        closed = setup("/Object/door");
 
         collision = true;
+        locked = false;
     }
 }

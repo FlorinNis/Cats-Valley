@@ -30,6 +30,7 @@ public class UI {
     BufferedImage heart_full, heart_half, heart_blank, bg, inventory_Slot, textBoxImage;
 
     public boolean messageOn = false;
+    public int equipmentIndex = 0;
     public String message = "";
     public boolean showKey = false;
     public int messageCounter = 0;
@@ -39,6 +40,7 @@ public class UI {
     public int titleScreenState = 0; //0: NEW GAME, 1:SETTINGS
     int subState = 0;
     public BufferedImage backgroundImage;
+    public boolean equipPressed = false;
     public int selectedSlotIndex = 0;
     public int lastNpcIndex = 0;
 
@@ -117,8 +119,6 @@ public class UI {
     }
 
     private void drawDialogueBoxNPC() {
-        System.out.println("Player index dialog: " + gp.player.npcIndex);
-        System.out.println("Ajunge in dialogueBox dar nu il afiseaza");
         if (gp.player.npcIndex == 999 && gp.currentMap == 0 && lastNpcIndex != 1) {
             gp.npc[gp.currentMap][lastNpcIndex].speed = 1;
             return;
@@ -199,12 +199,16 @@ public class UI {
             g2.drawImage(inventory_Slot, x, y, null);
             i++;
             x += gp.tileSize + 5;
-            System.out.println(i);
             if(i % 7 == 0) {
                 y += gp.tileSize;
                 x = gp.tileSize * 6;
             }
         }
+        x = gp.tileSize * 15;
+        y = gp.tileSize * 4;
+        g2.drawImage(inventory_Slot, x, y, null);
+        y += gp.tileSize;
+        g2.drawImage(inventory_Slot, x, y, null);
         //Populate Inv
         i = 0;
         int qty = 0;
@@ -216,8 +220,6 @@ public class UI {
                 // Display larger image and description
                 drawSelectedItemInfo(gp.player.itemsHeld[i]);
             }
-            System.out.println(gp.player.itemsHeld[i].name);
-            System.out.println("test inventar");
             qty = gp.player.itemsHeld[i].qty;
             i++;
             x += gp.tileSize + 5;
@@ -252,7 +254,33 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15f));
         g2.setColor(Color.white);
         g2.drawString(item.itemDescription, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 4);
-        g2.drawString("Qty: " + item.qty, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
+        if(item.equipable){
+            if(equipPressed){
+                if(item.equiped){
+                    gp.player.handItem[--equipmentIndex] = null;
+                    equipPressed = false;
+                    gp.player.hasSword = false;
+                    item.equiped = false;
+                }
+                else if(gp.player.handItem[equipmentIndex] == null) {
+                    gp.player.handItem[equipmentIndex] = item;
+                    item.equiped = true;
+                    equipmentIndex++;
+                    equipPressed = false;
+                    gp.player.hasSword = true;
+                }
+                if(gp.player.handItem[equipmentIndex] == null)
+                    g2.drawString("Press e to equip", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
+                else
+                    g2.drawString("Press e to remove", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
+            }
+        }else g2.drawString("Qty: " + item.qty, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
+        int i = 0;
+        while(i < 2 && gp.player.handItem[i] != null){
+            g2.drawImage(gp.player.handItem[i].down1, gp.tileSize * 15, gp.tileSize * 4, gp.tileSize, gp.tileSize, null);
+            i++;
+        }
+
     }
 
     public void drawGameOverScreen() {
@@ -727,11 +755,11 @@ public class UI {
         i = 0;
 
         //draw current inventory
-//        while(i < gp.player.itemHeld) {
-//            g2.drawImage(itemHeld, x, y, null);
-//            i++;
-//            x += gp.tileSize;
-//        }
+        while(gp.player.handItem[i] != null) {
+            g2.drawImage(gp.player.handItem[i].down1, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
     }
     public int getXForCenteredText(String text) {
 

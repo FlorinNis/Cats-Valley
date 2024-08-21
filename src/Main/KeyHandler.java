@@ -184,6 +184,9 @@ public class KeyHandler implements KeyListener{
                 }
                 gp.ui.selectedSlotIndex--;
             }
+            if (code == KeyEvent.VK_E){
+                gp.ui.equipPressed = true;
+            }
         }
     }
     public void optionsState(int code) {

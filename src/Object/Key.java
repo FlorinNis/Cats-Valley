@@ -14,5 +14,6 @@ public class Key extends Entity {
         down1 = setup("/Object/key");
         qty = 0;
         itemDescription = "It must open something...";
+        equipable = false;
     }
 }
