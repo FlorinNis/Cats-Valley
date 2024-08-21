@@ -30,55 +30,55 @@ public class TileManager {
         } catch (CustomException e) {
             e.printStackTrace();
         }
-        loadMap("/Map/map.txt", 0);
+        loadMap("/Map/Sar_Island.txt", 0);
         loadMap("/Map/dungeon1.txt", 1);
         loadMap("/Map/dungeon2.txt", 2);
     }
 
     public void getTileImage() throws CustomException {
 
-        setup(0, "grass_tile", false);
-        setup(1, "wall", true);
-        setup(2, "water", true);
-        setup(3, "tree", true);
-        setup(4, "road", false);
-        setup(5, "port", false);
-        setup(6, "wall_house", true);
-        setup(7, "door", true);
-        setup(8, "roof_left", true);
-        setup(9, "roof_right", true);
-        setup(10, "roof_top", true);
-        setup(11, "floor", false);
-        setup(24, "grass/grass", false);
-        setup(25, "grass/grass_snow_down", false);
-        setup(26, "grass/grass_snow_left", false);
-        setup(27, "grass/grass_snow_right", false);
-        setup(28, "grass/grass_snow_up", false);
-        setup(29, "grass/coltstangasus", false);
-        setup(30, "grass/colt_stanga_jos", false);
-        setup(31, "grass/colt_dreapta_jos", false);
-        setup(32, "grass/colt_dreapta_sus", false);
-        setup(34, "void", true);
-        setup(40, "floorDungeon", false);
+        setup(0, "door", true);
+        setup(1, "floor", false);
+        setup(2, "floorDungeon", false);
+        setup(3, "grass_tile", false);
+        setup(4, "port", true);
+        setup(5, "road", false);
+        setup(6, "rock", true);
+        setup(7, "roof_left", true);
+        setup(8, "roof_right", true);
+        setup(9, "roof_top", true);
+        setup(10, "shipwreck", true);
+        setup(11, "simple_grass", false);
+        setup(12, "stairs", false);
+        setup(13, "tree", true);
+        setup(14, "void", false);
+        setup(15, "wall", true);
+        setup(16, "wall_house", true);
+        setup(17, "water", true);
+        //setup(18, "water", false);
+//        setup(31, "grass/colt_dreapta_jos", false);
+//        setup(32, "grass/colt_dreapta_sus", false);
+//        setup(34, "void", true);
+//        setup(40, "floorDungeon", false);
 
 
         //water tiles
-        setup(12, "Water/water_top", true);
-        setup(13, "Water/water_left", true);
-        setup(14, "Water/water_right", true);
-        setup(15, "Water/water_down", true);
-        setup(16, "Water/water_corner_left_up", true);
-        setup(17, "Water/water_corner_left_down", true);
-        setup(18, "Water/water_corner_right_up", true);
-        setup(19, "Water/water_corner_right_down", true);
-        setup(22, "Water/water_ice", true);
+        setup(18, "Water/water_corner_left_down", true);
+        setup(19, "Water/water_corner_left_up", true);
+        setup(20, "Water/water_corner_right_down", true);
+        setup(21, "Water/water_corner_right_up", true);
+        setup(22, "Water/water_down", true);
+        setup(23, "Water/water_ice", true);
+        setup(24, "Water/water_left", true);
+        setup(25, "Water/water_right", true);
+        setup(26, "Water/water_top", true);
 
         //aesthetics
-        setup(20, "simple_grass", false);
-        setup(21, "rock", true);
-        setup(23, "shipwreck", true);
-
-        setup(33, "stairs", false);
+//        setup(20, "simple_grass", false);
+//        setup(21, "rock", true);
+//        setup(23, "shipwreck", true);
+//
+//        setup(33, "stairs", false);
 
 //        setup(49, "/Effects/dash_left_diag", false);
 //        setup(48, "/Effects/dash_left_right", false);

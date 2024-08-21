@@ -23,6 +23,7 @@ public class Player extends Entity{
     public final int screenY;
     public int hasKey = 0;
     public Entity[] itemsHeld = new Entity[35];
+    public int invContor = 0;
     public int itemsHeldSize = 0;
     int finalDialog = 0;
 
@@ -73,12 +74,23 @@ public class Player extends Entity{
         updash1 = setup("/Effects/up_dash_1");
         updash2 = setup("/Effects/up_dash_2");
 
+        up1_sword = setupScaleForSword("/Player/player_sword_1/up_1_sword_1");
+        up2_sword = setupScaleForSword("/Player/player_sword_1/up_2_sword_1");
+        down1_sword = setupScaleForSword("/Player/player_sword_1/down_1_sword_1");
+        down2_sword = setupScaleForSword("/Player/player_sword_1/down_2_sword_1");
+        left1_sword = setupScaleForSword("/Player/player_sword_1/left_1_sword_1");
+        left2_sword = setupScaleForSword("/Player/player_sword_1/left_2_sword_1");
+        right1_sword = setupScaleForSword("/Player/player_sword_1/right_1_sword_1");
+        right2_sword = setupScaleForSword("/Player/player_sword_1/right_2_sword_1");
+        stand1_sword = setupScaleForSword("/Player/player_sword_1/stand_1_sword_1");
+        stand2_sword = setupScaleForSword("/Player/player_sword_1/stand_2_sword_1");
+
     }
 
     public void setDefaultValues() {
 
-        worldX = gp.tileSize * 28;
-        worldY = gp.tileSize * 24;
+        worldX = gp.tileSize * 58;
+        worldY = gp.tileSize * 86;
         speed = 4;
         dashSpeed = speed * 3;
         direction = "stand";
@@ -347,8 +359,8 @@ public class Player extends Entity{
                     gp.gameState = gameState;
                     gp.playSF(2);
                     hasKey++;
-                    itemsHeld[0] = gp.obj[gp.currentMap][i];
-                    itemsHeld[0].qty++;
+                    itemsHeld[invContor] = gp.obj[gp.currentMap][i];
+                    itemsHeld[invContor++].qty++;
                     itemsHeldSize++;
                     gp.obj[gp.currentMap][i] = null;
                     gp.ui.currentDialogue = "You picked up a key!";
@@ -378,6 +390,14 @@ public class Player extends Entity{
                     gp.gameState = gameState;
 
                     break;
+                case "Sword of Beelzebub":
+                    gp.gameState = gameState;
+                    gp.playSF(2);
+                    itemsHeld[invContor++] = gp.obj[gp.currentMap][i];
+                    itemsHeldSize++;
+                    hasSword = true;
+                    gp.obj[gp.currentMap][i] = null;
+                    gp.ui.currentDialogue = "You picked up a SWORD! :O";
             }
         }
     }
@@ -410,13 +430,17 @@ public class Player extends Entity{
         switch(direction) {
             case "up":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = updash;
                     }
                     if (spriteNum == 2) {
                         image = updash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = up1;
                     }
@@ -424,132 +448,236 @@ public class Player extends Entity{
                         image = up2;
                     }
                 }
+                else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = up1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = up2_sword;
+                    }
+                }
                 break;
             case "down":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = downdash;
                     }
                     if (spriteNum == 2) {
                         image = downdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = down1;
                     }
                     if (spriteNum == 2) {
                         image = down2;
                     }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = down1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = down2_sword;
+                    }
                 }
                 break;
             case "left":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = leftdash;
                     }
                     if (spriteNum == 2) {
                         image = leftdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = left1;
                     }
                     if (spriteNum == 2) {
                         image = left2;
+                    }
+                }else{
+                    if(spriteNum == 1){
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                        image = left1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = left2_sword;
                     }
                 }
                 break;
             case "right":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = rightdash;
                     }
                     if (spriteNum == 2) {
                         image = rightdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = right1;
                     }
                     if (spriteNum == 2) {
                         image = right2;
+                    }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = right1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = right2_sword;
                     }
                 }
                 break;
             case "upright":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = rightdiagdash;
                     }
                     if (spriteNum == 2) {
                         image = rightdiagdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = right1;
                     }
                     if (spriteNum == 2) {
                         image = right2;
+                    }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = right1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = right2_sword;
                     }
                 }
                 break;
             case "upleft":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = leftdiagdash;
                     }
                     if (spriteNum == 2) {
                         image = leftdiagdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = left1;
                     }
                     if (spriteNum == 2) {
                         image = left2;
                     }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = left1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = left2_sword;
+                    }
                 }
                 break;
             case "downright":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = rightdiagdash;
                     }
                     if (spriteNum == 2) {
                         image = rightdiagdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = right1;
                     }
                     if (spriteNum == 2) {
                         image = right2;
                     }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = right1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = right2_sword;
+                    }
                 }
                 break;
             case "downleft":
                 if(isDashing){
+                    if(hasSword)
+                        solidArea = new Rectangle(24, 16, 32, 32);
+                    else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = leftdiagdash;
                     }
                     if (spriteNum == 2) {
                         image = leftdiagdash;
                     }
-                }else {
+                }else if(!hasSword){
+                    solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
                         image = left1;
                     }
                     if (spriteNum == 2) {
                         image = left2;
                     }
+                }else{
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = left1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = left2_sword;
+                    }
                 }
                 break;
             case "stand":
-                if(spriteNum == 1) {
-                    image = stand1;
-                }
-                if(spriteNum == 2) {
-                    image = stand2;
+                if(hasSword){
+                    solidArea = new Rectangle(24, 16, 32, 32);
+                    if(spriteNum == 1){
+                        image = stand1_sword;
+                    }
+                    if(spriteNum == 2){
+                        image = stand2_sword;
+                    }
+                }else{
+                    solidArea = new Rectangle(8, 16, 32, 32);
+                    if(spriteNum == 1) {
+                        image = stand1;
+                    }
+                    if(spriteNum == 2) {
+                        image = stand2;
+                    }
                 }
         }
         if(invincible == true) {

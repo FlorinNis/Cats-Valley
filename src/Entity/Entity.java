@@ -21,6 +21,7 @@ public class Entity {
     public int dashPauseDuration = 10;
     public boolean canDash = true;
     public boolean waitDash = false;
+    public boolean hasSword = false;
     public boolean hitPlayer = false;
     public boolean isEnemy = false;
     public boolean interactRange = false;
@@ -29,6 +30,7 @@ public class Entity {
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage updash, rightdash, leftdash, downdash, rightdiagdash, leftdiagdash, updash1, updash2;
+    public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public String direction = "down";
 
     public int spriteCounter = 0;
@@ -215,6 +217,20 @@ public class Entity {
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+    public BufferedImage setupScaleForSword(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize*2, gp.tileSize);
         }catch(IOException e) {
             e.printStackTrace();
         }
