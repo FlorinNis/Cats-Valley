@@ -8,6 +8,7 @@ import Object.Door;
 import Object.Chest;
 import Object.HealthUp;
 import Object.sword1;
+import Object.obstacle_log;
 
 public class AssetSetter {
 
@@ -71,10 +72,41 @@ public class AssetSetter {
         gp.obj[0][10].worldX = 36 * gp.tileSize;
         gp.obj[0][10].worldY = 76 * gp.tileSize;
 
-        gp.obj[0][11] = new Door(gp);
-        gp.obj[0][11].locked = false;
-        gp.obj[0][11].worldX = 37 * gp.tileSize;
-        gp.obj[0][11].worldY = 47 * gp.tileSize;
+        gp.obj[0][11] = new obstacle_log(gp);
+        gp.obj[0][11].worldX = 55 * gp.tileSize;
+        gp.obj[0][11].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][12] = new obstacle_log(gp);
+        gp.obj[0][12].worldX = 56 * gp.tileSize;
+        gp.obj[0][12].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][13] = new obstacle_log(gp);
+        gp.obj[0][13].worldX = 57 * gp.tileSize;
+        gp.obj[0][13].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][14] = new obstacle_log(gp);
+        gp.obj[0][14].worldX = 58 * gp.tileSize;
+        gp.obj[0][14].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][15] = new obstacle_log(gp);
+        gp.obj[0][15].worldX = 59 * gp.tileSize;
+        gp.obj[0][15].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][16] = new obstacle_log(gp);
+        gp.obj[0][16].worldX = 60 * gp.tileSize;
+        gp.obj[0][16].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][17] = new obstacle_log(gp);
+        gp.obj[0][17].worldX = 61 * gp.tileSize;
+        gp.obj[0][17].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][18] = new obstacle_log(gp);
+        gp.obj[0][18].worldX = 62 * gp.tileSize;
+        gp.obj[0][18].worldY = 68 * gp.tileSize;
+
+        gp.obj[0][19] = new obstacle_log(gp);
+        gp.obj[0][19].worldX = 63 * gp.tileSize;
+        gp.obj[0][19].worldY = 68 * gp.tileSize;
     }
     public void setNPC() {
 

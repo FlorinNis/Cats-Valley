@@ -28,9 +28,10 @@ public class Entity {
     public boolean locked = false;
     public int npcIndex = 999;
     public boolean isNPC = false;
+    public boolean dashable;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
-    public BufferedImage updash, rightdash, leftdash, downdash, rightdiagdash, leftdiagdash, updash1, updash2;
+    public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public BufferedImage closed, open;
     public boolean playedSound = false;
@@ -108,21 +109,21 @@ public class Entity {
                 case "up":
                     worldY -= speed;
                     break;
-                case "upleft":
+                case "up_left":
                     worldY -= speed;
                     worldX -= speed;
                     break;
-                case "upright":
+                case "up_right":
                     worldY -= speed;
                     worldX += speed;
                 case "down":
                     worldY += speed;
                     break;
-                case "downleft":
+                case "down_left":
                     worldY += speed;
                     worldX -= speed;
                     break;
-                case "downright":
+                case "down_right":
                     worldY += speed;
                     worldX += speed;
                     break;
@@ -208,6 +209,37 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = stand2;
                     }
+                case "up_left":
+                    if(spriteNum == 1) {
+                        image = up1;
+                    }
+                    if(spriteNum == 2) {
+                        image = up2;
+                    }
+                    break;
+                case "up_right":
+                    if(spriteNum == 1) {
+                        image = up1;
+                    }
+                    if(spriteNum == 2) {
+                        image = up2;
+                    }
+                case "down_left":
+                    if(spriteNum == 1) {
+                        image = down1;
+                    }
+                    if(spriteNum == 2) {
+                        image = down2;
+                    }
+                    break;
+                case "down_right":
+                    if(spriteNum == 1) {
+                        image = down1;
+                    }
+                    if(spriteNum == 2) {
+                        image = down2;
+                    }
+                    break;
             }
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 

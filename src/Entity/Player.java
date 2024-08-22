@@ -2,13 +2,9 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
-import Main.UI;
-import Main.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity{
@@ -68,14 +64,14 @@ public class Player extends Entity{
         right2 = setup("/player/player_right_2");
         stand1 = setup("/player/player_stand_1");
         stand2 = setup("/player/player_stand_2");
-        updash = setup("/Effects/dash_up_down");
-        downdash = setup("/Effects/dash_up_down");
-        leftdash = setup("/Effects/dash_left_right");
-        rightdash = setup("/Effects/dash_left_right");
-        leftdiagdash = setup("/Effects/dash_left_diag");
-        rightdiagdash = setup("/Effects/dash_right_diag");
-        updash1 = setup("/Effects/up_dash_1");
-        updash2 = setup("/Effects/up_dash_2");
+        up_dash = setup("/Effects/dash_up_down");
+        down_dash = setup("/Effects/dash_up_down");
+        left_dash = setup("/Effects/dash_left_right");
+        right_dash = setup("/Effects/dash_left_right");
+        left_diag_dash = setup("/Effects/dash_left_diag");
+        right_diag_dash = setup("/Effects/dash_right_diag");
+        up_dash1 = setup("/Effects/up_dash_1");
+        up_dash2 = setup("/Effects/up_dash_2");
 
         up1_sword = setupScaleForSword("/Player/player_sword_1/up_1_sword_1");
         up2_sword = setupScaleForSword("/Player/player_sword_1/up_2_sword_1");
@@ -113,16 +109,16 @@ public class Player extends Entity{
         else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
             //diagonala
             if(keyH.upPressed == true && keyH.leftPressed == true){
-                direction ="upleft";
+                direction ="up_left";
             }
             else if(keyH.upPressed == true && keyH.rightPressed == true){
-                direction ="upright";
+                direction ="up_right";
             }
             else if(keyH.downPressed == true && keyH.leftPressed == true){
-                direction ="downleft";
+                direction ="down_left";
             }
             else if(keyH.downPressed == true && keyH.rightPressed == true){
-                direction ="downright";
+                direction ="down_right";
             }
             //up/down/left/right movement
             else if(keyH.upPressed == true) {
@@ -175,19 +171,19 @@ public class Player extends Entity{
             if(collisionOn == false && keyH.enterPressed == false) {
 
                 switch(direction) {
-                    case "downleft":
+                    case "down_left":
                         worldY += speed;
                         worldX -= speed/2;
                         break;
-                    case "downright":
+                    case "down_right":
                         worldY += speed;
                         worldX += speed/2;
                         break;
-                    case "upleft":
+                    case "up_left":
                         worldY -= speed;
                         worldX -= speed/2;
                         break;
-                    case "upright":
+                    case "up_right":
                         worldY -= speed/3;
                         worldX += speed/2;
                     case "up":
@@ -289,19 +285,19 @@ public class Player extends Entity{
                 case "right":
                     worldX += dashSpeed;
                     break;
-                case "upleft":
+                case "up_left":
                     worldY -= dashSpeed / 1.5;
                     worldX -= dashSpeed / 1.5;
                     break;
-                case "upright":
+                case "up_right":
                     worldY -= dashSpeed / 1.5;
                     worldX += dashSpeed / 1.5;
                     break;
-                case "downleft":
+                case "down_left":
                     worldY += dashSpeed / 1.5;
                     worldX -= dashSpeed / 1.5;
                     break;
-                case "downright":
+                case "down_right":
                     worldY += dashSpeed / 1.5;
                     worldX += dashSpeed / 1.5;
                     break;
@@ -322,19 +318,19 @@ public class Player extends Entity{
                 case "right":
                     worldX -= speed;
                     break;
-                case "upleft":
+                case "up_left":
                     worldY += speed / 1.5;
                     worldX += speed / 1.5;
                     break;
-                case "upright":
+                case "up_right":
                     worldY += speed / 1.5;
                     worldX -= speed / 1.5;
                     break;
-                case "downleft":
+                case "down_left":
                     worldY -= speed / 1.5;
                     worldX += speed / 1.5;
                     break;
-                case "downright":
+                case "down_right":
                     worldY -= speed / 1.5;
                     worldX -= speed / 1.5;
                     break;
@@ -454,10 +450,10 @@ public class Player extends Entity{
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = updash;
+                        image = up_dash;
                     }
                     if (spriteNum == 2) {
-                        image = updash;
+                        image = up_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -484,10 +480,10 @@ public class Player extends Entity{
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = downdash;
+                        image = down_dash;
                     }
                     if (spriteNum == 2) {
-                        image = downdash;
+                        image = down_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -513,10 +509,10 @@ public class Player extends Entity{
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = leftdash;
+                        image = left_dash;
                     }
                     if (spriteNum == 2) {
-                        image = leftdash;
+                        image = left_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -542,10 +538,10 @@ public class Player extends Entity{
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = rightdash;
+                        image = right_dash;
                     }
                     if (spriteNum == 2) {
-                        image = rightdash;
+                        image = right_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -565,16 +561,16 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "upright":
+            case "up_right":
                 if(isDashing){
                     if(hasSword)
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = rightdiagdash;
+                        image = right_diag_dash;
                     }
                     if (spriteNum == 2) {
-                        image = rightdiagdash;
+                        image = right_diag_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -594,16 +590,16 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "upleft":
+            case "up_left":
                 if(isDashing){
                     if(hasSword)
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = leftdiagdash;
+                        image = left_diag_dash;
                     }
                     if (spriteNum == 2) {
-                        image = leftdiagdash;
+                        image = left_diag_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -623,16 +619,16 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "downright":
+            case "down_right":
                 if(isDashing){
                     if(hasSword)
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = rightdiagdash;
+                        image = right_diag_dash;
                     }
                     if (spriteNum == 2) {
-                        image = rightdiagdash;
+                        image = right_diag_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);
@@ -652,16 +648,16 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "downleft":
+            case "down_left":
                 if(isDashing){
                     if(hasSword)
                         solidArea = new Rectangle(24, 16, 32, 32);
                     else solidArea = new Rectangle(8, 16, 32, 32);
                     if (spriteNum == 1) {
-                        image = leftdiagdash;
+                        image = left_diag_dash;
                     }
                     if (spriteNum == 2) {
-                        image = leftdiagdash;
+                        image = left_diag_dash;
                     }
                 }else if(!hasSword){
                     solidArea = new Rectangle(8, 16, 32, 32);

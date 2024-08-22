@@ -5,7 +5,8 @@ import Main.GamePanel;
 
 import java.util.Random;
 
-public class Green_Slime extends Entity {
+public class
+Green_Slime extends Entity {
 
 
     public Green_Slime(GamePanel gp) {

@@ -60,7 +60,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "upleft":
+            case "up_left":
                 entityTopRow = (entityTopWorldY - entity.speed)/gp.tileSize;
                 entityLeftCol = (entityLeftWorldX - entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
@@ -68,7 +68,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "upright":
+            case "up_right":
                 entityTopRow = (entityTopWorldY - entity.speed)/gp.tileSize;
                 entityRightCol = (entityRightWorldX + entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
@@ -76,7 +76,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "downleft":
+            case "down_left":
                 entityBottomRow = (entityBottomWorldY + entity.speed)/gp.tileSize;
                 entityLeftCol = (entityLeftWorldX - entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
@@ -84,7 +84,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "downright":
+            case "down_right":
                 entityBottomRow = (entityBottomWorldY + entity.speed)/gp.tileSize;
                 entityRightCol = (entityRightWorldX + entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
@@ -154,7 +154,7 @@ public class CollisionChecker {
                         }
                         break;
                         //diagonal collision
-                    case "upleft":
+                    case "up_left":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
@@ -166,7 +166,7 @@ public class CollisionChecker {
                             }
                         }
                         break;
-                    case "upright":
+                    case "up_right":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
@@ -178,7 +178,7 @@ public class CollisionChecker {
                             }
                         }
                         break;
-                    case "downleft":
+                    case "down_left":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
@@ -190,7 +190,7 @@ public class CollisionChecker {
                             }
                         }
                         break;
-                    case "downright":
+                    case "down_right":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
@@ -209,6 +209,9 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].solidAreaDefaultX;
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].solidAreaDefaultY;
 
+                if(gp.obj[gp.currentMap][i].name == "obstacle_log" && entity.isDashing)
+                    entity.collisionOn = false;
+//                } else entity.collision = true;
             }
         }
 
@@ -275,7 +278,7 @@ public class CollisionChecker {
                         }
                         break;
                     //diagonal collision
-                    case "upleft":
+                    case "up_left":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -287,7 +290,7 @@ public class CollisionChecker {
                             entity.interactRange = true;
                         }
                         break;
-                    case "upright":
+                    case "up_right":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -299,7 +302,7 @@ public class CollisionChecker {
                             entity.interactRange = true;
                         }
                         break;
-                    case "downleft":
+                    case "down_left":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -311,7 +314,7 @@ public class CollisionChecker {
                             entity.interactRange = true;
                         }
                         break;
-                    case "downright":
+                    case "down_right":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -380,7 +383,7 @@ public class CollisionChecker {
                 }
                 break;
             //diagonal collision
-            case "upleft":
+            case "up_left":
                 entity.solidArea.y -= entity.speed;
                 entity.solidArea.x -= entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
@@ -388,7 +391,7 @@ public class CollisionChecker {
                     entity.hitPlayer = true;
                 }
                 break;
-            case "upright":
+            case "up_right":
                 entity.solidArea.y -= entity.speed;
                 entity.solidArea.x += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
@@ -396,7 +399,7 @@ public class CollisionChecker {
                     entity.hitPlayer = true;
                 }
                 break;
-            case "downleft":
+            case "down_left":
                 entity.solidArea.y += entity.speed;
                 entity.solidArea.x -= entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
@@ -404,7 +407,7 @@ public class CollisionChecker {
                     entity.hitPlayer = true;
                 }
                 break;
-            case "downright":
+            case "down_right":
                 entity.solidArea.y += entity.speed;
                 entity.solidArea.x += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
@@ -484,7 +487,7 @@ public class CollisionChecker {
                         }
                         break;
                     //diagonal collision
-                    case "upleft":
+                    case "up_left":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -492,7 +495,7 @@ public class CollisionChecker {
                             index = i;
                         }
                         break;
-                    case "upright":
+                    case "up_right":
                         entity.solidArea.y -= entity.speed;
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -500,7 +503,7 @@ public class CollisionChecker {
                             index = i;
                         }
                         break;
-                    case "downleft":
+                    case "down_left":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x -= entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
@@ -508,7 +511,7 @@ public class CollisionChecker {
                             index = i;
                         }
                         break;
-                    case "downright":
+                    case "down_right":
                         entity.solidArea.y += entity.speed;
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {

@@ -58,20 +58,32 @@ public class NPC_Pisica_1 extends Entity {
         if (actionLockCounter == 120) {
 
             Random random = new Random();
-            int i = random.nextInt(0, 100) + 1;
+            int i = random.nextInt(0, 120) + 1;
             System.out.println("I = " + i);
 
-            if (i <= 25) {
+            if (i <= 15) {
                 direction = "up";
             }
-            if (i > 25 && i <= 50) {
+            if (i > 15 && i <= 30) {
                 direction = "down";
             }
-            if (i > 50 && i <= 75) {
+            if (i > 30 && i <= 45) {
                 direction = "left";
             }
-            if (i > 75 && i <= 100) {
+            if (i > 60 && i <= 75) {
                 direction = "right";
+            }
+            if (i > 90 && i <= 105) {
+                direction = "up_right";
+            }
+            if (i > 105 && i <= 110) {
+                direction = "up_left";
+            }
+            if (i > 110 && i <= 115) {
+                direction = "down_right";
+            }
+            if (i > 115 && i <= 120) {
+                direction = "down_left";
             }
             //if (i > 100 && i <= 125) {
             //    direction = "stand";

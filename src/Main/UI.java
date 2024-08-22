@@ -255,6 +255,10 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(item.itemDescription, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 4);
         if(item.equipable){
+            if(gp.player.handItem[equipmentIndex] == null)
+                g2.drawString("Press e to equip", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
+            else
+                g2.drawString("Press e to remove", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
             if(equipPressed){
                 if(item.equiped){
                     gp.player.handItem[--equipmentIndex] = null;
@@ -269,10 +273,6 @@ public class UI {
                     equipPressed = false;
                     gp.player.hasSword = true;
                 }
-                if(gp.player.handItem[equipmentIndex] == null)
-                    g2.drawString("Press e to equip", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
-                else
-                    g2.drawString("Press e to remove", infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
             }
         }else g2.drawString("Qty: " + item.qty, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
         int i = 0;

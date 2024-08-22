@@ -73,6 +73,12 @@ public class TileManager {
         setup(25, "Water/water_right", true);
         setup(26, "Water/water_top", true);
 
+        setup(27, "z1", false);
+        setup(36, "z6", false);
+        setup(37, "z7", false);
+        setup(38, "z8", false);
+        setup(39, "z9", false);
+
         //aesthetics
 //        setup(20, "simple_grass", false);
 //        setup(21, "rock", true);
