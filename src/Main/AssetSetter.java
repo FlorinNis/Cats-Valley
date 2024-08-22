@@ -9,6 +9,15 @@ import Object.Chest;
 import Object.HealthUp;
 import Object.sword1;
 import Object.obstacle_log;
+import Object.bed;
+import Object.chair_left;
+import Object.chair_right;
+import Object.flower;
+import Object.fridge;
+import Object.lamp;
+import Object.table;
+import Object.letter;
+import Object.Key_house2;
 
 public class AssetSetter {
 
@@ -33,6 +42,7 @@ public class AssetSetter {
 
         gp.obj[0][2] = new Door(gp);
         gp.obj[0][2].locked = true;
+        gp.obj[0][2].doorHouse = "DungeonEntrance";
         gp.obj[0][2].worldX = 62 * gp.tileSize;
         gp.obj[0][2].worldY = 13 * gp.tileSize;
 
@@ -68,10 +78,12 @@ public class AssetSetter {
         gp.obj[0][9].worldY = 76 * gp.tileSize;
 
         gp.obj[0][10] = new Door(gp);
-        gp.obj[0][10].locked = false;
+        gp.obj[0][10].locked = true;
+        gp.obj[0][10].doorHouse = "Andre";
         gp.obj[0][10].worldX = 36 * gp.tileSize;
         gp.obj[0][10].worldY = 76 * gp.tileSize;
 
+        //obstacol inceput joc
         gp.obj[0][11] = new obstacle_log(gp);
         gp.obj[0][11].worldX = 55 * gp.tileSize;
         gp.obj[0][11].worldY = 68 * gp.tileSize;
@@ -107,6 +119,41 @@ public class AssetSetter {
         gp.obj[0][19] = new obstacle_log(gp);
         gp.obj[0][19].worldX = 63 * gp.tileSize;
         gp.obj[0][19].worldY = 68 * gp.tileSize;
+
+
+        //Aestetics Housing
+
+        //House_1
+        gp.obj[0][20] = new fridge(gp);
+        gp.obj[0][20].worldX = 58 * gp.tileSize;
+        gp.obj[0][20].worldY = 57 * gp.tileSize;
+
+        gp.obj[0][21] = new table(gp);
+        gp.obj[0][21].worldX = 63 * gp.tileSize;
+        gp.obj[0][21].worldY = 58 * gp.tileSize;
+
+        gp.obj[0][22] = new chair_left(gp);
+        gp.obj[0][22].worldX = 64 * gp.tileSize;
+        gp.obj[0][22].worldY = 58 * gp.tileSize;
+
+        gp.obj[0][23] = new bed(gp);
+        gp.obj[0][23].worldX = 60 * gp.tileSize;
+        gp.obj[0][23].worldY = 52 * gp.tileSize;
+
+        gp.obj[0][24] = new lamp(gp);
+        gp.obj[0][24].worldX = 60 * gp.tileSize;
+        gp.obj[0][24].worldY = 57 * gp.tileSize;
+
+        gp.obj[0][25] = new flower(gp);
+        gp.obj[0][25].worldX = 64 * gp.tileSize;
+        gp.obj[0][25].worldY = 55 * gp.tileSize;
+
+        gp.obj[0][26] = new Chest(gp);
+        gp.obj[0][26].worldX = 62 * gp.tileSize;
+        gp.obj[0][26].worldY = 52 * gp.tileSize;
+
+        gp.obj[0][27] = new letter(gp);
+        gp.obj[0][28] = new Key_house2(gp);
     }
     public void setNPC() {
 

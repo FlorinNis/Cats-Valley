@@ -209,9 +209,8 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].solidAreaDefaultX;
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].solidAreaDefaultY;
 
-                if(gp.obj[gp.currentMap][i].name == "obstacle_log" && entity.isDashing)
-                    entity.collisionOn = false;
-//                } else entity.collision = true;
+//                if(Objects.equals(gp.obj[gp.currentMap][i].name, "log") && entity.isDashing)
+//                    entity.collisionOn = false;
             }
         }
 

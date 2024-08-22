@@ -34,7 +34,11 @@ public class Entity {
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public BufferedImage closed, open;
+    public String  doorHouse;
+    public int quest_letter_index = 0;
+    public boolean quest_1_done = false, quest_2_done = false, quest_3_done = false;
     public boolean playedSound = false;
+
     public String direction = "down";
 
     public int spriteCounter = 0;

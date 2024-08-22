@@ -31,24 +31,19 @@ public class NPC_Pisica_2 extends Entity {
     }
     public void setDialogue() {
 
-//        dialogues[0] = "How did you get here?";
-//        dialogues[1] = "I see, so you found the key";
-//        dialogues[2] = "I must warn you...";
-//        dialogues[3] = "If you value your life...";
-//        dialogues[4] = "Don't go in the dungeon!";
-//        dialogues[5] = "Don't tell me I didn't warn you...";
-//        dialogues[6] = "If you'l have the chance to tell me";
-//        dialogues[7] = "Hahahahaha...";
-//        dialogues[8] = "...";
-        dialogues[0] = "How did you get here?";
-        dialogues[1] = "I see, so you found the key";
-        dialogues[2] = "I must warn you...";
-        dialogues[3] = "If you value your life...";
-        dialogues[4] = "Don't go in the dungeon!";
-        dialogues[5] = "Don't tell me I didn't warn you...";
-        dialogues[6] = "If you'l have the chance to tell me";
-        dialogues[7] = "Hahahahaha...";
-        dialogues[8] = "...";
+        dialogues[0] = "You gave the letter to Andre";
+        dialogues[1] = "How did you get here?";
+        dialogues[2] = "I see, so Mark gave you the key to my house";
+        dialogues[3] = "What's this, a letter?";
+        dialogues[4] = "...";
+        dialogues[5] = "I must warn you...";
+        dialogues[6] = "If you value your life...";
+        dialogues[7] = "Don't go in the dungeon!";
+        dialogues[8] = "Don't tell me I didn't warn you...";
+        dialogues[9] = "If you'l have the chance to tell me";
+        dialogues[10] = "Hahahahaha...";
+        dialogues[11] = "Give this to mark, and he should give you the key.";
+        dialogues[12] = "Did you give the letter to Mark?";
 
 
     }
@@ -96,11 +91,12 @@ public class NPC_Pisica_2 extends Entity {
 
         if(text == 0) {
             super.speak();
-            if(dialogueIndex == 7) {
+            if(dialogueIndex == 12) {
+                gp.player.quest_1_done = true;
                 text++;
             }
         } else if(text == 1) {
-                dialogueIndex = 7;
+                dialogueIndex = 12;
                 super.speak();
                 text++;
         } else if(text == 2) {
