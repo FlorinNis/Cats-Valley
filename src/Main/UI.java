@@ -87,6 +87,7 @@ public class UI {
 
         //playState
         if(gp.gameState == gp.playState) {
+            drawTutorialText();
             drawDialogueBoxNPC();
             drawPlayerLife();
             drawItemHolding();
@@ -215,12 +216,13 @@ public class UI {
         x = gp.tileSize * 6;
         y = gp.tileSize * 4;
         while(i < gp.player.itemsHeldSize){
+            System.out.println("Merge?" + gp.player.itemsHeld[i].name);
             g2.drawImage(gp.player.itemsHeld[i].down1, x, y, null);
             if (i == selectedSlotIndex) {
                 // Display larger image and description
                 drawSelectedItemInfo(gp.player.itemsHeld[i]);
             }
-            qty = gp.player.itemsHeld[i].qty;
+            //qty = gp.player.itemsHeld[i].qty;
             i++;
             x += gp.tileSize + 5;
             if(i % 7 == 0) {
@@ -320,6 +322,40 @@ public class UI {
         if(commandNum == 1) {
             g2.drawString(">", x-40, y);
         }
+    }
+
+    public void drawTutorialText(){
+        int worldX = 60 * gp.tileSize;
+        int worldY = 83 * gp.tileSize;
+
+        // Gasesc pozitia pe ecran relativ cu pozitia player-ului
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+        // Calibrez pozitia cu un mic offset
+        int boxX = screenX;
+        int boxY = screenY + gp.tileSize;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+
+        text = "Movement";
+        g2.setColor(Color.MAGENTA);
+        g2.drawString(text, boxX, boxY);
+
+        worldX = 55 * gp.tileSize;
+        worldY = 70 * gp.tileSize;
+
+        // Gasesc pozitia pe ecran relativ cu pozitia player-ului
+        screenX = worldX - gp.player.worldX + gp.player.screenX;
+        screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+        // Calibrez pozitia cu un mic offset
+        boxX = screenX;
+        boxY = screenY + gp.tileSize;
+
+        text = "Press SPACE to dash through obstacles";
+        g2.setColor(Color.MAGENTA);
+        g2.drawString(text, boxX, boxY);
     }
     public void drawTitleScreen() {
         try {

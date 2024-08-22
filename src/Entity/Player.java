@@ -18,7 +18,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
+    public boolean hasDungeonKey = false, hasAndreKey = false;
     public Entity[] itemsHeld = new Entity[35];
     public Entity[] handItem = new Entity[2];
     public int invContor = 0;
@@ -91,7 +91,7 @@ public class Player extends Entity{
         worldX = gp.tileSize * 58;
         worldY = gp.tileSize * 86;
         speed = 4;
-        dashSpeed = speed * 3;
+        dashSpeed = speed * 2;
         direction = "stand";
 
         //PLAYER STATUS
@@ -269,6 +269,11 @@ public class Player extends Entity{
         gp.eHandler.checkEvent();
 
         gp.keyH.enterPressed = false;
+        System.out.println(collisionOn);
+        if(objIndex != 999 && gp.obj[gp.currentMap][objIndex] != null) {
+            if(Objects.equals(gp.obj[gp.currentMap][objIndex].name, "log"))
+                    collisionOn = false;
+        }
 
         //if collision is false, se misca, enter-ul este ca sa nu se miste npc-urile in timpul unui dialog
         if(collisionOn == false && keyH.enterPressed == false) {
@@ -369,7 +374,7 @@ public class Player extends Entity{
                 case "Key":
                     gp.gameState = gameState;
                     gp.playSF(2);
-                    hasKey++;
+                    hasDungeonKey = true;
                     itemsHeld[invContor] = gp.obj[gp.currentMap][i];
                     itemsHeld[invContor++].qty++;
                     itemsHeldSize++;
@@ -382,11 +387,18 @@ public class Player extends Entity{
                         gp.obj[gp.currentMap][i].collision = false;
                         gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].open;
                     }
-                    else if(hasKey > 0) {
+                    else if(hasDungeonKey && Objects.equals(gp.obj[gp.currentMap][i].doorHouse, "DungeonEntrance")) {
                         gp.gameState = gameState;
                         gp.playSF(3);
                         gp.obj[gp.currentMap][i].locked = false;
-                        hasKey--;
+                        hasDungeonKey = false;
+                        gp.ui.currentDialogue = "You opened the door!";
+                    }
+                    else if(hasAndreKey && Objects.equals(gp.obj[gp.currentMap][i].doorHouse, "Andre")) {
+                        gp.gameState = gameState;
+                        gp.playSF(3);
+                        gp.obj[gp.currentMap][i].locked = false;
+                        hasAndreKey = false;
                         gp.ui.currentDialogue = "You opened the door!";
                     }
                     else {
