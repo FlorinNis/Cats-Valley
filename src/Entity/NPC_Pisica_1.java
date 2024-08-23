@@ -56,7 +56,7 @@ public class NPC_Pisica_1 extends Entity {
         dialogues[20] = "You gave the letter to Mark";
         dialogues[21] = "I see, aha...";
         dialogues[22] = "Alright, you earned it!";
-        dialogues[23] = "But just a tip, you should get to know everyone before you go in the dungeon";
+        dialogues[23] = "But just a tip, you should get to know everyone \n before you go in the dungeon";
         dialogues[24] = "I'l have something for you after you defeat your first enemy";
         dialogues[25] = "I won't give it to you now, what if you don't come back hahaha";
         dialogues[26] = "...";
@@ -137,24 +137,21 @@ public class NPC_Pisica_1 extends Entity {
                 gp.player.hasAndreKey = true;
             }
         } else if(text == 4){
-            dialogueIndex = 19;
-            super.speak();
             if(gp.player.quest_1_done) {
-//                gp.player.itemsHeld[gp.player.quest_letter_index] = null;
-//                gp.player.itemsHeldSize--;
-//                gp.player.invContor--;
+                gp.player.removeFromInventory("Letter");
                 text++;
             }else{
+                super.speak();
                 gp.gameState = gp.playState;
             }
         } else if(text == 5){
-            //gp.obj[gp.currentMap][28] = null;
-            dialogueIndex = 20;
             super.speak();
+            System.out.println(dialogueIndex);
             if(dialogueIndex == 25) {
-                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][27];
+                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][0];
                 gp.player.itemsHeld[gp.player.invContor++].qty++;
                 gp.player.itemsHeldSize++;
+                gp.player.hasDungeonKey = true;
                 text++;
             }
         }else if(text == 6){

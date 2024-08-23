@@ -33,8 +33,6 @@ public class AssetSetter {
         int mapNum = 0;
 
         gp.obj[mapNum][0] = new Key(gp);
-        gp.obj[mapNum][0].worldX = 84 * gp.tileSize;
-        gp.obj[mapNum][0].worldY = 80 * gp.tileSize;
 
         //gp.obj[1] = new Chest(gp);
         //gp.obj[1].worldX = 14 * gp.tileSize;
