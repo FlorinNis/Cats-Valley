@@ -10,7 +10,7 @@ public class Key extends Entity {
     public Key(GamePanel gp) {
         super(gp);
 
-        name = "Key";
+        name = "Key Dungeon";
         down1 = setup("/Object/key");
         qty = 0;
         itemDescription = "It must open something...";

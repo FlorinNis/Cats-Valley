@@ -388,6 +388,7 @@ public class Player extends Entity{
                         gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].open;
                     }
                     else if(hasDungeonKey && Objects.equals(gp.obj[gp.currentMap][i].doorHouse, "DungeonEntrance")) {
+                        removeFromInventory("Key Dungeon");
                         gp.gameState = gameState;
                         gp.playSF(3);
                         gp.obj[gp.currentMap][i].locked = false;
@@ -395,6 +396,7 @@ public class Player extends Entity{
                         gp.ui.currentDialogue = "You opened the door!";
                     }
                     else if(hasAndreKey && Objects.equals(gp.obj[gp.currentMap][i].doorHouse, "Andre")) {
+                        removeFromInventory("Key Andre House");
                         gp.gameState = gameState;
                         gp.playSF(3);
                         gp.obj[gp.currentMap][i].locked = false;
@@ -737,5 +739,19 @@ public class Player extends Entity{
     public void restoreLife() {
         life = maxLife;
         invincible = false;
+    }
+
+    public void removeFromInventory(String itemName){
+        for(int i = 0; i < invContor; i++){
+            if(Objects.equals(itemsHeld[i].name, itemName)){
+                itemsHeld[i] = itemsHeld[++i];
+                for(int j = i; j < invContor - 1; j++){
+                    itemsHeld[j] = itemsHeld[j+1];
+                }
+                invContor--;
+                gp.player.itemsHeldSize--;
+                break;
+            }
+        }
     }
 }
