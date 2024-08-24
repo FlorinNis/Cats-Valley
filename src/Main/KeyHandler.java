@@ -3,6 +3,7 @@ package Main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 import Entity.Player;
 
@@ -187,6 +188,15 @@ public class KeyHandler implements KeyListener{
             if (code == KeyEvent.VK_E){
                 gp.ui.equipPressed = true;
             }
+        }
+    }
+
+    public void mousePressed(MouseEvent e){
+        int code = e.getButton();
+
+        if (code == MouseEvent.BUTTON1) {
+            if(gp.player.hasSword)
+                gp.player.isAttacking = true;
         }
     }
     public void optionsState(int code) {

@@ -15,6 +15,7 @@ public class Entity {
     public int speed;
     //dash
     public boolean isDashing = false;
+    public boolean isAttacking = false;
     public int dashDuration = 20;
     public int dashCounter = 0;
     public int dashSpeed;
@@ -105,6 +106,9 @@ public class Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
+        if(isAttacking){
+            attack();
+        }
 
 
         if (collisionOn == false) {
@@ -159,6 +163,10 @@ public class Entity {
         }
 
 
+
+    }
+
+    private void attack() {
 
     }
 
