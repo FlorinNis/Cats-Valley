@@ -49,16 +49,16 @@ Green_Slime extends Entity {
             System.out.println("I = " + i);
 
             if (i <= 25) {
-                direction = "up";
+                move_direction = "up";
             }
             if (i > 25 && i <= 50) {
-                direction = "down";
+                move_direction = "down";
             }
             if (i > 50 && i <= 75) {
-                direction = "left";
+                move_direction = "left";
             }
             if (i > 75 && i <= 100) {
-                direction = "right";
+                move_direction = "right";
             }
             actionLockCounter = 0;
         }

@@ -3,7 +3,6 @@ package Main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 
 import Entity.Player;
 
@@ -11,7 +10,7 @@ public class KeyHandler implements KeyListener{
 
     GamePanel gp;
     Player p;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, ePressed;
     //DEBUG
     boolean checkDrawTime = false;
     boolean fulscreen = false;
@@ -55,52 +54,16 @@ public class KeyHandler implements KeyListener{
                         //gp.playMusic(0);
                     }
                     if (gp.ui.commandNum == 1) {
-                        //later
-                    }
-                    /*
-                    if (gp.ui.commandNum == 2) {
-                        gp.ui.titleScreenState = 2;
-                    }
 
-                     */
+                    }
                     if (gp.ui.commandNum == 2) {
                         System.exit(0);
                     }
                 }
             }
             else if(gp.ui.titleScreenState == 1) {
-                //stuff
-            }
-            /*
-            else if(gp.ui.titleScreenState == 2) {
-                if (code == KeyEvent.VK_W) {
-                    gp.ui.commandNum--;
-                    gp.playSF(4);
-                    if (gp.ui.commandNum < 0) {
-                        gp.ui.commandNum = 2;
-                    }
-                }
-                if (code == KeyEvent.VK_S) {
-                    gp.ui.commandNum++;
-                    gp.playSF(4);
-                    if (gp.ui.commandNum > 2) {
-                        gp.ui.commandNum = 0;
-                    }
-                }
-                if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0) {
-                        if(fulscreen == false) fulscreen = true; else fulscreen = false;
-                    }
-                    if (gp.ui.commandNum == 1) {
-                        //later
-                    }
-                    if (gp.ui.commandNum == 2) {
-                        gp.ui.titleScreenState = 0;
-                    }
-                }
-            }
 
-             */
+            }
         }
         //Play state
         if(gp.gameState == gp.playState) {
@@ -119,6 +82,7 @@ public class KeyHandler implements KeyListener{
             }
             if(code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
+                ePressed = true;
             }
             if(code == KeyEvent.VK_SPACE) {
                 if (gp.player.canDash) {
@@ -159,6 +123,7 @@ public class KeyHandler implements KeyListener{
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
                 enterPressed = true;
+                ePressed = true;
             }
         }
         //option state
@@ -191,14 +156,6 @@ public class KeyHandler implements KeyListener{
         }
     }
 
-    public void mousePressed(MouseEvent e){
-        int code = e.getButton();
-
-        if (code == MouseEvent.BUTTON1) {
-            if(gp.player.hasSword)
-                gp.player.isAttacking = true;
-        }
-    }
     public void optionsState(int code) {
 
         if(code == KeyEvent.VK_ESCAPE) {
@@ -206,6 +163,9 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_ENTER) {
             enterPressed = true;
+        }
+        if(code == KeyEvent.VK_E) {
+            ePressed = true;
         }
 
         int maxCommandNum = 0;

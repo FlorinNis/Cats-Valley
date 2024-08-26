@@ -1,7 +1,6 @@
 package Entity;
 
 import Main.GamePanel;
-import Main.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +12,7 @@ public class NPC_boy extends Entity {
     public NPC_boy(GamePanel gp) {
         super(gp);
 
-        direction = "down";
+        draw_direction = "down";
 
         getImage();
         setDialogue();
@@ -63,7 +62,7 @@ public class NPC_boy extends Entity {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-            switch(direction) {
+            switch(move_direction) {
                 case "up":
                     if(spriteNum == 1) {
                         image = up1;

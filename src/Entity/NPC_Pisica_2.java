@@ -11,7 +11,7 @@ public class NPC_Pisica_2 extends Entity {
     public NPC_Pisica_2(GamePanel gp) {
         super(gp);
 
-        direction = "down";
+        draw_direction = "down";
         speed = 1;
 
         getImage();
@@ -58,28 +58,28 @@ public class NPC_Pisica_2 extends Entity {
             System.out.println("I = " + i);
 
             if (i <= 15) {
-                direction = "up";
+                move_direction = "up";
             }
             if (i > 15 && i <= 30) {
-                direction = "down";
+                move_direction = "down";
             }
             if (i > 30 && i <= 45) {
-                direction = "left";
+                move_direction = "left";
             }
             if (i > 60 && i <= 75) {
-                direction = "right";
+                move_direction = "right";
             }
             if (i > 90 && i <= 105) {
-                direction = "up_right";
+                move_direction = "up_right";
             }
             if (i > 105 && i <= 110) {
-                direction = "up_left";
+                move_direction = "up_left";
             }
             if (i > 110 && i <= 115) {
-                direction = "down_right";
+                move_direction = "down_right";
             }
             if (i > 115 && i <= 120) {
-                direction = "down_left";
+                move_direction = "down_left";
             }
             //if (i > 100 && i <= 125) {
             //    direction = "stand";

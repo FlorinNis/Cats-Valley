@@ -43,11 +43,11 @@ public class GamePanel extends JPanel implements Runnable {
     //System
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public MouseHandler mouseH = new MouseHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
-
 
     //entity and object
 
@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
 
     //Singleton
-    public Player player = Player.getInstance(this, keyH);
+    public Player player = Player.getInstance(this, keyH, mouseH);
 
     public Entity obj[][] = new Entity[maxMap][50];
     public Entity npc[][] = new Entity[maxMap][50];
@@ -80,6 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.addMouseListener(mouseH);
         this.setFocusable(true);
     }
 

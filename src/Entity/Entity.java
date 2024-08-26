@@ -16,9 +16,11 @@ public class Entity {
     //dash
     public boolean isDashing = false;
     public boolean isAttacking = false;
+    public int attackCounter = 0;
+    public int attackDuration = 20;
     public int dashDuration = 20;
     public int dashCounter = 0;
-    public int dashSpeed;
+    public float dashSpeed;
     public int dashPauseDuration = 10;
     public boolean canDash = true;
     public boolean waitDash = false;
@@ -34,13 +36,16 @@ public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
+    public BufferedImage up_attack, down_attack, left_attack, right_attack, up_left_attack, up_right_attack, down_left_attack, down_right_attack;
     public BufferedImage closed, open;
     public String  doorHouse;
     public int quest_letter_index = 0;
     public boolean quest_1_done = false, quest_2_done = false, quest_3_done = false;
     public boolean playedSound = false;
 
-    public String direction = "down";
+    public String move_direction = "down";
+    //public String move_direction = "down";
+    public String draw_direction = "down";
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -83,18 +88,18 @@ public class Entity {
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
 
-        switch(gp.player.direction) {
+        switch(gp.player.move_direction) {
             case "up":
-                direction = "down";
+                move_direction = "down";
                 break;
             case "down":
-                direction = "up";
+                move_direction = "up";
                 break;
             case "left":
-                direction = "right";
+                move_direction = "right";
                 break;
             case "right":
-                direction = "left";
+                move_direction = "left";
                 break;
         }
     }
@@ -113,7 +118,7 @@ public class Entity {
 
         if (collisionOn == false) {
 
-            switch (direction) {
+            switch (move_direction) {
                 case "up":
                     worldY -= speed;
                     break;
@@ -181,7 +186,7 @@ public class Entity {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-            switch(direction) {
+            switch(move_direction) {
                 case "up":
                     if(spriteNum == 1) {
                         image = up1;
@@ -279,6 +284,20 @@ public class Entity {
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
             image = uTool.scaleImage(image, gp.tileSize*2, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+    public BufferedImage setupScaleForAttack(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize*2);
         }catch(IOException e) {
             e.printStackTrace();
         }

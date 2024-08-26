@@ -2,8 +2,6 @@ package Entity;
 
 import Main.GamePanel;
 
-import java.util.Random;
-
 public class NPC_Pisica_3 extends Entity {
 
     public int text = 0;
@@ -11,7 +9,7 @@ public class NPC_Pisica_3 extends Entity {
     public NPC_Pisica_3(GamePanel gp) {
         super(gp);
 
-        direction = "down";
+        draw_direction = "down";
         speed = 1;
 
         getImage();
@@ -40,7 +38,7 @@ public class NPC_Pisica_3 extends Entity {
     }
     public void setAction() {
 
-        direction = "stand";
+        move_direction = "stand";
     }
     public void speak() {
 

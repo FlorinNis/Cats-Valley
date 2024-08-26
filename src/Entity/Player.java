@@ -2,8 +2,10 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
+import Main.MouseHandler;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
@@ -11,6 +13,7 @@ public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
+    MouseHandler mouseH;
 
     //Singleton
     private static Player instance;
@@ -25,13 +28,15 @@ public class Player extends Entity{
     public int itemsHeldSize = 0;
     public int openDoorIndex = 7;
     int finalDialog = 0;
+    public String attack_direction;
 
-    private Player(GamePanel gp, KeyHandler keyH) {
+    private Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
 
         super(gp);
 
         this.gp = gp;
         this.keyH = keyH;
+        this.mouseH = mouseH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
@@ -44,10 +49,10 @@ public class Player extends Entity{
     }
 
     //Singleton
-    public static Player getInstance(GamePanel gp, KeyHandler keyH) {
+    public static Player getInstance(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
 
         if(instance == null) {
-            return new Player(gp, keyH);
+            return new Player(gp, keyH, mouseH);
         }
         return instance;
     }
@@ -84,6 +89,15 @@ public class Player extends Entity{
         stand1_sword = setupScaleForSword("/Player/player_sword_1/stand_1_sword_1");
         stand2_sword = setupScaleForSword("/Player/player_sword_1/stand_2_sword_1");
 
+        up_attack = setupScaleForSword("/Player/player_attack/up_attack");
+        down_attack = setupScaleForSword("/Player/player_attack/down_attack");
+        left_attack = setupScaleForAttack("/Player/player_attack/left_attack");
+        right_attack = setupScaleForAttack("/Player/player_attack/right_attack");
+//        up_left_attack = setupScaleForAttack("/Player/player_attack/up_left_attack");
+//        up_right_attack = setupScaleForAttack("/Player/player_attack/up_right_attack");
+//        down_left_attack = setupScaleForAttack("/Player/player_attack/down_left_attack");
+//        down_right_attack = setupScaleForAttack("/Player/player_attack/down_right_attack");
+
     }
 
     public void setDefaultValues() {
@@ -91,8 +105,8 @@ public class Player extends Entity{
         worldX = gp.tileSize * 58;
         worldY = gp.tileSize * 86;
         speed = 4;
-        dashSpeed = speed * 2;
-        direction = "stand";
+        dashSpeed = speed * 1.5f;
+        move_direction = "stand";
 
         //PLAYER STATUS
         maxLife = 2; //2 - full heart
@@ -106,32 +120,56 @@ public class Player extends Entity{
         if(isDashing){
             Dash();
         }
-        else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
+        else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true || keyH.ePressed == true) {
             //diagonala
             if(keyH.upPressed == true && keyH.leftPressed == true){
-                direction ="up_left";
+                move_direction ="up_left";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.upPressed == true && keyH.rightPressed == true){
-                direction ="up_right";
+                move_direction ="up_right";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.downPressed == true && keyH.leftPressed == true){
-                direction ="down_left";
+                move_direction ="down_left";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.downPressed == true && keyH.rightPressed == true){
-                direction ="down_right";
+                move_direction ="down_right";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             //up/down/left/right movement
             else if(keyH.upPressed == true) {
-                direction = "up";
+                move_direction = "up";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.downPressed == true) {
-                direction = "down";
+                move_direction = "down";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.leftPressed == true) {
-                direction = "left";
+                move_direction = "left";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
             else if(keyH.rightPressed == true) {
-                direction = "right";
+                move_direction = "right";
+                if(isAttacking)
+                    draw_direction = attack_direction;
+                else draw_direction = move_direction;
             }
 
 
@@ -165,12 +203,11 @@ public class Player extends Entity{
             //check enemy collision
             int monsterIndex = gp.cChecker.checkEnemy(this, gp.monster);
             contactMonster(monsterIndex);
-            gp.keyH.enterPressed = false;
 
             //if collision is false, knightu se misca
-            if(collisionOn == false && keyH.enterPressed == false) {
+            if(collisionOn == false && keyH.enterPressed == false && keyH.ePressed == false) {
 
-                switch(direction) {
+                switch(move_direction) {
                     case "down_left":
                         worldY += speed;
                         worldX -= speed/2;
@@ -201,6 +238,7 @@ public class Player extends Entity{
                 }
             }
             gp.keyH.enterPressed = false;
+            gp.keyH.ePressed = false;
 
             spriteCounter++;
             if(spriteCounter > 15) {
@@ -227,8 +265,11 @@ public class Player extends Entity{
             }
 
         }
-        else {
-            direction = "stand";
+
+         else {
+            if(isAttacking)
+                draw_direction = attack_direction;
+            else draw_direction = "stand";
             spriteCounter++;
             if(spriteCounter > 15) {
                 if(spriteNum == 1) {
@@ -255,8 +296,75 @@ public class Player extends Entity{
         }
 
     }
+    public void drawAttack(Graphics2D g2) {
+        attackCounter++;
+        int attackOffsetX = 0;
+        int attackOffsetY = 0;
 
-    private void Dash() {
+        if(hasSword && isAttacking){
+            AffineTransform originalTransform = g2.getTransform();
+            AffineTransform transform = new AffineTransform();
+
+            switch (attack_direction) {
+                case "up":
+                    attackOffsetY = -gp.tileSize;
+                    g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "down":
+                    attackOffsetY = gp.tileSize;
+                    g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "left":
+                    attackOffsetX = -gp.tileSize;
+                    attackOffsetY = -gp.tileSize/2;
+                    g2.drawImage(left_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "right":
+                    attackOffsetX = gp.tileSize*2;
+                    attackOffsetY = -gp.tileSize/2;
+                    g2.drawImage(right_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "up_left":
+                    attackOffsetX = -gp.tileSize;
+                    attackOffsetY = -gp.tileSize;
+                    transform.rotate(Math.toRadians(-45), screenX + attackOffsetX + gp.tileSize, screenY + attackOffsetY + gp.tileSize);
+                    g2.setTransform(transform);
+                    g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "up_right":
+                    attackOffsetX = gp.tileSize;
+                    attackOffsetY = -gp.tileSize - gp.tileSize/2;
+                    transform.rotate(Math.toRadians(45), screenX + attackOffsetX, screenY + attackOffsetY + gp.tileSize);
+                    g2.setTransform(transform);
+                    g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "down_left":
+                    attackOffsetX = -gp.tileSize/2;
+                    attackOffsetY = gp.tileSize;
+                    transform.rotate(Math.toRadians(45), screenX + attackOffsetX + gp.tileSize, screenY + attackOffsetY);
+                    g2.setTransform(transform);
+                    g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+                case "down_right":
+                    attackOffsetX = gp.tileSize/2;
+                    attackOffsetY = gp.tileSize + gp.tileSize/2 + 2;
+                    transform.rotate(Math.toRadians(-45), screenX + attackOffsetX, screenY + attackOffsetY);
+                    g2.setTransform(transform);
+                    g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
+                    break;
+            }
+            g2.setTransform(originalTransform);
+            if (attackCounter >= attackDuration) {
+                isAttacking = false;
+                attackCounter = 0;
+            }
+
+        }
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+    }
+
+        private void Dash() {
         dashCounter++;
         //checkTile Collision
         collisionOn = false;
@@ -269,6 +377,7 @@ public class Player extends Entity{
         gp.eHandler.checkEvent();
 
         gp.keyH.enterPressed = false;
+        gp.keyH.ePressed = false;
         System.out.println(collisionOn);
         if(objIndex != 999 && gp.obj[gp.currentMap][objIndex] != null) {
             if(Objects.equals(gp.obj[gp.currentMap][objIndex].name, "log"))
@@ -276,8 +385,8 @@ public class Player extends Entity{
         }
 
         //if collision is false, se misca, enter-ul este ca sa nu se miste npc-urile in timpul unui dialog
-        if(collisionOn == false && keyH.enterPressed == false) {
-            switch (direction) {
+        if(collisionOn == false && keyH.enterPressed == false && keyH.ePressed == false) {
+            switch (move_direction) {
                 case "up":
                     worldY -= dashSpeed;
                     break;
@@ -310,7 +419,7 @@ public class Player extends Entity{
         }
         //ca sa nu se mai blocheze in perete cand dau dash, daca da de o coliziune se da mai in spate cu un pixel
         else{
-            switch (direction) {
+            switch (move_direction) {
                 case "up":
                     worldY += speed;
                     break;
@@ -364,6 +473,7 @@ public class Player extends Entity{
         dashCounter = 0;
         keyH.spacePressed = false;
     }
+
     public void pickUpObject(int i, int gameState) {
 
         if(i != 999) {
@@ -416,6 +526,7 @@ public class Player extends Entity{
                     gp.obj[gp.currentMap][i] = null;
                     gp.ui.currentDialogue = "Hp UP!";
                     gp.keyH.enterPressed = false;
+                    gp.keyH.ePressed = false;
                     break;
                 case "Chest":
                     gp.gameState = gameState;
@@ -435,7 +546,7 @@ public class Player extends Entity{
 
         if (i != 999) {
 
-            if(gp.keyH.enterPressed == true) {
+            if(gp.keyH.enterPressed == true || gp.keyH.ePressed == true) {
                 if(gp.gameState == gp.playState) {
                     gp.gameState = gp.dialogueState;
                     gp.npc[gp.currentMap][i].speak();
@@ -456,8 +567,9 @@ public class Player extends Entity{
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
+        drawAttack(g2);
 
-        switch(direction) {
+        switch(draw_direction) {
             case "up":
                 if(isDashing){
                     if(hasSword)
