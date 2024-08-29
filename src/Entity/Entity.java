@@ -1,5 +1,6 @@
 package Entity;
 
+import Enemy.Green_Slime;
 import Main.GamePanel;
 import Main.UtilityTool;
 
@@ -32,6 +33,7 @@ public class Entity {
     public int npcIndex = 999;
     public boolean isNPC = false;
     public boolean dashable;
+    public int attackDamage;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
@@ -52,6 +54,7 @@ public class Entity {
 
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle checkNPC = new Rectangle(0,0 , 140, 140);
+    public Rectangle attackBox = null;
     public int solidAreaDefaultX, solidAreaDefaultY, checkNPCDefaultX, checkNPCDefaultY;
     public boolean collisionOn = false;
 
@@ -111,9 +114,6 @@ public class Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
-        if(isAttacking){
-            attack();
-        }
 
 
         if (collisionOn == false) {
@@ -171,8 +171,13 @@ public class Entity {
 
     }
 
-    private void attack() {
-
+    public void takeDamage(int damage, int index) {
+        if(!gp.monster[gp.currentMap][index].invincible) {
+            gp.monster[gp.currentMap][index].life -= damage;
+            gp.monster[gp.currentMap][index].invincible = true;
+            System.out.println(gp.monster[gp.currentMap][index].life);
+        }
+        System.out.println("enemy life: " + life);
     }
 
     public void draw(Graphics2D g2) {

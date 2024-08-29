@@ -64,6 +64,7 @@ Green_Slime extends Entity {
         }
     }
 
+
     public void hitPlayer(GamePanel gp){
         gp.cChecker.checkPlayer(this);
         if(hitPlayer && gp.player.isDashing) {

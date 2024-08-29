@@ -94,6 +94,31 @@ public class CollisionChecker {
                 break;
         }
     }
+
+    public void checkAttackCollision(Entity entity, Entity[][] target, int attackDamage) {
+        for(int i = 0; i < target[gp.currentMap].length; i++) {
+            if (target[gp.currentMap][i] != null) {
+                System.out.println("atackBox x: " + entity.attackBox.x);
+                //get entity solid area position
+                entity.attackBox.x = entity.worldX + entity.attackBox.x;
+                entity.attackBox.y = entity.worldY + entity.attackBox.y;
+                System.out.println("atackBox x: " + entity.attackBox.x);
+                System.out.println("atackBox y: " + entity.attackBox.y);
+                //get object solid area pos
+                target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX + target[gp.currentMap][i].solidArea.x;
+                target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
+                System.out.println("monster x: " + target[gp.currentMap][i].solidArea.x);
+                System.out.println("monster y: " + target[gp.currentMap][i].solidArea.y);
+                if (entity.attackBox.intersects(target[gp.currentMap][i].solidArea)) {
+                    System.out.println("ataca monstrul cu index: " + i);
+                    target[gp.currentMap][i].takeDamage(attackDamage, i);
+                }
+                target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].solidAreaDefaultX;
+                target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].solidAreaDefaultY;
+            }
+        }
+    }
+
     public int checkObject(Entity entity, boolean player) {
 
         int index = 999;
@@ -525,7 +550,6 @@ public class CollisionChecker {
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].solidAreaDefaultY;
             }
         }
-        System.out.println(index);
         return index;
 
     }
