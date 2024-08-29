@@ -365,11 +365,12 @@ public class Player extends Entity{
             if (attackBox != null) {
                 g2.setColor(new Color(255, 0, 0, 100)); // Red with some transparency
                 g2.fillRect(attackBox.x + worldX, attackBox.y + worldY, attackBox.width, attackBox.height);
-                System.out.println("x" + attackBox.x + "y" + attackBox.y);
             }
-            int index = gp.cChecker.checkAttackCollision(gp.monster);
-            if(index!=999)
-                System.out.println("A MERS: " + index);
+            gp.cChecker.checkAttackCollision(gp.monster);
+
+            if(attackCollisionOn){
+                enemyTakeDamage();
+            }
 
             if (attackCounter >= attackDuration) {
                 isAttacking = false;
@@ -381,6 +382,8 @@ public class Player extends Entity{
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
     }
+
+
 
         private void Dash() {
         dashCounter++;

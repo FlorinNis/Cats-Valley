@@ -34,6 +34,7 @@ public class Entity {
     public boolean isNPC = false;
     public boolean dashable;
     public int attackDamage;
+    public int enemyHit;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
@@ -169,20 +170,20 @@ public class Entity {
         }
 
 
-
     }
 
-    public void takeDamage(int damage, int index) {
-        if(!gp.monster[gp.currentMap][index].invincible) {
-            gp.monster[gp.currentMap][index].life -= damage;
-            gp.monster[gp.currentMap][index].invincible = true;
-            System.out.println(gp.monster[gp.currentMap][index].life);
+    public void enemyTakeDamage() {
+        if(enemyHit != 999 && !gp.monster[gp.currentMap][enemyHit].invincible) {
+            gp.monster[gp.currentMap][enemyHit].life -= gp.player.handItem[0].attackDamage;
+            if(gp.monster[gp.currentMap][enemyHit].life == 0) {
+                gp.monster[gp.currentMap][enemyHit] = null;
+                return;
+            }
+            gp.monster[gp.currentMap][enemyHit].invincible = true;
         }
-        System.out.println("enemy life: " + life);
     }
 
     public void draw(Graphics2D g2) {
-
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;

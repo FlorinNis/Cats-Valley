@@ -62,6 +62,15 @@ Green_Slime extends Entity {
             }
             actionLockCounter = 0;
         }
+
+        //invincible
+        if(invincible) {
+            invincibleCounter++;
+            if(invincibleCounter > 30) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
 
