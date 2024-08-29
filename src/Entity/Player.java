@@ -308,30 +308,30 @@ public class Player extends Entity{
             switch (attack_direction) {
                 case "up":
                     attackOffsetY = -gp.tileSize;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize, gp.tileSize * 2);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize * 2, gp.tileSize);
                     g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
                     break;
                 case "down":
                     attackOffsetY = gp.tileSize;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize, gp.tileSize * 2);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize * 2, gp.tileSize);
                     g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
                     break;
                 case "left":
                     attackOffsetX = -gp.tileSize;
                     attackOffsetY = -gp.tileSize/2;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize * 2, gp.tileSize);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize, gp.tileSize * 2);
                     g2.drawImage(left_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
                     break;
                 case "right":
                     attackOffsetX = gp.tileSize*2;
                     attackOffsetY = -gp.tileSize/2;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize * 2, gp.tileSize);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize, gp.tileSize * 2);
                     g2.drawImage(right_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
                     break;
                 case "up_left":
                     attackOffsetX = -gp.tileSize;
                     attackOffsetY = -gp.tileSize;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize, gp.tileSize * 2);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize * 2, gp.tileSize);
                     transform.rotate(Math.toRadians(-45), screenX + attackOffsetX + gp.tileSize, screenY + attackOffsetY + gp.tileSize);
                     g2.setTransform(transform);
                     g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
@@ -339,7 +339,7 @@ public class Player extends Entity{
                 case "up_right":
                     attackOffsetX = gp.tileSize;
                     attackOffsetY = -gp.tileSize - gp.tileSize/2;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize, gp.tileSize * 2);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY + gp.tileSize, gp.tileSize * 2, gp.tileSize);
                     transform.rotate(Math.toRadians(45), screenX + attackOffsetX, screenY + attackOffsetY + gp.tileSize);
                     g2.setTransform(transform);
                     g2.drawImage(up_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
@@ -347,7 +347,7 @@ public class Player extends Entity{
                 case "down_left":
                     attackOffsetX = -gp.tileSize/2;
                     attackOffsetY = gp.tileSize;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize * 2, gp.tileSize);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY, gp.tileSize * 2, gp.tileSize);
                     transform.rotate(Math.toRadians(45), screenX + attackOffsetX + gp.tileSize, screenY + attackOffsetY);
                     g2.setTransform(transform);
                     g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
@@ -355,19 +355,21 @@ public class Player extends Entity{
                 case "down_right":
                     attackOffsetX = gp.tileSize/2;
                     attackOffsetY = gp.tileSize + gp.tileSize/2 + 2;
-                    attackBox = new Rectangle(screenX + attackOffsetX, screenY + attackOffsetY, gp.tileSize * 2, gp.tileSize);
+                    attackBox = new Rectangle(attackOffsetX, attackOffsetY - gp.tileSize, gp.tileSize * 2, gp.tileSize);
                     transform.rotate(Math.toRadians(-45), screenX + attackOffsetX, screenY + attackOffsetY);
                     g2.setTransform(transform);
                     g2.drawImage(down_attack, screenX + attackOffsetX, screenY + attackOffsetY, null);
                     break;
             }
             g2.setTransform(originalTransform);
-            gp.cChecker.checkAttackCollision(this, gp.monster, attackDamage);
-
             if (attackBox != null) {
                 g2.setColor(new Color(255, 0, 0, 100)); // Red with some transparency
-                g2.fillRect(attackBox.x, attackBox.y, attackBox.width, attackBox.height);
+                g2.fillRect(attackBox.x + worldX, attackBox.y + worldY, attackBox.width, attackBox.height);
+                System.out.println("x" + attackBox.x + "y" + attackBox.y);
             }
+            int index = gp.cChecker.checkAttackCollision(gp.monster);
+            if(index!=999)
+                System.out.println("A MERS: " + index);
 
             if (attackCounter >= attackDuration) {
                 isAttacking = false;
