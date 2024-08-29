@@ -95,29 +95,73 @@ public class CollisionChecker {
         }
     }
 
-    public void checkAttackCollision(Entity entity, Entity[][] target, int attackDamage) {
+    public int checkAttackCollision(Entity[][] target) {
+        //setam coliziunea in functie de pozitia player-ului
+        gp.player.attackBox.x = gp.player.worldX + gp.player.attackBox.x;
+        gp.player.attackBox.y = gp.player.worldY + gp.player.attackBox.y;
+        int index = 999;
+
+        //Calibram pozitia coliziunii atacului
+//        switch(gp.player.attack_direction) {
+//            case "up":
+//                gp.player.attackBox.y -= gp.tileSize;
+//                break;
+//            case "down":
+//                gp.player.attackBox.y += gp.tileSize;
+//                break;
+//            case "left":
+//                gp.player.attackBox.x -= gp.tileSize;
+//                gp.player.attackBox.y -= gp.tileSize/2;
+//                break;
+//            case "right":
+//                //gp.player.attackBox.x +=;
+//
+//                break;
+//            //diagonal collision
+//            case "up_left":
+//                gp.player.attackBox.y -= gp.player.speed;
+//                gp.player.attackBox.x -= gp.player.speed;
+//
+//                break;
+//            case "up_right":
+//                gp.player.attackBox.y -= gp.player.speed;
+//                gp.player.attackBox.x += gp.player.speed;
+//
+//                break;
+//            case "down_left":
+//                gp.player.attackBox.y += gp.player.speed;
+//                gp.player.attackBox.x -= gp.player.speed;
+//
+//                break;
+//            case "down_right":
+//                gp.player.attackBox.y += gp.player.speed;
+//                gp.player.attackBox.x += gp.player.speed;
+//
+//                break;
+//        }
+        System.out.println("atack x: " + gp.player.attackBox.x);
+        System.out.println("atack y: " + gp.player.attackBox.y);
+
         for(int i = 0; i < target[gp.currentMap].length; i++) {
-            if (target[gp.currentMap][i] != null) {
-                System.out.println("atackBox x: " + entity.attackBox.x);
-                //get entity solid area position
-                entity.attackBox.x = entity.worldX + entity.attackBox.x;
-                entity.attackBox.y = entity.worldY + entity.attackBox.y;
-                System.out.println("atackBox x: " + entity.attackBox.x);
-                System.out.println("atackBox y: " + entity.attackBox.y);
+            if(target[gp.currentMap][i] != null) {
                 //get object solid area pos
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX + target[gp.currentMap][i].solidArea.x;
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
+
                 System.out.println("monster x: " + target[gp.currentMap][i].solidArea.x);
                 System.out.println("monster y: " + target[gp.currentMap][i].solidArea.y);
-                if (entity.attackBox.intersects(target[gp.currentMap][i].solidArea)) {
-                    System.out.println("ataca monstrul cu index: " + i);
-                    target[gp.currentMap][i].takeDamage(attackDamage, i);
+                if(gp.player.attackBox.intersects(target[gp.currentMap][i].solidArea)) {
+                    gp.player.attackCollisionOn = true;
+                    index = i;
                 }
+
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].solidAreaDefaultX;
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].solidAreaDefaultY;
             }
         }
+        return index;
     }
+
 
     public int checkObject(Entity entity, boolean player) {
 
