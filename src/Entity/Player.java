@@ -181,7 +181,7 @@ public class Player extends Entity{
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex, gp.dialogueState);
             if(objIndex != 999 && gp.obj[gp.currentMap][objIndex] != null){
-                if(Objects.equals(gp.obj[gp.currentMap][objIndex].name, "Door")) {
+                if(Objects.equals(gp.obj[gp.currentMap][objIndex].name, "Door") && !gp.obj[gp.currentMap][objIndex].locked) {
                     gp.obj[gp.currentMap][objIndex].down1 = gp.obj[gp.currentMap][objIndex].open;
                     openDoorIndex = objIndex;
                     if(!playedSound) {
@@ -189,7 +189,7 @@ public class Player extends Entity{
                         playedSound = true;
                     }
                 }
-            }else if(objIndex != 999 && gp.obj[gp.currentMap][objIndex] != null){
+            }else{
                 gp.obj[gp.currentMap][openDoorIndex].down1 = gp.obj[gp.currentMap][openDoorIndex].closed;
                 playedSound = false;
             }
@@ -516,7 +516,7 @@ public class Player extends Entity{
                 case "Door":
                     if(!gp.obj[gp.currentMap][i].locked){
                         gp.obj[gp.currentMap][i].collision = false;
-                        gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].open;
+                        //gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].open;
                     }
                     else if(hasDungeonKey && Objects.equals(gp.obj[gp.currentMap][i].doorHouse, "DungeonEntrance")) {
                         removeFromInventory("Key Dungeon");

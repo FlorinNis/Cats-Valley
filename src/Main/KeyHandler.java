@@ -82,6 +82,9 @@ public class KeyHandler implements KeyListener{
             }
             if(code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
+                //ePressed = true;
+            }
+            if(code == KeyEvent.VK_E){
                 ePressed = true;
             }
             if(code == KeyEvent.VK_SPACE) {
@@ -123,6 +126,9 @@ public class KeyHandler implements KeyListener{
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
                 enterPressed = true;
+            }
+            if(code == KeyEvent.VK_E){
+                gp.gameState = gp.playState;
                 ePressed = true;
             }
         }
