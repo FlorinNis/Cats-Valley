@@ -32,7 +32,7 @@ public class CollisionChecker {
                 entityTopRow = (entityTopWorldY - entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -40,7 +40,7 @@ public class CollisionChecker {
                 entityBottomRow = (entityBottomWorldY + entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -48,7 +48,7 @@ public class CollisionChecker {
                 entityLeftCol = (entityLeftWorldX - entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -56,7 +56,7 @@ public class CollisionChecker {
                 entityRightCol = (entityRightWorldX + entity.speed)/gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -137,10 +137,13 @@ public class CollisionChecker {
                     case "up":
                         entity.solidArea.y -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
-                            if(gp.obj[gp.currentMap][i].collision == true) {
+                            if(gp.obj[gp.currentMap][i].collision) {
                                 entity.collisionOn = true;
                             }
-                            if(player == true) {
+                            if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY += entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -148,10 +151,13 @@ public class CollisionChecker {
                     case "down":
                         entity.solidArea.y += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
-                            if(gp.obj[gp.currentMap][i].collision == true) {
+                            if(gp.obj[gp.currentMap][i].collision) {
                                 entity.collisionOn = true;
                             }
-                            if(player == true) {
+                            if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY -= entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -159,10 +165,13 @@ public class CollisionChecker {
                     case "left":
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
-                            if(gp.obj[gp.currentMap][i].collision == true) {
+                            if(gp.obj[gp.currentMap][i].collision) {
                                 entity.collisionOn = true;
                             }
-                            if(player == true) {
+                            if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldX += entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -170,10 +179,13 @@ public class CollisionChecker {
                     case "right":
                         entity.solidArea.x += entity.speed;
                         if(entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
-                            if(gp.obj[gp.currentMap][i].collision == true) {
+                            if(gp.obj[gp.currentMap][i].collision) {
                                 entity.collisionOn = true;
                             }
-                            if(player == true) {
+                            if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldX -= entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -187,6 +199,10 @@ public class CollisionChecker {
                                 entity.collisionOn = true;
                             }
                             if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY += entity.speed;
+                                    gp.player.worldX += entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -199,6 +215,10 @@ public class CollisionChecker {
                                 entity.collisionOn = true;
                             }
                             if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY += entity.speed;
+                                    gp.player.worldX -= entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -211,6 +231,10 @@ public class CollisionChecker {
                                 entity.collisionOn = true;
                             }
                             if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY -= entity.speed;
+                                    gp.player.worldX += entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -223,6 +247,10 @@ public class CollisionChecker {
                                 entity.collisionOn = true;
                             }
                             if(player) {
+                                if(Objects.equals(gp.obj[gp.currentMap][i].name, "Door") && gp.obj[gp.currentMap][i].locked){
+                                    gp.player.worldY += entity.speed;
+                                    gp.player.worldX += entity.speed;
+                                }
                                 index = i;
                             }
                         }
@@ -234,8 +262,6 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].solidAreaDefaultX;
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].solidAreaDefaultY;
 
-//                if(Objects.equals(gp.obj[gp.currentMap][i].name, "log") && entity.isDashing)
-//                    entity.collisionOn = false;
             }
         }
 
