@@ -1,5 +1,6 @@
 package Main;
 
+import Enemy.Frog_Boss;
 import Enemy.Green_Slime;
 import Entity.NPC_Factory;
 import Entity.NPC_Type;
@@ -190,6 +191,10 @@ public class AssetSetter {
         gp.monster[1][4] = new Green_Slime(gp);
         gp.monster[1][4].worldX = gp.tileSize * 71;
         gp.monster[1][4].worldY = gp.tileSize * 40;
+
+        gp.monster[1][5] = new Frog_Boss(gp);
+        gp.monster[1][5].worldX = gp.tileSize * 26;
+        gp.monster[1][5].worldY = gp.tileSize * 67;
 
         gp.monster[2][5] = new Green_Slime(gp);
         gp.monster[2][5].worldX = gp.tileSize * 71;

@@ -21,7 +21,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    public boolean hasDungeonKey = false, hasAndreKey = false;
+    public boolean hasDungeonKey = true, hasAndreKey = false;
     public Entity[] itemsHeld = new Entity[35];
     public Entity[] handItem = new Entity[2];
     public int invContor = 0;
@@ -189,7 +189,7 @@ public class Player extends Entity{
                         playedSound = true;
                     }
                 }
-            }else{
+            }else if(gp.obj[gp.currentMap][openDoorIndex] != null){
                 gp.obj[gp.currentMap][openDoorIndex].down1 = gp.obj[gp.currentMap][openDoorIndex].closed;
                 playedSound = false;
             }

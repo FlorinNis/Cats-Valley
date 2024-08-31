@@ -14,6 +14,7 @@ public class Entity {
     GamePanel gp;
     public int worldX, worldY;
     public int speed;
+    public boolean goingUp = true;
     //dash
     public boolean isDashing = false;
     public boolean isAttacking = false;
@@ -35,11 +36,12 @@ public class Entity {
     public boolean dashable;
     public int attackDamage;
     public int enemyHit;
+    public String enemy_type;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
-    public BufferedImage up_attack, down_attack, left_attack, right_attack, up_left_attack, up_right_attack, down_left_attack, down_right_attack;
+    public BufferedImage up_attack, down_attack, left_attack, right_attack, jump1, jump2, jump3;
     public BufferedImage closed, open;
     public String  doorHouse;
     public int quest_letter_index = 0;
@@ -52,6 +54,8 @@ public class Entity {
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
+    public int spriteNumBoss = 1;
+    public int spriteCounterBoss = 0;
     public boolean attackCollisionOn = false;
 
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
@@ -148,6 +152,33 @@ public class Entity {
                 case "right":
                     worldX += speed;
                     break;
+                case "Frog_Boss":
+                    System.out.println("spriteNumBoss = " + spriteNumBoss);
+                    if(goingUp) {
+                        if (spriteNumBoss == 1) {
+                            worldY -= speed / 2;
+                            System.out.println("ar trebui sa mearga");
+                        }
+                        if (spriteNumBoss == 2) {
+                            worldY -= speed / 2;
+                        }
+                        if (spriteNumBoss == 3) {
+                            worldY -= speed / 2;
+                            goingUp = false;
+                        }
+                    } else {
+                        if (spriteNumBoss == 1) {
+                            worldY += speed / 2;
+                        }
+                        if (spriteNumBoss == 2) {
+                            worldY += speed / 2;
+                        }
+                        if (spriteNumBoss == 3) {
+                            worldY += speed / 2;
+                            goingUp = true;
+                        }
+                    }
+                    break;
                 case "stand":
                     break;
             }
@@ -201,6 +232,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = up2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "down":
                     if(spriteNum == 1) {
@@ -209,6 +241,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = down2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "left":
                     if(spriteNum == 1) {
@@ -217,6 +250,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = left2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "right":
                     if(spriteNum == 1) {
@@ -225,6 +259,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = right2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "stand":
                     if(spriteNum == 1) {
@@ -233,6 +268,8 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = stand2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    break;
                 case "up_left":
                     if(spriteNum == 1) {
                         image = up1;
@@ -240,6 +277,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = up2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "up_right":
                     if(spriteNum == 1) {
@@ -248,6 +286,8 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = up2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    break;
                 case "down_left":
                     if(spriteNum == 1) {
                         image = down1;
@@ -255,6 +295,7 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = down2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
                 case "down_right":
                     if(spriteNum == 1) {
@@ -263,12 +304,26 @@ public class Entity {
                     if(spriteNum == 2) {
                         image = down2;
                     }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    break;
+                case "Frog_Boss":
+                    if(spriteNumBoss == 1) {
+                        image = jump1;
+                    }
+                    if(spriteNumBoss == 2) {
+                        image = jump2;
+                    }
+                    if(spriteNumBoss == 3) {
+                        image = jump3;
+                    }
+                    g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
                     break;
             }
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
 
         }
     }
+
     public BufferedImage setup(String imagePath) {
 
         UtilityTool uTool = new UtilityTool();
@@ -277,6 +332,20 @@ public class Entity {
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+    public BufferedImage setupScaleBoss(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize*4, gp.tileSize*4);
         }catch(IOException e) {
             e.printStackTrace();
         }
