@@ -14,6 +14,7 @@ public class Chest extends Entity {
 
         name = "Key";
         down1 = setup("/Object/chest");
+        entity_type = "Object";
         itemDescription = "What does it open?...";
 
     }

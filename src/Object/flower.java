@@ -10,6 +10,7 @@ public class flower extends Entity {
         super(gp);
 
         name = "flower";
+        entity_type = "Object";
         down1 = setup("/Object/flower");
         //itemDescription = "What does it open?...";
         collision = true;

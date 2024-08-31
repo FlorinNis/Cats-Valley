@@ -12,6 +12,7 @@ public class HealthUp extends Entity {
         super(gp);
 
         name = "HealthUp";
+        entity_type = "Object";
         down1 = setup("/Hp/Full");
 
     }

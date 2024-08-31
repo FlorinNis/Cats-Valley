@@ -10,6 +10,7 @@ public class fridge extends Entity {
         super(gp);
 
         name = "fridge";
+        entity_type = "Object";
         down1 = setup("/Object/fridge");
         //itemDescription = "What does it open?...";
         collision = true;

@@ -34,9 +34,10 @@ public class Entity {
     public int npcIndex = 999;
     public boolean isNPC = false;
     public boolean dashable;
+    public boolean jumped = false;
     public int attackDamage;
     public int enemyHit;
-    public String enemy_type;
+    public String enemy_type = "none";
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
@@ -51,6 +52,7 @@ public class Entity {
     public String move_direction = "down";
     //public String move_direction = "down";
     public String draw_direction = "down";
+    public String entity_type;
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -122,64 +124,141 @@ public class Entity {
         gp.cChecker.checkPlayer(this);
 
 
-        if (collisionOn == false) {
-
-            switch (move_direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "up_left":
-                    worldY -= speed;
-                    worldX -= speed;
-                    break;
-                case "up_right":
-                    worldY -= speed;
-                    worldX += speed;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "down_left":
-                    worldY += speed;
-                    worldX -= speed;
-                    break;
-                case "down_right":
-                    worldY += speed;
-                    worldX += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                case "Frog_Boss":
-                    System.out.println("spriteNumBoss = " + spriteNumBoss);
-                    if(goingUp) {
-                        if (spriteNumBoss == 1) {
-                            worldY -= speed / 2;
-                            System.out.println("ar trebui sa mearga");
-                        }
-                        if (spriteNumBoss == 2) {
-                            worldY -= speed / 2;
-                        }
-                        if (spriteNumBoss == 3) {
-                            worldY -= speed / 2;
-                            goingUp = false;
-                        }
-                    } else {
-                        if (spriteNumBoss == 1) {
-                            worldY += speed / 2;
-                        }
-                        if (spriteNumBoss == 2) {
-                            worldY += speed / 2;
-                        }
-                        if (spriteNumBoss == 3) {
-                            worldY += speed / 2;
-                            goingUp = true;
-                        }
+        if (!collisionOn) {
+            switch(entity_type) {
+                case "Enemy":
+                    switch (enemy_type) {
+                        case ("Slime"):
+                            switch (move_direction) {
+                                case "up":
+                                    worldY -= speed;
+                                    break;
+                                case "up_left":
+                                    worldY -= speed;
+                                    worldX -= speed;
+                                    break;
+                                case "up_right":
+                                    worldY -= speed;
+                                    worldX += speed;
+                                    break;
+                                case "down":
+                                    worldY += speed;
+                                    break;
+                                case "down_left":
+                                    worldY += speed;
+                                    worldX -= speed;
+                                    break;
+                                case "down_right":
+                                    worldY += speed;
+                                    worldX += speed;
+                                    break;
+                                case "left":
+                                    worldX -= speed;
+                                    break;
+                                case "right":
+                                    worldX += speed;
+                                    break;
+                            }
+                            break;
+                        case "Frog_Boss":
+                            switch (move_direction) {
+                                case "up":
+                                    if (spriteNumBoss == 1 && !jumped) {
+                                        worldY -= speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 2 && !jumped) {
+                                        worldY -= speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 3 && !jumped) {
+                                        worldY -= speed;
+                                        jumped = true;
+                                    }
+                                    break;
+                                case "down":
+                                    if (spriteNumBoss == 1 && !jumped) {
+                                        worldY += speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 2 && !jumped) {
+                                        worldY += speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 3 && !jumped) {
+                                        worldY += speed;
+                                        jumped = true;
+                                    }
+                                    break;
+                                case "left":
+                                    if (spriteNumBoss == 1 && !jumped) {
+                                        worldX -= speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 2 && !jumped) {
+                                        worldX -= speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 3 && !jumped) {
+                                        worldX -= speed;
+                                        jumped = true;
+                                    }
+                                    break;
+                                case "right":
+                                    if (spriteNumBoss == 1 && !jumped) {
+                                        worldX += speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 2 && !jumped) {
+                                        worldX += speed;
+                                        jumped = true;
+                                    }
+                                    if (spriteNumBoss == 3 && !jumped) {
+                                        worldX += speed;
+                                        jumped = true;
+                                    }
+                                    break;
+                                case "stand":
+                                    break;
+                            }
+                            break;
+                        case ("None"):
+                            break;
                     }
                     break;
-                case "stand":
+                case "NPC":
+                    switch (move_direction) {
+                        case "up":
+                            worldY -= speed;
+                            break;
+                        case "up_left":
+                            worldY -= speed;
+                            worldX -= speed;
+                            break;
+                        case "up_right":
+                            worldY -= speed;
+                            worldX += speed;
+                            break;
+                        case "down":
+                            worldY += speed;
+                            break;
+                        case "down_left":
+                            worldY += speed;
+                            worldX -= speed;
+                            break;
+                        case "down_right":
+                            worldY += speed;
+                            worldX += speed;
+                            break;
+                        case "left":
+                            worldX -= speed;
+                            break;
+                        case "right":
+                            worldX += speed;
+                            break;
+                    }
+                    break;
+                case "Object":
                     break;
             }
         }
@@ -224,103 +303,141 @@ public class Entity {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-            switch(move_direction) {
-                case "up":
-                    if(spriteNum == 1) {
-                        image = up1;
+            switch(entity_type) {
+
+                case "Enemy":
+
+                    switch (enemy_type) {
+
+                        case "Slime":
+
+                            switch (move_direction) {
+                                case "up":
+                                case "up_left":
+                                case "up_right":
+                                    if (spriteNum == 1) {
+                                        image = up1;
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = up2;
+                                    }
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    break;
+                                case "down":
+                                case "down_left":
+                                case "down_right":
+                                    if (spriteNum == 1) {
+                                        image = down1;
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = down2;
+                                    }
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    break;
+                                case "left":
+                                    if (spriteNum == 1) {
+                                        image = left1;
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = left2;
+                                    }
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    break;
+                                case "right":
+                                    if (spriteNum == 1) {
+                                        image = right1;
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = right2;
+                                    }
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    break;
+                                case "stand":
+                                    if (spriteNum == 1) {
+                                        image = stand1;
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = stand2;
+                                    }
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    break;
+                            }
+                            break;
+                        case "Frog_Boss":
+                            if (spriteNumBoss == 1) {
+                                image = jump1;
+                                jumped = false;
+                            }
+                            if (spriteNumBoss == 2) {
+                                image = jump2;
+                                jumped = false;
+                            }
+                            if (spriteNumBoss == 3) {
+                                image = jump3;
+                                jumped = false;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
+                            break;
                     }
-                    if(spriteNum == 2) {
-                        image = up2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
-                case "down":
-                    if(spriteNum == 1) {
-                        image = down1;
+                case "NPC":
+                    switch (move_direction) {
+                        case "up":
+                        case "up_left":
+                        case "up_right":
+                            if (spriteNum == 1) {
+                                image = up1;
+                            }
+                            if (spriteNum == 2) {
+                                image = up2;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            break;
+                        case "down":
+                        case "down_left":
+                        case "down_right":
+                            if (spriteNum == 1) {
+                                image = down1;
+                            }
+                            if (spriteNum == 2) {
+                                image = down2;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            break;
+                        case "left":
+                            if (spriteNum == 1) {
+                                image = left1;
+                            }
+                            if (spriteNum == 2) {
+                                image = left2;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            break;
+                        case "right":
+                            if (spriteNum == 1) {
+                                image = right1;
+                            }
+                            if (spriteNum == 2) {
+                                image = right2;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            break;
+                        case "stand":
+                            if (spriteNum == 1) {
+                                image = stand1;
+                            }
+                            if (spriteNum == 2) {
+                                image = stand2;
+                            }
+                            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            break;
                     }
-                    if(spriteNum == 2) {
-                        image = down2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
-                case "left":
-                    if(spriteNum == 1) {
-                        image = left1;
-                    }
-                    if(spriteNum == 2) {
-                        image = left2;
-                    }
+                case "Object":
+                    image = down1;
                     g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "right":
-                    if(spriteNum == 1) {
-                        image = right1;
-                    }
-                    if(spriteNum == 2) {
-                        image = right2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "stand":
-                    if(spriteNum == 1) {
-                        image = stand1;
-                    }
-                    if(spriteNum == 2) {
-                        image = stand2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "up_left":
-                    if(spriteNum == 1) {
-                        image = up1;
-                    }
-                    if(spriteNum == 2) {
-                        image = up2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "up_right":
-                    if(spriteNum == 1) {
-                        image = up1;
-                    }
-                    if(spriteNum == 2) {
-                        image = up2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "down_left":
-                    if(spriteNum == 1) {
-                        image = down1;
-                    }
-                    if(spriteNum == 2) {
-                        image = down2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "down_right":
-                    if(spriteNum == 1) {
-                        image = down1;
-                    }
-                    if(spriteNum == 2) {
-                        image = down2;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                    break;
-                case "Frog_Boss":
-                    if(spriteNumBoss == 1) {
-                        image = jump1;
-                    }
-                    if(spriteNumBoss == 2) {
-                        image = jump2;
-                    }
-                    if(spriteNumBoss == 3) {
-                        image = jump3;
-                    }
-                    g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
                     break;
             }
-
-
         }
     }
 
