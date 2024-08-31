@@ -11,6 +11,7 @@ public class table extends Entity {
 
         name = "table";
         down1 = setup("/Object/table");
+        entity_type = "Object";
         //itemDescription = "What does it open?...";
         collision = true;
 

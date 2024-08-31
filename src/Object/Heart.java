@@ -13,6 +13,7 @@ public class Heart extends Entity {
         super(gp);
 
         name = "Heart";
+        entity_type = "Object";
         image = setup("/Hp/Low");
         image2 = setup("/Hp/Half");
         image3 = setup("/Hp/Full");

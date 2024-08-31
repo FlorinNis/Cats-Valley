@@ -13,6 +13,7 @@ public class NPC_boy extends Entity {
         super(gp);
 
         draw_direction = "down";
+        entity_type = "NPC";
 
         getImage();
         setDialogue();

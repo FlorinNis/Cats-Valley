@@ -11,6 +11,7 @@ public class bed extends Entity {
 
         name = "bed";
         down1 = setup("/Object/bed");
+        entity_type = "Object";
         //itemDescription = "What does it open?...";
         collision = true;
 

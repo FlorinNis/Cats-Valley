@@ -11,6 +11,7 @@ public class Key_house2 extends Entity {
         super(gp);
 
         name = "Key Andre House";
+        entity_type = "Object";
         down1 = setup("/Object/key");
         qty = 0;
         itemDescription = "Where was this house again...?";

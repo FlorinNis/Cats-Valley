@@ -12,6 +12,7 @@ public class sword1 extends Entity {
 
         name = "Sword of Beelzebub";
         down1 = setup("/Player/player_sword_1/sword_1");
+        entity_type = "Object";
         qty = 0;
         attackDamage = 2;
         itemDescription = "Does it work?";

@@ -16,6 +16,8 @@ Green_Slime extends Entity {
         speed = 1;
         maxLife = 4;
         life = maxLife;
+        enemy_type = "Slime";
+        entity_type = "Enemy";
 
         solidArea.x = 3;
         solidArea.y = 18;

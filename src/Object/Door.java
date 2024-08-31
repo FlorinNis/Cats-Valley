@@ -13,6 +13,7 @@ public class Door extends Entity {
         super(gp);
 
         name = "Door";
+        entity_type = "Object";
         down1 = setup("/Object/door");
         open = setup("/Object/door_unlocked");
         closed = setup("/Object/door");

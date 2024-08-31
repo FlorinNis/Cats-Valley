@@ -12,6 +12,7 @@ public class NPC_Pisica_1 extends Entity {
         super(gp);
 
         draw_direction = "down";
+        entity_type = "NPC";
         speed = 1;
 
         getImage();

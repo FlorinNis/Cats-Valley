@@ -10,6 +10,7 @@ public class lamp extends Entity {
         super(gp);
 
         name = "lamp";
+        entity_type = "Object";
         down1 = setup("/Object/lamp");
         //itemDescription = "What does it open?...";
         collision = true;

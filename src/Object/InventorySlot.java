@@ -10,6 +10,7 @@ public class InventorySlot extends Entity {
         super(gp);
 
         name = "inventorySlot";
+        entity_type = "Object";
         image = setup("/UI/inventory_Slot");
         image2 = setup("/UI/DescBox");
 

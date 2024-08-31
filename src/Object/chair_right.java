@@ -11,6 +11,7 @@ public class chair_right extends Entity {
 
         name = "chairRight";
         down1 = setup("/Object/chair_right");
+        entity_type = "Object";
         //itemDescription = "What does it open?...";
         collision = true;
 
