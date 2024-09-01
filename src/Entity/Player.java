@@ -852,12 +852,12 @@ public class Player extends Entity{
 
         g2.drawImage(image, screenX, screenY, null);
         // Draw the checkNPC rectangle
-        g2.setColor(Color.BLUE);
-        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
-
-        // Draw the solidArea rectangle
-        g2.setColor(Color.RED);
-        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+//        g2.setColor(Color.BLUE);
+//        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
+//
+//        // Draw the solidArea rectangle
+//        g2.setColor(Color.RED);
+//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 

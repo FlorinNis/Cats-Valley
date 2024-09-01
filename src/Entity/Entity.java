@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Entity {
 
@@ -299,30 +300,33 @@ public class Entity {
         int diffX = gp.player.worldX - entity.worldX;
         int diffY = gp.player.worldY - entity.worldY;
 
-        Line2D lineOfSight = new Line2D.Float(entity.worldX, entity.worldY, gp.player.worldX, gp.player.worldY);
-        boolean lineOfSightBlocked = gp.cChecker.checkLineOfSight(lineOfSight);
+//        Line2D lineOfSight = new Line2D.Float(entity.worldX, entity.worldY, gp.player.worldX, gp.player.worldY);
+//        boolean lineOfSightBlocked = gp.cChecker.checkLineOfSight(lineOfSight);
 
-        if(!lineOfSightBlocked) {
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (diffX > 0) {
-                    move_direction = "right";
-                } else {
-                    move_direction = "left";
-                }
+       // if(!lineOfSightBlocked) {
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+                move_direction = "right";
             } else {
-                if (diffY > 0) {
-                    move_direction = "down";
-                } else {
-                    move_direction = "up";
-                }
+                move_direction = "left";
             }
-        } else playerNearby = false;
+        } else {
+            if (diffY > 0) {
+                move_direction = "down";
+            } else {
+                move_direction = "up";
+            }
+        }
+       // } else playerNearby = false;
     }
 
     public void enemyTakeDamage() {
         if(enemyHit != 999 && !gp.monster[gp.currentMap][enemyHit].invincible) {
             gp.monster[gp.currentMap][enemyHit].life -= gp.player.handItem[0].attackDamage;
             if(gp.monster[gp.currentMap][enemyHit].life == 0) {
+                if(Objects.equals(gp.monster[gp.currentMap][enemyHit].name, "Frog Boss")) {
+                    gp.gameState = gp.youWinState;
+                }
                 gp.monster[gp.currentMap][enemyHit] = null;
                 return;
             }
@@ -494,14 +498,14 @@ public class Entity {
                     break;
             }
             // Desenez coliziunile pentru o vizualizare mai buna
-            g2.setColor(Color.BLUE);
-            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
-
-            g2.setColor(Color.RED);
-            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-            g2.setColor(Color.GREEN);
-            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
+//            g2.setColor(Color.BLUE);
+//            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
+//
+//            g2.setColor(Color.RED);
+//            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+//
+//            g2.setColor(Color.GREEN);
+//            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
         }
     }
 
