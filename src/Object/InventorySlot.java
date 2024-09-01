@@ -11,6 +11,7 @@ public class InventorySlot extends Entity {
 
         name = "inventorySlot";
         entity_type = "Object";
+        pickedUp = false;
         image = setup("/UI/inventory_Slot");
         image2 = setup("/UI/DescBox");
 

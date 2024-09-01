@@ -26,6 +26,11 @@ Green_Slime extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        checkPlayer.x = 0;
+        checkPlayer.y = 0;
+        checkPlayer.width = gp.tileSize * 7;
+        checkPlayer.height = gp.tileSize * 7;
+
         getImage();
     }
 
@@ -43,8 +48,11 @@ Green_Slime extends Entity {
     public void setAction() {
 
         actionLockCounter ++;
+        System.out.println("playerNearby: " + playerNearby);
 
-        if (actionLockCounter == 120) {
+        if (playerNearby) {
+            followPlayer(this);
+        }else if (actionLockCounter == 120) {
 
             Random random = new Random();
             int i = random.nextInt(0, 100) + 1;

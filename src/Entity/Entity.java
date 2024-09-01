@@ -25,6 +25,7 @@ public class Entity {
     public int dashDuration = 20;
     public int dashCounter = 0;
     public float dashSpeed;
+    public boolean pickedUp = false;
     public int dashPauseDuration = 10;
     public boolean canDash = true;
     public boolean waitDash = false;
@@ -32,6 +33,7 @@ public class Entity {
     public boolean hitPlayer = false;
     public boolean isEnemy = false;
     public boolean interactRange = false;
+    public boolean playerNearby = false;
     public boolean locked = false;
     public int npcIndex = 999;
     public boolean isNPC = false;
@@ -63,10 +65,11 @@ public class Entity {
     public int spriteCounterBoss = 0;
     public boolean attackCollisionOn = false;
 
-    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
-    public Rectangle checkNPC = new Rectangle(0,0 , 140, 140);
+    public Rectangle solidArea = new Rectangle(0, 0, 0, 0);
+    public Rectangle checkNPC = new Rectangle(0,0 , 0, 0);
+    public Rectangle checkPlayer = new Rectangle(0,0 , 0, 0);
     public Rectangle attackBox = null;
-    public int solidAreaDefaultX, solidAreaDefaultY, checkNPCDefaultX, checkNPCDefaultY;
+    public int solidAreaDefaultX, solidAreaDefaultY, checkNPCDefaultX, checkNPCDefaultY, checkPlayerDefaultX, checkPlayerDefaultY;
     public boolean collisionOn = false;
 
     public int actionLockCounter = 0;
@@ -96,6 +99,8 @@ public class Entity {
         this.gp = gp;
         this.checkNPCDefaultX = checkNPC.x;
         this.checkNPCDefaultY = checkNPC.y;
+        this.checkPlayerDefaultX = checkPlayer.x;
+        this.checkPlayerDefaultY = checkPlayer.y;
     }
 
     public void setAction() {}
@@ -289,6 +294,24 @@ public class Entity {
 
 
     }
+    public void followPlayer(Entity entity){
+        int diffX = gp.player.worldX - entity.worldX;
+        int diffY = gp.player.worldY - entity.worldY;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+                move_direction = "right";
+            } else {
+                move_direction = "left";
+            }
+        } else {
+            if (diffY > 0) {
+                move_direction = "down";
+            } else {
+                move_direction = "up";
+            }
+        }
+    }
 
     public void enemyTakeDamage() {
         if(enemyHit != 999 && !gp.monster[gp.currentMap][enemyHit].invincible) {
@@ -306,10 +329,10 @@ public class Entity {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX - gp.tileSize * 2 &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize * 2 &&
+                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize * 2 &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize * 2) {
 
             switch(entity_type) {
 
@@ -388,8 +411,7 @@ public class Entity {
                                     jumped = false;
                                 }
                                 g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
-                                if(hasSword)
-                                    drawHealthBar(g2, screenX, screenY);
+                                drawBossHealthBar(g2, screenX, "Froggo");
                             }
                             break;
                     }
@@ -448,18 +470,32 @@ public class Entity {
                     }
                     break;
                 case "Object":
-                    image = down1;
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    if(!pickedUp) {
+                        image = down1;
+                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    }
                     break;
                 case "Projectile":
                     if(collisionOn) {
+                        if(hitPlayer)
+                            gp.player.contactMonster(998);
                         gp.projectiles.remove(this);
+
                     }else {
                         image = projectile;
                         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     }
                     break;
             }
+            // Desenez coliziunile pentru o vizualizare mai buna
+            g2.setColor(Color.BLUE);
+            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
+
+            g2.setColor(Color.RED);
+            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+
+            g2.setColor(Color.GREEN);
+            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
         }
     }
 
@@ -488,7 +524,7 @@ public class Entity {
         for (int i = -1; i <= 1; i++) {
             Projectile projectile = new Projectile(gp);
             projectile.worldX = this.worldX;
-            projectile.worldY = this.worldY + (i * 10);
+            projectile.worldY = this.worldY + (i * 30);
             projectile.setTarget(gp.player.worldX, gp.player.worldY);
             gp.projectiles.add(projectile);
         }
@@ -496,19 +532,37 @@ public class Entity {
 
     public void drawHealthBar(Graphics2D g2, int screenX, int screenY) {
         int barWidth = gp.tileSize;
-        int barHeight = 5;
+        int barHeight = 10;
         int barX = screenX;
-        int barY = screenY - barHeight - 2; // Position the bar above the entity
-        System.out.println("barWidth: " + barWidth + " barHeight: " + barHeight + " barX: " + barX + " barY: " + barY);
+        int barY = screenY - barHeight - 2;
 
-        // Draw the background of the health bar
         g2.setColor(Color.GRAY);
         g2.fillRect(barX, barY, barWidth, barHeight);
 
-        // Calculate the width of the filled part based on the entity's health
         int filledWidth = (int) ((double) life / maxLife * barWidth);
 
-        // Draw the filled part of the health bar
+        g2.setColor(Color.RED);
+        g2.fillRect(barX, barY, filledWidth, barHeight);
+
+        g2.setColor(Color.BLACK);
+        g2.drawRect(barX, barY, barWidth, barHeight);
+    }
+
+    public void drawBossHealthBar(Graphics2D g2, int screenX, String bossName) {
+        int barWidth = gp.getWidth() / 2;
+        int barHeight = 15;
+        int barX = (gp.getWidth() - barWidth) / 2;
+        int barY = gp.getHeight() - barHeight - 10;
+
+        //g2.setFont(new Font("Ancient Modern Tales", Font.PLAIN, 12));
+        g2.setColor(Color.WHITE);
+        g2.drawString(bossName, barX, barY - 5);
+
+        g2.setColor(Color.GRAY);
+        g2.fillRect(barX, barY, barWidth, barHeight);
+
+        int filledWidth = (int) ((double) life / maxLife * barWidth);
+
         g2.setColor(Color.RED);
         g2.fillRect(barX, barY, filledWidth, barHeight);
 

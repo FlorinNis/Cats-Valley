@@ -13,7 +13,15 @@ public class HealthUp extends Entity {
 
         name = "HealthUp";
         entity_type = "Object";
+        pickedUp = false;
         down1 = setup("/Hp/Full");
+
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 42;
+        solidArea.height = 30;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
     }
 }

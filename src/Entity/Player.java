@@ -506,6 +506,7 @@ public class Player extends Entity{
                     gp.gameState = gameState;
                     gp.playSF(2);
                     hasDungeonKey = true;
+                    gp.obj[gp.currentMap][i].pickedUp = true;
                     itemsHeld[invContor] = gp.obj[gp.currentMap][i];
                     itemsHeld[invContor++].qty++;
                     itemsHeldSize++;
@@ -543,6 +544,7 @@ public class Player extends Entity{
                     gp.gameState = gameState;
                     maxLife += 2;
                     life += 2;
+                    gp.obj[gp.currentMap][i].pickedUp = true;
                     gp.playSF(1);
                     gp.obj[gp.currentMap][i] = null;
                     gp.ui.currentDialogue = "Hp UP!";
@@ -551,11 +553,12 @@ public class Player extends Entity{
                     break;
                 case "Chest":
                     gp.gameState = gameState;
-
+                    gp.obj[gp.currentMap][i].pickedUp = true;
                     break;
                 case "Sword of Beelzebub":
                     gp.gameState = gameState;
                     gp.playSF(2);
+                    gp.obj[gp.currentMap][i].pickedUp = true;
                     itemsHeld[invContor++] = gp.obj[gp.currentMap][i];
                     itemsHeldSize++;
                     gp.obj[gp.currentMap][i] = null;
@@ -848,6 +851,13 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, screenX, screenY, null);
+        // Draw the checkNPC rectangle
+        g2.setColor(Color.BLUE);
+        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
+
+        // Draw the solidArea rectangle
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 

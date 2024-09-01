@@ -14,10 +14,18 @@ public class Door extends Entity {
 
         name = "Door";
         entity_type = "Object";
+        pickedUp = false;
         down1 = setup("/Object/door");
         open = setup("/Object/door_unlocked");
         closed = setup("/Object/door");
         doorHouse = "Andre";
+
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 42;
+        solidArea.height = 30;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         collision = true;
         locked = false;

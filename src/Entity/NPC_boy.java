@@ -15,6 +15,18 @@ public class NPC_boy extends Entity {
         draw_direction = "down";
         entity_type = "NPC";
 
+        solidArea.x = 10;
+        solidArea.y = 60;
+        solidArea.width = 42;
+        solidArea.height = 30;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
+        checkNPC.x = 0;
+        checkNPC.y = 0;
+        checkNPC.width = 140;
+        checkNPC.height = 140;
+
         getImage();
         setDialogue();
     }
@@ -58,10 +70,10 @@ public class NPC_boy extends Entity {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX - gp.tileSize * 2 &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize * 2 &&
+                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize * 2 &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize * 2) {
 
             switch(move_direction) {
                 case "up":
@@ -97,6 +109,13 @@ public class NPC_boy extends Entity {
                 //    }
             }
             g2.drawImage(image, screenX, screenY, gp.tileSize*2, gp.tileSize*2, null);
+            // Draw the checkNPC rectangle
+            g2.setColor(Color.RED);
+            g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
+
+            // Draw the solidArea rectangle
+            g2.setColor(Color.BLUE);
+            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         }
     }
 }

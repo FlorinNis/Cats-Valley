@@ -13,6 +13,18 @@ public class NPC_Pisica_3 extends Entity {
         entity_type = "NPC";
         speed = 1;
 
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 42;
+        solidArea.height = 30;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
+        checkNPC.x = 0;
+        checkNPC.y = 0;
+        checkNPC.width = 140;
+        checkNPC.height = 140;
+
         getImage();
         setDialogue();
     }

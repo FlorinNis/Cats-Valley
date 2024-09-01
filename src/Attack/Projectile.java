@@ -13,10 +13,10 @@ public class Projectile extends Entity {
         entity_type = "Projectile";
         speed = 4;
 
-        solidArea.x = 3;
-        solidArea.y = 4;
-        solidArea.width = 10;
-        solidArea.height = 10;
+        solidArea.x = 5;
+        solidArea.y = 10;
+        solidArea.width = 20;
+        solidArea.height = 25;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

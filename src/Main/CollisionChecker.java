@@ -400,6 +400,9 @@ public class CollisionChecker {
         gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
 
+        entity.checkPlayer.x = entity.worldX + entity.checkPlayer.x - gp.tileSize * 3;
+        entity.checkPlayer.y = entity.worldY + entity.checkPlayer.y - gp.tileSize * 3;
+
         if(Objects.equals(entity.name, "Green Slime")) entity.isEnemy = true;
 
 
@@ -410,12 +413,24 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
+                }
                 break;
             case "down":
                 entity.solidArea.y += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
+                }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
                 }
                 break;
             case "left":
@@ -424,12 +439,24 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
+                }
                 break;
             case "right":
                 entity.solidArea.x += entity.speed;
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
+                }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
                 }
                 break;
             //diagonal collision
@@ -440,6 +467,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
+                }
                 break;
             case "up_right":
                 entity.solidArea.y -= entity.speed;
@@ -447,6 +480,12 @@ public class CollisionChecker {
                 if (entity.solidArea.intersects(gp.player.solidArea)) {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
+                }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
                 }
                 break;
             case "down_left":
@@ -456,6 +495,12 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
+                }
                 break;
             case "down_right":
                 entity.solidArea.y += entity.speed;
@@ -464,12 +509,26 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     entity.hitPlayer = true;
                 }
+                if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+                    entity.playerNearby = true;
+                }
+                else {
+                    entity.playerNearby = false;
+                }
                 break;
+        }
+        if(entity.checkPlayer.intersects((gp.player.solidArea))) {
+            entity.playerNearby = true;
+        }
+        else {
+            entity.playerNearby = false;
         }
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
         gp.player.solidArea.x = gp.player.solidAreaDefaultX;
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+        entity.checkPlayer.x = entity.checkPlayerDefaultX;
+        entity.checkPlayer.y = entity.checkPlayerDefaultY;
     }
 
 

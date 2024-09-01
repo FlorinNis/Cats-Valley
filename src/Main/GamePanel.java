@@ -124,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
         double nextDrawTime = System.nanoTime() + drawInterval;
         long lastTime = System.nanoTime();
         long currentTime;
-        int timer = 0;
+        long timer = 0;
         int drawCount = 0;
 
         while(gameThread != null) {
@@ -134,8 +134,15 @@ public class GamePanel extends JPanel implements Runnable {
             timer += (currentTime - lastTime);
             lastTime = currentTime;
 
+            if (timer > drawInterval * 10) {
+                timer = (long) drawInterval * 10;
+            }
+
             //UPDATE: update info such as character position
-            update();
+            while (timer >= drawInterval) {
+                update();
+                timer -= drawInterval;
+            }
 
             //DRAW: draw the screen with the updated information
             drawToTempScreen();
@@ -172,9 +179,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             for(int i = 0; i < npc[1].length; i++) {
                 if(npc[currentMap][i] != null) {
-//                    if (cChecker.isPlayerNearNPC(player, npc[currentMap][i])) {
-//                        //dialogueBoxNPC(npc[currentMap][i], g2);
-//                    }
                     npc[currentMap][i].update();
                 }
             }
@@ -194,7 +198,7 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
         }
         if(gameState == titleScreen) {
-            if(keyH.fulscreen == true) setFullScreen();
+            if(keyH.fulscreen) setFullScreen();
         }
 
     }
@@ -202,7 +206,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
 
@@ -331,27 +335,4 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-//    public void dialogueBoxNPC(Entity entity, Graphics2D g2) {
-//        // Position above NPC
-//        int boxWidth = 120;
-//        int boxHeight = 40;
-//        int boxX = entity.worldX + (tileSize - boxWidth) / 2;
-//        int boxY = entity.worldY - boxHeight - 10;
-//
-//        // Draw the box
-//        g2.setColor(new Color(0, 0, 0, 150)); // Black background with some transparency
-//        g2.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
-//
-//        // Draw the border
-//        g2.setColor(Color.WHITE); // White border
-//        g2.drawRoundRect(boxX, boxY, boxWidth, boxHeight, 10, 10);
-//
-//        // Draw the text
-//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 12F));
-//        g2.setColor(Color.WHITE); // White text
-//        String message = "Press E to interact...";
-//        int textX = boxX + 10; // Padding from the left side
-//        int textY = boxY + 25; // Padding from the top
-//        g2.drawString(message, textX, textY);
-//    }
 }

@@ -12,6 +12,7 @@ public class letter extends Entity {
 
         name = "Letter";
         entity_type = "Object";
+        pickedUp = false;
         down1 = setup("/Object/letter");
         qty = 0;
         itemDescription = "Who knows what is says...";
