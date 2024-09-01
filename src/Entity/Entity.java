@@ -7,6 +7,7 @@ import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -298,19 +299,24 @@ public class Entity {
         int diffX = gp.player.worldX - entity.worldX;
         int diffY = gp.player.worldY - entity.worldY;
 
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-            if (diffX > 0) {
-                move_direction = "right";
+        Line2D lineOfSight = new Line2D.Float(entity.worldX, entity.worldY, gp.player.worldX, gp.player.worldY);
+        boolean lineOfSightBlocked = gp.cChecker.checkLineOfSight(lineOfSight);
+
+        if(!lineOfSightBlocked) {
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    move_direction = "right";
+                } else {
+                    move_direction = "left";
+                }
             } else {
-                move_direction = "left";
+                if (diffY > 0) {
+                    move_direction = "down";
+                } else {
+                    move_direction = "up";
+                }
             }
-        } else {
-            if (diffY > 0) {
-                move_direction = "down";
-            } else {
-                move_direction = "up";
-            }
-        }
+        } else playerNearby = false;
     }
 
     public void enemyTakeDamage() {

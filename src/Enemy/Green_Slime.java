@@ -52,6 +52,7 @@ Green_Slime extends Entity {
 
         if (playerNearby) {
             followPlayer(this);
+            actionLockCounter = 0;
         }else if (actionLockCounter == 120) {
 
             Random random = new Random();

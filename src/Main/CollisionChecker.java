@@ -1,8 +1,10 @@
 package Main;
 
 import Entity.Entity;
+import Tiles.Tile;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.util.Objects;
 
 public class CollisionChecker {
@@ -529,6 +531,29 @@ public class CollisionChecker {
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
         entity.checkPlayer.x = entity.checkPlayerDefaultX;
         entity.checkPlayer.y = entity.checkPlayerDefaultY;
+    }
+
+    public boolean checkLineOfSight(Line2D lineOfSight){
+        for (int row = 0; row < gp.maxWorldRow; row++) {
+            for (int col = 0; col < gp.maxWorldCol; col++) {
+
+                int tileNum = gp.tileM.mapTileNum[gp.currentMap][col][row];
+
+                Rectangle tileRect = new Rectangle(col * gp.tileSize, row * gp.tileSize, gp.tileSize, gp.tileSize);
+
+                if (gp.tileM.tile[tileNum].collision && lineOfSight.intersects(tileRect)) {
+                    return true;
+                }
+            }
+        }
+
+        for (Entity object : gp.obj[gp.currentMap]) {
+            if (object != null && lineOfSight.intersects(object.solidArea)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
