@@ -1,5 +1,6 @@
 package Entity;
 
+import Attack.Projectile;
 import Enemy.Green_Slime;
 import Main.GamePanel;
 import Main.UtilityTool;
@@ -14,6 +15,7 @@ public class Entity {
     GamePanel gp;
     public int worldX, worldY;
     public int speed;
+    public int speedX, speedY;
     public boolean goingUp = true;
     //dash
     public boolean isDashing = false;
@@ -44,6 +46,7 @@ public class Entity {
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public BufferedImage up_attack, down_attack, left_attack, right_attack, jump1, jump2, jump3;
     public BufferedImage closed, open;
+    public BufferedImage projectile;
     public String  doorHouse;
     public int quest_letter_index = 0;
     public boolean quest_1_done = false, quest_2_done = false, quest_3_done = false;
@@ -67,6 +70,7 @@ public class Entity {
     public boolean collisionOn = false;
 
     public int actionLockCounter = 0;
+    public int attackLockCounter = 0;
 
     String dialogues[] = new String[50];
     public int dialogueIndex = 0;
@@ -260,6 +264,10 @@ public class Entity {
                     break;
                 case "Object":
                     break;
+                case "Projectile":
+                    worldX += speedX;
+                    worldY += speedY;
+                    break;
             }
         }
 
@@ -310,73 +318,79 @@ public class Entity {
                     switch (enemy_type) {
 
                         case "Slime":
-
-                            switch (move_direction) {
-                                case "up":
-                                case "up_left":
-                                case "up_right":
-                                    if (spriteNum == 1) {
-                                        image = up1;
-                                    }
-                                    if (spriteNum == 2) {
-                                        image = up2;
-                                    }
-                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                                    break;
-                                case "down":
-                                case "down_left":
-                                case "down_right":
-                                    if (spriteNum == 1) {
-                                        image = down1;
-                                    }
-                                    if (spriteNum == 2) {
-                                        image = down2;
-                                    }
-                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                                    break;
-                                case "left":
-                                    if (spriteNum == 1) {
-                                        image = left1;
-                                    }
-                                    if (spriteNum == 2) {
-                                        image = left2;
-                                    }
-                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                                    break;
-                                case "right":
-                                    if (spriteNum == 1) {
-                                        image = right1;
-                                    }
-                                    if (spriteNum == 2) {
-                                        image = right2;
-                                    }
-                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                                    break;
-                                case "stand":
-                                    if (spriteNum == 1) {
-                                        image = stand1;
-                                    }
-                                    if (spriteNum == 2) {
-                                        image = stand2;
-                                    }
-                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                                    break;
+                            if(life > 0) {
+                                switch (move_direction) {
+                                    case "up":
+                                    case "up_left":
+                                    case "up_right":
+                                        if (spriteNum == 1) {
+                                            image = up1;
+                                        }
+                                        if (spriteNum == 2) {
+                                            image = up2;
+                                        }
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                        break;
+                                    case "down":
+                                    case "down_left":
+                                    case "down_right":
+                                        if (spriteNum == 1) {
+                                            image = down1;
+                                        }
+                                        if (spriteNum == 2) {
+                                            image = down2;
+                                        }
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                        break;
+                                    case "left":
+                                        if (spriteNum == 1) {
+                                            image = left1;
+                                        }
+                                        if (spriteNum == 2) {
+                                            image = left2;
+                                        }
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                        break;
+                                    case "right":
+                                        if (spriteNum == 1) {
+                                            image = right1;
+                                        }
+                                        if (spriteNum == 2) {
+                                            image = right2;
+                                        }
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                        break;
+                                    case "stand":
+                                        if (spriteNum == 1) {
+                                            image = stand1;
+                                        }
+                                        if (spriteNum == 2) {
+                                            image = stand2;
+                                        }
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                        break;
+                                }
+                                drawHealthBar(g2, screenX, screenY);
                             }
                             break;
                         case "Frog_Boss":
-                            if (spriteNumBoss == 1) {
-                                image = jump1;
-                                jumped = false;
+                            if(life > 0) {
+                                if (spriteNumBoss == 1) {
+                                    image = jump1;
+                                    jumped = false;
+                                }
+                                if (spriteNumBoss == 2) {
+                                    image = jump2;
+                                    jumped = false;
+                                }
+                                if (spriteNumBoss == 3) {
+                                    image = jump3;
+                                    jumped = false;
+                                }
+                                g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
+                                if(hasSword)
+                                    drawHealthBar(g2, screenX, screenY);
                             }
-                            if (spriteNumBoss == 2) {
-                                image = jump2;
-                                jumped = false;
-                            }
-                            if (spriteNumBoss == 3) {
-                                image = jump3;
-                                jumped = false;
-                            }
-                            g2.drawImage(image, screenX, screenY, gp.tileSize * 4, gp.tileSize * 4, null);
                             break;
                     }
                     break;
@@ -437,8 +451,70 @@ public class Entity {
                     image = down1;
                     g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     break;
+                case "Projectile":
+                    if(collisionOn) {
+                        gp.projectiles.remove(this);
+                    }else {
+                        image = projectile;
+                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    }
+                    break;
             }
         }
+    }
+
+    public void shootProjectileAtPlayer() {
+        Projectile projectile = new Projectile(gp);
+        projectile.worldX = this.worldX;
+        projectile.worldY = this.worldY;
+        projectile.setTarget(gp.player.worldX, gp.player.worldY);
+        gp.projectiles.add(projectile);
+    }
+
+    public void shootProjectilesInAllDirections() {
+        int[] directionsX = {1, 0, -1, 0, 1, -1, 1, -1};
+        int[] directionsY = {0, 1, 0, -1, 1, 1, -1, -1};
+
+        for (int i = 0; i < directionsX.length; i++) {
+            Projectile projectile = new Projectile(gp);
+            projectile.worldX = this.worldX;
+            projectile.worldY = this.worldY;
+            projectile.setDirection(directionsX[i], directionsY[i]);
+            gp.projectiles.add(projectile);
+        }
+    }
+
+    public void shootThreeProjectilesAtPlayer() {
+        for (int i = -1; i <= 1; i++) {
+            Projectile projectile = new Projectile(gp);
+            projectile.worldX = this.worldX;
+            projectile.worldY = this.worldY + (i * 10);
+            projectile.setTarget(gp.player.worldX, gp.player.worldY);
+            gp.projectiles.add(projectile);
+        }
+    }
+
+    public void drawHealthBar(Graphics2D g2, int screenX, int screenY) {
+        int barWidth = gp.tileSize;
+        int barHeight = 5;
+        int barX = screenX;
+        int barY = screenY - barHeight - 2; // Position the bar above the entity
+        System.out.println("barWidth: " + barWidth + " barHeight: " + barHeight + " barX: " + barX + " barY: " + barY);
+
+        // Draw the background of the health bar
+        g2.setColor(Color.GRAY);
+        g2.fillRect(barX, barY, barWidth, barHeight);
+
+        // Calculate the width of the filled part based on the entity's health
+        int filledWidth = (int) ((double) life / maxLife * barWidth);
+
+        // Draw the filled part of the health bar
+        g2.setColor(Color.RED);
+        g2.fillRect(barX, barY, filledWidth, barHeight);
+
+        // Draw the border of the health bar
+        g2.setColor(Color.BLACK);
+        g2.drawRect(barX, barY, barWidth, barHeight);
     }
 
     public BufferedImage setup(String imagePath) {

@@ -61,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity obj[][] = new Entity[maxMap][50];
     public Entity npc[][] = new Entity[maxMap][50];
     public Entity monster[][] = new Entity[maxMap][50];
+    public ArrayList<Entity> projectiles = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     //GAMESTATE
@@ -82,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.addMouseListener(mouseH);
         this.setFocusable(true);
+        projectiles = new ArrayList<>();
     }
 
     public void setupGame() {
@@ -181,6 +183,9 @@ public class GamePanel extends JPanel implements Runnable {
                     monster[currentMap][i].update();
                 }
             }
+            for (int i = 0; i < projectiles.size(); i++) {
+                projectiles.get(i).update();
+            }
         }
         if(gameState == pauseState) {
 
@@ -242,6 +247,10 @@ public class GamePanel extends JPanel implements Runnable {
                     return result;
                 }
             });
+            //draw projectile
+            for (int i = 0; i < projectiles.size(); i++) {
+                projectiles.get(i).draw(g2);
+            }
 
             //draw entity
             for(int i = 0; i < entityList.size(); i++) {

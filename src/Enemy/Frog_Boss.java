@@ -1,5 +1,6 @@
 package Enemy;
 
+import Attack.Projectile;
 import Entity.Entity;
 import Main.GamePanel;
 
@@ -73,6 +74,25 @@ Frog_Boss extends Entity {
                 spriteNumBoss = 1;
             }
             spriteCounterBoss = 0;
+        }
+        // Randomly select an attack pattern
+        attackLockCounter ++;
+        if (attackLockCounter == 120) {
+            Random random = new Random();
+            int attackPattern = random.nextInt(3);
+
+            switch (attackPattern) {
+                case 0:
+                    shootProjectileAtPlayer();
+                    break;
+                case 1:
+                    shootProjectilesInAllDirections();
+                    break;
+                case 2:
+                    shootThreeProjectilesAtPlayer();
+                    break;
+            }
+            attackLockCounter = 0;
         }
 
         //invincible
