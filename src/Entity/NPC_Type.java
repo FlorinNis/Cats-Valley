@@ -5,5 +5,7 @@ public enum NPC_Type {
     BOY,
     PisicaSTART,
     PisicaCASA,
-    dungeonKeeper
+    dungeonKeeper,
+    TUTORIAL,
+    CAT
 }

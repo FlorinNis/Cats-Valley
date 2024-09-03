@@ -6,6 +6,8 @@ public class Main {
 
     public static JFrame window;
 
+    //public UI ui = new UI(gamePanel);
+
     public static void main(String[] args) {
 
         window = new JFrame();
@@ -23,6 +25,8 @@ public class Main {
         window.setVisible(true);
 
         gamePanel.setupGame();
+        //gamePanel.loadCurrentMap(0);
         gamePanel.startGameThread();
+
     }
 }

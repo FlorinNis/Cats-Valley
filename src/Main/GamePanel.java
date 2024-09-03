@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static Main.Main.window;
+
 public class GamePanel extends JPanel implements Runnable {
 
     //screen settings
@@ -58,11 +60,15 @@ public class GamePanel extends JPanel implements Runnable {
     //Singleton
     public Player player = Player.getInstance(this, keyH, mouseH);
 
-    public Entity obj[][] = new Entity[maxMap][3000];
+    public Entity obj[][] = new Entity[maxMap][300];
+
+    public Entity grass[][] = new Entity[maxMap][1500];
     public Entity npc[][] = new Entity[maxMap][50];
     public Entity monster[][] = new Entity[maxMap][50];
     public ArrayList<Entity> projectiles = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
+
+    private boolean once[] = new boolean[10];
 
     //GAMESTATE
     public int gameState;
@@ -88,10 +94,15 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        //gameState = loadingScreen;
+        //ui.draw(g2);
 
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
+//        aSetter.setGrass();
+//        aSetter.setObject();
+//        aSetter.setNPC();
+//        aSetter.setMonster();
+        loadCurrentMap(0);
+
         playMusic(0);
         music.fc.setValue(-20.0f);
         gameState = titleScreen;
@@ -99,23 +110,69 @@ public class GamePanel extends JPanel implements Runnable {
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics();
 
-
-
     }
     public void setFullScreen() {
         //get local screen device
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(Main.window);
+        gd.setFullScreenWindow(window);
 
         //get full screen width and height
-        screenWidth2 = Main.window.getWidth();;
-        screenHeight2 = Main.window.getHeight();
+        screenWidth2 = window.getWidth();;
+        screenHeight2 = window.getHeight();
     }
 
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void loadCurrentMap(int index){
+        if(index == 0) {
+            if(!once[index]) {
+                //showLoadingScreen(g2);
+                aSetter.setObject(index);
+                aSetter.setGrass();
+                aSetter.setNPC();
+                aSetter.setMonster();
+                once[index] = true;
+            }
+            //casa dreapta
+        } else if(index == 5) {
+            if(!once[index]) {
+                showLoadingScreen(g2);
+                aSetter.setObject(index);
+                repaint();
+                once[index] = true;
+            }
+            //casa mare
+        } else if(index == 4) {
+            if(!once[index]) {
+                showLoadingScreen(g2);
+                aSetter.setObject(index);
+                repaint();
+                once[index] = true;
+            }
+            //casa stanga
+        } else if(index == 3) {
+            if(!once[index]) {
+                showLoadingScreen(g2);
+                aSetter.setObject(index);
+                repaint();
+                once[index] = true;
+            };
+        }
+
+    }
+
+    public void showLoadingScreen(Graphics2D g2) {
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Arial", Font.BOLD, 50));
+        String text = "Loading...";
+        int x = (getWidth() - g2.getFontMetrics().stringWidth(text)) / 2;
+        int y = getHeight() / 2;
+        g2.drawString(text, x, y);
+        repaint();
     }
 
     @Override
@@ -141,6 +198,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             //UPDATE: update info such as character position
             while (timer >= drawInterval) {
+                System.out.println("update");
+
                 update();
                 timer -= drawInterval;
             }
@@ -176,21 +235,19 @@ public class GamePanel extends JPanel implements Runnable {
 
         if(gameState == playState) {
             player.update();
-            //npc
-
-//            for(int i = 0; i < npc[1].length; i++) {
-//                if(npc[currentMap][i] != null) {
-//                    npc[currentMap][i].update();
-//                }
-//            }
-//            for(int i = 0; i < monster.length; i++) {
-//                if(monster[currentMap][i] != null) {
-//                    monster[currentMap][i].update();
-//                }
-//            }
-//            for (int i = 0; i < projectiles.size(); i++) {
-//                projectiles.get(i).update();
-//            }
+            for(int i = 0; i < npc[1].length; i++) {
+                if(npc[currentMap][i] != null) {
+                    npc[currentMap][i].update();
+                }
+            }
+            for(int i = 0; i < monster.length; i++) {
+                if(monster[currentMap][i] != null) {
+                    monster[currentMap][i].update();
+                }
+            }
+            for (int i = 0; i < projectiles.size(); i++) {
+                projectiles.get(i).update();
+            }
         }
         if(gameState == pauseState) {
 
@@ -227,6 +284,11 @@ public class GamePanel extends JPanel implements Runnable {
             for(int i = 0; i < npc[currentMap].length; i++) {
                 if(npc[currentMap][i] != null) {
                     entityList.add(npc[currentMap][i]);
+                }
+            }
+            for(int i = 0; i < grass[currentMap].length; i++) {
+                if(grass[currentMap][i] != null) {
+                    entityList.add(grass[currentMap][i]);
                 }
             }
 

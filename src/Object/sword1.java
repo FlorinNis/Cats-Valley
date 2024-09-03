@@ -11,7 +11,8 @@ public class sword1 extends Entity {
         super(gp);
 
         name = "Sword of Beelzebub";
-        down1 = setup("/Player/player_sword_1/sword_1");
+        down1 = setup("/Object/New_Objects/sword");
+        object_type = "sword1";
         entity_type = "Object";
         pickedUp = false;
         qty = 0;

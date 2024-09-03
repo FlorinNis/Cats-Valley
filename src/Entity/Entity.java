@@ -45,6 +45,7 @@ public class Entity {
     public int attackDamage;
     public int enemyHit;
     public String enemy_type = "none";
+    public String npc_name = "none";
 
     public BufferedImage animation_1, animation_2, animation_3, animation_4, animation_5, animation_6, animation_7, animation_8;
     public BufferedImage up1, up2, down1, down2, down3, left1, left2, right1, right2, stand1, stand2;
@@ -139,9 +140,10 @@ public class Entity {
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
 
-
+        if(name == "pisica1")
+            System.out.println("pisica1");
         if (!collisionOn) {
-            switch(entity_type) {
+            switch (entity_type) {
                 case "Enemy":
                     switch (enemy_type) {
                         case ("Slime"):
@@ -243,9 +245,12 @@ public class Entity {
                     }
                     break;
                 case "NPC":
+                    System.out.println("ajunge la move");
                     switch (move_direction) {
                         case "up":
+                            System.out.println("upWORLD");
                             worldY -= speed;
+                            System.out.println("worldY: " + worldY);
                             break;
                         case "up_left":
                             worldY -= speed;
@@ -272,14 +277,14 @@ public class Entity {
                         case "right":
                             worldX += speed;
                             break;
+
+                        case "Object":
+                            break;
+                        case "Projectile":
+                            worldX += speedX;
+                            worldY += speedY;
+                            break;
                     }
-                    break;
-                case "Object":
-                    break;
-                case "Projectile":
-                    worldX += speedX;
-                    worldY += speedY;
-                    break;
             }
         }
 
@@ -359,6 +364,22 @@ public class Entity {
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize * 4 &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize * 4 &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize * 4) {
+
+//            if(name == "grass1"){
+//                System.out.println("grass1");
+//                if (spriteNumAnim == 1) {
+//                    image = animation_1;
+//                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+//                }
+//                if (spriteNumAnim == 2) {
+//                    image = animation_2;
+//                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+//                }
+//                if (spriteNumAnim == 3) {
+//                    image = animation_3;
+//                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+//                }
+//            }
 
             switch(entity_type) {
 
@@ -443,6 +464,7 @@ public class Entity {
                     }
                     break;
                 case "NPC":
+                    //update();
                     switch (move_direction) {
                         case "up":
                         case "up_left":
@@ -485,6 +507,7 @@ public class Entity {
                             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                             break;
                         case "stand":
+                            System.out.println("stand");
                             if (spriteNum == 1) {
                                 image = stand1;
                             }
@@ -498,7 +521,6 @@ public class Entity {
                 case "Object":
                     switch (object_type){
                         case "tree":
-                            System.out.println("tree");
                             if (spriteNumAnim == 1) {
                                 image = down1;
                             }
@@ -513,18 +535,20 @@ public class Entity {
                         case "grass1":
                             if (spriteNumAnim == 1) {
                                 image = animation_1;
-                                g2.drawImage(animation_1, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                             }
                             if (spriteNumAnim == 2) {
                                 image = animation_2;
-                                g2.drawImage(animation_2, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                             }
                             if (spriteNumAnim == 3) {
                                 image = animation_3;
-                                g2.drawImage(animation_3, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                             }
 
                             break;
+                        case "obstacle_log":
+                            g2.drawImage(down1, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     }
 
                     if(!pickedUp && object_type != "tree") {
@@ -545,14 +569,14 @@ public class Entity {
                     break;
             }
             // Desenez coliziunile pentru o vizualizare mai buna
-//            g2.setColor(Color.BLUE);
-//            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
-//
-//            g2.setColor(Color.RED);
-//            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-//
-//            g2.setColor(Color.GREEN);
-//            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
+            g2.setColor(Color.BLUE);
+            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
+
+            g2.setColor(Color.RED);
+            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+
+            g2.setColor(Color.GREEN);
+            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
         }
     }
 

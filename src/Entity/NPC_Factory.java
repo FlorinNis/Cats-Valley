@@ -11,6 +11,8 @@ public class NPC_Factory {
             case PisicaSTART -> new NPC_Pisica_1(gp);
             case PisicaCASA -> new NPC_Pisica_2(gp);
             case dungeonKeeper -> new NPC_Pisica_3(gp);
+            case TUTORIAL -> new NPC_Pisica_Tutorial(gp);
+            case CAT -> new cat(gp);
         };
     }
 }

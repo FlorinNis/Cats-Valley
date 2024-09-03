@@ -122,8 +122,19 @@ public class UI {
         }
     }
 
+    private void drawLoadingScreen() {
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Arial", Font.BOLD, 50));
+        String text = "Loading...";
+        int x = (gp.screenWidth - g2.getFontMetrics().stringWidth(text)) / 2;
+        int y = gp.screenHeight / 2;
+        g2.drawString(text, x, y);
+    }
+
     private void drawDialogueBoxNPC() {
-        if (gp.player.npcIndex == 999 && gp.currentMap == 0 && lastNpcIndex != 1) {
+        if (gp.npc[gp.currentMap][lastNpcIndex] != null &&
+
+                gp.player.npcIndex == 999 && gp.currentMap == 0 && lastNpcIndex != 1) {
             gp.npc[gp.currentMap][lastNpcIndex].speed = 1;
             return;
         }

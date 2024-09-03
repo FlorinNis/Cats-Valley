@@ -29,6 +29,7 @@ public class Player extends Entity{
     public int openDoorIndex = 7;
     int finalDialog = 0;
     public String attack_direction;
+    public boolean hasDashed = false;
 
     private Player(GamePanel gp, KeyHandler keyH, MouseHandler mouseH) {
 
@@ -118,6 +119,7 @@ public class Player extends Entity{
 
     public void update() {
         if(isDashing){
+            hasDashed = true;
             Dash();
         }
         else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true || keyH.ePressed == true) {
@@ -295,6 +297,16 @@ public class Player extends Entity{
             gp.gameState = gp.gameOverState;
         }
 
+    }
+
+    public void stopMoving() {
+        keyH.upPressed = false;
+        keyH.downPressed = false;
+        keyH.leftPressed = false;
+        keyH.rightPressed = false;
+        keyH.spacePressed = false;
+        keyH.enterPressed = false;
+        keyH.ePressed = false;
     }
     public void drawAttack(Graphics2D g2) {
         attackCounter++;
@@ -851,13 +863,13 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, screenX, screenY, null);
-//        // Draw the checkNPC rectangle
-//        g2.setColor(Color.BLUE);
-//        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
-//
-//        // Draw the solidArea rectangle
-//        g2.setColor(Color.RED);
-//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        // Draw the checkNPC rectangle
+        g2.setColor(Color.BLUE);
+        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
+
+        // Draw the solidArea rectangle
+        g2.setColor(Color.RED);
+        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 

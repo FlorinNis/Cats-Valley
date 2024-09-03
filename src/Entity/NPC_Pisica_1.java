@@ -11,6 +11,7 @@ public class NPC_Pisica_1 extends Entity {
     public NPC_Pisica_1(GamePanel gp) {
         super(gp);
 
+        name = "pisica1";
         draw_direction = "down";
         entity_type = "NPC";
         speed = 1;
@@ -84,6 +85,7 @@ public class NPC_Pisica_1 extends Entity {
             System.out.println("I = " + i);
 
             if (i <= 15) {
+                System.out.println("Up");
                 move_direction = "up";
             }
             if (i > 15 && i <= 30) {

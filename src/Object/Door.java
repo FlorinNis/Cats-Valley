@@ -14,6 +14,7 @@ public class Door extends Entity {
 
         name = "Door";
         entity_type = "Object";
+        object_type = "door";
         pickedUp = false;
         down1 = setup("/Object/door");
         open = setup("/Object/door_unlocked");

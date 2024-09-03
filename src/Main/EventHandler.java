@@ -54,18 +54,53 @@ public class EventHandler {
 
 
         if(canTouchEvent == true) {
-            if (hit(0, 70, 10, "any") == true) {
+            //Casa stanga
+            if (hit(0, 11, 52, "any") == true) {
+                //gp.playSF(5);
+                gp.loadCurrentMap(3);
+                teleport(3, 36, 30);
+                gp.player.stopMoving();
+
+                //casa mare
+            } else if (hit(0, 35, 51, "any") == true) {
                 gp.playSF(5);
-                teleport(1, 12, 13);
-            } else if (hit(1, 12, 13, "any") == true) {
+                gp.loadCurrentMap(4);
+                teleport(4, 36, 30);
+                gp.player.stopMoving();
+            } else if (hit(0, 35, 51, "any") == true) {
                 gp.playSF(5);
-                teleport(0, 14, 26);
-            } else if (hit(1, 17, 25, "any") == true) {
+                gp.loadCurrentMap(4);
+                teleport(4, 36, 30);
+                gp.player.stopMoving();
+
+                //casa dreapta
+            } else if (hit(0, 76, 62, "any") == true) {
                 gp.playSF(5);
-                teleport(2, 12, 13);
-            } else if (hit(2, 12, 13, "any") == true) {
+                gp.loadCurrentMap(5);
+                teleport(5, 36, 30);
+                gp.player.stopMoving();
+
+                //plecat casa stanga
+            } else if (hit(3, 36, 31, "any") == true) {
                 gp.playSF(5);
-                teleport(1, 17, 25);
+                teleport(0, 11, 52);
+                gp.player.stopMoving();
+
+                //plecat casa mare
+            } else if (hit(4, 36, 31, "any") == true) {
+                gp.playSF(5);
+                teleport(0, 35, 51);
+                gp.player.stopMoving();
+            } else if (hit(4, 36, 31, "any") == true) {
+                gp.playSF(5);
+                teleport(0, 36, 51);
+                gp.player.stopMoving();
+
+                //plecat casa dreapta
+            } else if (hit(5, 36, 31, "any") == true) {
+                gp.playSF(5);
+                teleport(0, 76, 62);
+                gp.player.stopMoving();
             }
         }
 
