@@ -21,7 +21,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[50];
+        tile = new Tile[150];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
 
@@ -30,66 +30,83 @@ public class TileManager {
         } catch (CustomException e) {
             e.printStackTrace();
         }
-        loadMap("/Map/Sar_Island.txt", 0);
+        loadMap("/Map/Sunny_Valley.txt", 0);
         loadMap("/Map/dungeon1.txt", 1);
         loadMap("/Map/dungeon2.txt", 2);
     }
 
     public void getTileImage() throws CustomException {
 
-        setup(0, "door", true);
-        setup(1, "floor", false);
-        setup(2, "floorDungeon", false);
-        setup(3, "grass_tile", false);
-        setup(4, "port", true);
-        setup(5, "road", false);
-        setup(6, "rock", true);
-        setup(7, "roof_left", true);
-        setup(8, "roof_right", true);
-        setup(9, "roof_top", true);
-        setup(10, "shipwreck", true);
-        setup(11, "simple_grass", false);
-        setup(12, "stairs", false);
-        setup(13, "tree", true);
-        setup(14, "void", false);
-        setup(15, "wall", true);
-        setup(16, "wall_house", true);
-        setup(17, "water", true);
-        //setup(18, "water", false);
-//        setup(31, "grass/colt_dreapta_jos", false);
-//        setup(32, "grass/colt_dreapta_sus", false);
-//        setup(34, "void", true);
-//        setup(40, "floorDungeon", false);
+        setup(0, "/Water/New_Water/apa_colt_dreapta_jos", true);
+        setup(1, "/Water/New_Water/apa_dreapta jos", true);
+        setup(2, "/Water/New_Water/apa_dreapta", true);
+        setup(3, "/Water/New_Water/apa_dreapta_2", true);
+        setup(4, "/Water/New_Water/apa_dreapta_3", true);
+        setup(5, "/Water/New_Water/apa_jos", true);
+        setup(6, "/Water/New_Water/apa_jos_2", true);
+        setup(7, "/Water/New_Water/apa_jos_3", true);
+        setup(8, "/Water/New_Water/apa_jos_4", true);
+        setup(9, "/Water/New_Water/apa_jos_stanga", true);
+        setup(10, "/Water/New_Water/apa_stanga", true);
+        setup(11, "/Water/New_Water/apa_stanga_3", true);
+        setup(12, "/Water/New_Water/apa_stanga_sus", true);
+        setup(13, "/Water/New_Water/apa_sus", true);
+        setup(14, "/Water/New_Water/apa_sus_2", true);
+        setup(15, "/Water/New_Water/apa_sus_3", true);
+        setup(16, "/Water/New_Water/apa_sus_4", true);
+        setup(17, "/Water/New_Water/apa_sus_dreapta_2", true);
 
+        setup(21, "/new_tiles/cevA", true);
+        setup(27, "/new_tiles/drum_flori", false);
+        setup(32, "/new_tiles/geam", true);
+        setup(35, "/new_tiles/geam_2", true);
+        setup(36, "/new_tiles/geam_3", true);
+        setup(37, "/new_tiles/geam_4", true);
+        setup(38, "/new_tiles/grass", false);
+        setup(39, "/new_tiles/grass1", false);
+        setup(44, "/new_tiles/grass2", false);
+        setup(45, "/new_tiles/grass3", false);
+        setup(42, "/new_tiles/grass4", false);
+        setup(43, "/new_tiles/grass5", false);
+        setup(40, "new_tiles/grass6", false);
+        setup(50, "/new_tiles/grass7", false);
+        setup(41, "/new_tiles/grass8", false);
+        setup(51, "/new_tiles/grass9", false);
+        setup(48, "/new_tiles/grass10", false);
+        setup(49, "/new_tiles/grass11", false);
+        setup(48, "/new_tiles/grass12", false);
+        setup(47, "/new_tiles/grass13", false);
 
-        //water tiles
-        setup(18, "Water/water_corner_left_down", true);
-        setup(19, "Water/water_corner_left_up", true);
-        setup(20, "Water/water_corner_right_down", true);
-        setup(21, "Water/water_corner_right_up", true);
-        setup(22, "Water/water_down", true);
-        setup(23, "Water/water_ice", true);
-        setup(24, "Water/water_left", true);
-        setup(25, "Water/water_right", true);
-        setup(26, "Water/water_top", true);
+        //Dungeon
+        setup(67, "/new_tiles/Dungeon/mossy_podea", false);
+        setup(70, "/new_tiles/Dungeon/PD1", true);
+        setup(71, "/new_tiles/Dungeon/PD10", true);
+        setup(72, "/new_tiles/Dungeon/PD11", true);
+        setup(73, "/new_tiles/Dungeon/PD12", true);
+        setup(74, "/new_tiles/Dungeon/PD13", true);
+        setup(75, "/new_tiles/Dungeon/PD14", true);
+        setup(76, "/new_tiles/Dungeon/PD15", true);
+        setup(77, "/new_tiles/Dungeon/PD16", true);
+        setup(78, "/new_tiles/Dungeon/PD17", true);
+        setup(79, "/new_tiles/Dungeon/PD18", true);
+        setup(80, "/new_tiles/Dungeon/PD19", true);
+        setup(81, "/new_tiles/Dungeon/PD2", true);
+        setup(82, "/new_tiles/Dungeon/PD20", true);
+        setup(83, "/new_tiles/Dungeon/PD21", true);
+        setup(84, "/new_tiles/Dungeon/PD3", true);
+        setup(85, "/new_tiles/Dungeon/PD4", true);
+        setup(86, "/new_tiles/Dungeon/PD5", true);
+        setup(87, "/new_tiles/Dungeon/PD6", true);
+        setup(91, "/new_tiles/Dungeon/PD7", true);
+        setup(92, "/new_tiles/Dungeon/PD8", true);
+        setup(93, "/new_tiles/Dungeon/PD9", true);
+        setup(94, "/new_tiles/perete_casa", true);
 
-        setup(27, "z1", false);
-        setup(36, "z6", false);
-        setup(37, "z7", false);
-        setup(38, "z8", false);
-        setup(39, "z9", false);
-
-        //aesthetics
-//        setup(20, "simple_grass", false);
-//        setup(21, "rock", true);
-//        setup(23, "shipwreck", true);
-//
-//        setup(33, "stairs", false);
-
-//        setup(49, "/Effects/dash_left_diag", false);
-//        setup(48, "/Effects/dash_left_right", false);
-//        setup(47, "/Effects/dash_right_diag", false);
-//        setup(46, "/Effects/dash_up_down", false);
+        setup(100, "/new_tiles/podea", false);
+        setup(101, "/new_tiles/podea_casa", false);
+        setup(109, "/Water/New_Water/water_1", true);
+        setup(110, "/Water/New_Water/water_2", true);
+        setup(111, "/Water/New_Water/water_3", true);
 
 
     }
@@ -159,7 +176,9 @@ public class TileManager {
                     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize*2 &&
                     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize*2 &&
                     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize*2) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+                if(tile[tileNum] != null) {
+                    g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+                }
             }
 
 

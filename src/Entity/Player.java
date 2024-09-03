@@ -41,7 +41,7 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
-        solidArea = new Rectangle(8, 16, 32, 32);
+        solidArea = new Rectangle(8, 16, 76, 76);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         setDefaultValues();
@@ -102,9 +102,9 @@ public class Player extends Entity{
 
     public void setDefaultValues() {
 
-        worldX = gp.tileSize * 58;
-        worldY = gp.tileSize * 86;
-        speed = 4;
+        worldX = gp.tileSize * 51;
+        worldY = gp.tileSize * 76;
+        speed = 8;
         dashSpeed = speed * 1.5f;
         move_direction = "stand";
 
@@ -597,8 +597,8 @@ public class Player extends Entity{
             case "up":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = up_dash;
                     }
@@ -606,7 +606,7 @@ public class Player extends Entity{
                         image = up_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = up1;
                     }
@@ -615,7 +615,7 @@ public class Player extends Entity{
                     }
                 }
                 else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = up1_sword;
                     }
@@ -627,8 +627,8 @@ public class Player extends Entity{
             case "down":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = down_dash;
                     }
@@ -636,7 +636,7 @@ public class Player extends Entity{
                         image = down_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = down1;
                     }
@@ -644,7 +644,7 @@ public class Player extends Entity{
                         image = down2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = down1_sword;
                     }
@@ -656,8 +656,8 @@ public class Player extends Entity{
             case "left":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left_dash;
                     }
@@ -665,7 +665,7 @@ public class Player extends Entity{
                         image = left_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left1;
                     }
@@ -674,7 +674,7 @@ public class Player extends Entity{
                     }
                 }else{
                     if(spriteNum == 1){
-                        solidArea = new Rectangle(24, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
                         image = left1_sword;
                     }
                     if(spriteNum == 2){
@@ -685,8 +685,8 @@ public class Player extends Entity{
             case "right":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right_dash;
                     }
@@ -694,7 +694,7 @@ public class Player extends Entity{
                         image = right_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right1;
                     }
@@ -702,7 +702,7 @@ public class Player extends Entity{
                         image = right2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = right1_sword;
                     }
@@ -714,8 +714,8 @@ public class Player extends Entity{
             case "up_right":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right_diag_dash;
                     }
@@ -723,7 +723,7 @@ public class Player extends Entity{
                         image = right_diag_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right1;
                     }
@@ -731,7 +731,7 @@ public class Player extends Entity{
                         image = right2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = right1_sword;
                     }
@@ -743,8 +743,8 @@ public class Player extends Entity{
             case "up_left":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left_diag_dash;
                     }
@@ -752,7 +752,7 @@ public class Player extends Entity{
                         image = left_diag_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left1;
                     }
@@ -760,7 +760,7 @@ public class Player extends Entity{
                         image = left2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = left1_sword;
                     }
@@ -772,8 +772,8 @@ public class Player extends Entity{
             case "down_right":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right_diag_dash;
                     }
@@ -781,7 +781,7 @@ public class Player extends Entity{
                         image = right_diag_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = right1;
                     }
@@ -789,7 +789,7 @@ public class Player extends Entity{
                         image = right2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = right1_sword;
                     }
@@ -801,8 +801,8 @@ public class Player extends Entity{
             case "down_left":
                 if(isDashing){
                     if(hasSword)
-                        solidArea = new Rectangle(24, 16, 32, 32);
-                    else solidArea = new Rectangle(8, 16, 32, 32);
+                        solidArea = new Rectangle(24, 16, 76, 76);
+                    else solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left_diag_dash;
                     }
@@ -810,7 +810,7 @@ public class Player extends Entity{
                         image = left_diag_dash;
                     }
                 }else if(!hasSword){
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if (spriteNum == 1) {
                         image = left1;
                     }
@@ -818,7 +818,7 @@ public class Player extends Entity{
                         image = left2;
                     }
                 }else{
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = left1_sword;
                     }
@@ -829,7 +829,7 @@ public class Player extends Entity{
                 break;
             case "stand":
                 if(hasSword){
-                    solidArea = new Rectangle(24, 16, 32, 32);
+                    solidArea = new Rectangle(24, 16, 76, 76);
                     if(spriteNum == 1){
                         image = stand1_sword;
                     }
@@ -837,7 +837,7 @@ public class Player extends Entity{
                         image = stand2_sword;
                     }
                 }else{
-                    solidArea = new Rectangle(8, 16, 32, 32);
+                    solidArea = new Rectangle(8, 16, 76, 76);
                     if(spriteNum == 1) {
                         image = stand1;
                     }
@@ -851,7 +851,7 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, screenX, screenY, null);
-        // Draw the checkNPC rectangle
+//        // Draw the checkNPC rectangle
 //        g2.setColor(Color.BLUE);
 //        g2.drawRect(screenX + checkNPC.x, screenY + checkNPC.y, checkNPC.width, checkNPC.height);
 //

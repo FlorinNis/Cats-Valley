@@ -7,6 +7,7 @@ import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -45,7 +46,8 @@ public class Entity {
     public int enemyHit;
     public String enemy_type = "none";
 
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, stand1, stand2;
+    public BufferedImage animation_1, animation_2, animation_3, animation_4, animation_5, animation_6, animation_7, animation_8;
+    public BufferedImage up1, up2, down1, down2, down3, left1, left2, right1, right2, stand1, stand2;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public BufferedImage up_attack, down_attack, left_attack, right_attack, jump1, jump2, jump3;
@@ -62,7 +64,9 @@ public class Entity {
     public String entity_type;
 
     public int spriteCounter = 0;
+    public int spriteCounterAnim = 0;
     public int spriteNum = 1;
+    public int spriteNumAnim = 1;
     public int spriteNumBoss = 1;
     public int spriteCounterBoss = 0;
     public boolean attackCollisionOn = false;
@@ -82,6 +86,7 @@ public class Entity {
 
     public BufferedImage image, image2, image3;
     public String name;
+    public String object_type;
     public int qty;
     public boolean collision = false;
 
@@ -335,14 +340,25 @@ public class Entity {
     }
 
     public void draw(Graphics2D g2) {
+        spriteCounterAnim++;
+        if (spriteCounterAnim > 40) {
+            if (spriteNumAnim == 1) {
+                spriteNumAnim = 2;
+            } else if (spriteNumAnim == 2) {
+                spriteNumAnim = 3;
+            } else if (spriteNumAnim == 3) {
+                spriteNumAnim = 1;
+            }
+            spriteCounterAnim = 0;
+        }
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX - gp.tileSize * 2 &&
-                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize * 2 &&
-                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize * 2 &&
-                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize * 2) {
+        if(     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX - gp.tileSize * 4 &&
+                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX + gp.tileSize * 4 &&
+                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY - gp.tileSize * 4 &&
+                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY + gp.tileSize * 4) {
 
             switch(entity_type) {
 
@@ -480,7 +496,38 @@ public class Entity {
                     }
                     break;
                 case "Object":
-                    if(!pickedUp) {
+                    switch (object_type){
+                        case "tree":
+                            System.out.println("tree");
+                            if (spriteNumAnim == 1) {
+                                image = down1;
+                            }
+                            if (spriteNumAnim == 2) {
+                                image = down2;
+                            }
+                            if (spriteNumAnim == 3) {
+                                image = down3;
+                            }
+                            g2.drawImage(image, screenX, screenY-gp.tileSize*2, gp.tileSize*4, gp.tileSize*4, null);
+                            break;
+                        case "grass1":
+                            if (spriteNumAnim == 1) {
+                                image = animation_1;
+                                g2.drawImage(animation_1, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            }
+                            if (spriteNumAnim == 2) {
+                                image = animation_2;
+                                g2.drawImage(animation_2, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            }
+                            if (spriteNumAnim == 3) {
+                                image = animation_3;
+                                g2.drawImage(animation_3, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            }
+
+                            break;
+                    }
+
+                    if(!pickedUp && object_type != "tree") {
                         image = down1;
                         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
                     }
@@ -589,6 +636,35 @@ public class Entity {
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+    public BufferedImage setupForGrass(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+
+    public BufferedImage setupForTree(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize*2, gp.tileSize*2);
         }catch(IOException e) {
             e.printStackTrace();
         }
