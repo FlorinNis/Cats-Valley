@@ -160,6 +160,9 @@ public class TileManager {
         setup(141, "/new_tiles/Dungeon/PD4", true);
         setup(142, "/new_tiles/Dungeon/PD5", true);
         setup(143, "/new_tiles/Dungeon/PD6", true);
+        setup(144, "/new_tiles/Dungeon/PD67", true);
+        setup(145, "/new_tiles/Dungeon/PD68", true);
+        setup(146, "/new_tiles/Dungeon/PD69", true);
         setup(147, "/new_tiles/Dungeon/PD7", true);
         setup(148, "/new_tiles/Dungeon/PD8", true);
         setup(149, "/new_tiles/Dungeon/PD9", true);

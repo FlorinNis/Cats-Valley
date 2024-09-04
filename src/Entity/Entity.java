@@ -48,7 +48,7 @@ public class Entity {
     public String npc_name = "none";
 
     public BufferedImage animation_1, animation_2, animation_3, animation_4, animation_5, animation_6, animation_7, animation_8;
-    public BufferedImage up1, up2, down1, down2, down3, left1, left2, right1, right2, stand1, stand2;
+    public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3, stand1, stand2, stand3, up_left1, up_left2, up_left3, up_right1, up_right2, up_right3, down_left1, down_left2, down_left3, down_right1, down_right2, down_right3;
     public BufferedImage up_dash, right_dash, left_dash, down_dash, right_diag_dash, left_diag_dash, up_dash1, up_dash2;
     public BufferedImage up1_sword, up2_sword, left1_sword, left2_sword, right1_sword, right2_sword, down1_sword, down2_sword, stand1_sword, stand2_sword;
     public BufferedImage up_attack, down_attack, left_attack, right_attack, jump1, jump2, jump3;
@@ -71,6 +71,8 @@ public class Entity {
     public int spriteNumBoss = 1;
     public int spriteCounterBoss = 0;
     public boolean attackCollisionOn = false;
+    private int contor=0;
+    public boolean isPlayerTouching = false;
 
     public Rectangle solidArea = new Rectangle(0, 0, 0, 0);
     public Rectangle checkNPC = new Rectangle(0,0 , 0, 0);
@@ -139,6 +141,7 @@ public class Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
+        //gp.cChecker.isPlayerTouching(this);
 
         if(name == "pisica1")
             System.out.println("pisica1");
@@ -245,12 +248,9 @@ public class Entity {
                     }
                     break;
                 case "NPC":
-                    System.out.println("ajunge la move");
                     switch (move_direction) {
                         case "up":
-                            System.out.println("upWORLD");
                             worldY -= speed;
-                            System.out.println("worldY: " + worldY);
                             break;
                         case "up_left":
                             worldY -= speed;
@@ -533,17 +533,34 @@ public class Entity {
                             g2.drawImage(image, screenX, screenY-gp.tileSize*2, gp.tileSize*4, gp.tileSize*4, null);
                             break;
                         case "grass1":
-                            if (spriteNumAnim == 1) {
-                                image = animation_1;
-                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            if(!isPlayerTouching) {
+                                if (spriteNumAnim == 1) {
+                                    image = animation_1;
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                }
+                                if (spriteNumAnim == 2) {
+                                    image = animation_2;
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                }
+                                if (spriteNumAnim == 3) {
+                                    image = animation_3;
+                                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                }
                             }
-                            if (spriteNumAnim == 2) {
-                                image = animation_2;
-                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-                            }
-                            if (spriteNumAnim == 3) {
-                                image = animation_3;
-                                g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                            else{
+                                contor++;
+                                while(contor != 20) {
+                                    if (spriteNum == 1) {
+                                        image = animation_4;
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    }
+                                    if (spriteNum == 2) {
+                                        image = animation_2;
+                                        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                                    }
+                                    contor = 0;
+                                }
+                                isPlayerTouching = false;
                             }
 
                             break;
@@ -569,14 +586,14 @@ public class Entity {
                     break;
             }
             // Desenez coliziunile pentru o vizualizare mai buna
-            g2.setColor(Color.BLUE);
-            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
-
-            g2.setColor(Color.RED);
-            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-            g2.setColor(Color.GREEN);
-            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
+//            g2.setColor(Color.BLUE);
+//            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
+//
+//            g2.setColor(Color.RED);
+//            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+//
+//            g2.setColor(Color.GREEN);
+//            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
         }
     }
 

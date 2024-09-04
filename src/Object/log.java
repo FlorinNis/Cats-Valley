@@ -19,7 +19,7 @@ public class log extends Entity {
         collision = true;
 
         solidArea.x = 24;
-        solidArea.y = 50;
+        solidArea.y = 25;
         solidArea.width = 45;
         solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;

@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Entity obj[][] = new Entity[maxMap][300];
 
-    public Entity grass[][] = new Entity[maxMap][1500];
+    public Entity grass[][] = new Entity[maxMap][800];
     public Entity npc[][] = new Entity[maxMap][50];
     public Entity monster[][] = new Entity[maxMap][50];
     public ArrayList<Entity> projectiles = new ArrayList<>();
@@ -133,7 +133,7 @@ public class GamePanel extends JPanel implements Runnable {
                 //showLoadingScreen(g2);
                 aSetter.setObject(index);
                 aSetter.setGrass();
-                aSetter.setNPC();
+                aSetter.setNPC(index);
                 aSetter.setMonster();
                 once[index] = true;
             }
@@ -142,7 +142,7 @@ public class GamePanel extends JPanel implements Runnable {
             if(!once[index]) {
                 showLoadingScreen(g2);
                 aSetter.setObject(index);
-                repaint();
+                aSetter.setNPC(index);
                 once[index] = true;
             }
             //casa mare
@@ -150,7 +150,7 @@ public class GamePanel extends JPanel implements Runnable {
             if(!once[index]) {
                 showLoadingScreen(g2);
                 aSetter.setObject(index);
-                repaint();
+                aSetter.setNPC(index);
                 once[index] = true;
             }
             //casa stanga
@@ -158,7 +158,7 @@ public class GamePanel extends JPanel implements Runnable {
             if(!once[index]) {
                 showLoadingScreen(g2);
                 aSetter.setObject(index);
-                repaint();
+                aSetter.setNPC(index);
                 once[index] = true;
             };
         }

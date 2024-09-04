@@ -13,19 +13,19 @@ public class NPC_Pisica_2 extends Entity {
 
         draw_direction = "down";
         entity_type = "NPC";
-        speed = 1;
+        speed = 0;
 
-        solidArea.x = 3;
+        solidArea.x = 20;
         solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.width = 70;
+        solidArea.height = 64;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
         checkNPC.x = 0;
         checkNPC.y = 0;
-        checkNPC.width = 140;
-        checkNPC.height = 140;
+        checkNPC.width = gp.tileSize * 3;
+        checkNPC.height = gp.tileSize * 3;
 
         getImage();
         setDialogue();
@@ -61,44 +61,44 @@ public class NPC_Pisica_2 extends Entity {
 
     }
     public void setAction() {
-
-        actionLockCounter ++;
-
-        if (actionLockCounter == 120) {
-
-            Random random = new Random();
-            int i = random.nextInt(0, 120) + 1;
-            System.out.println("I = " + i);
-
-            if (i <= 15) {
-                move_direction = "up";
-            }
-            if (i > 15 && i <= 30) {
-                move_direction = "down";
-            }
-            if (i > 30 && i <= 45) {
-                move_direction = "left";
-            }
-            if (i > 60 && i <= 75) {
-                move_direction = "right";
-            }
-            if (i > 90 && i <= 105) {
-                move_direction = "up_right";
-            }
-            if (i > 105 && i <= 110) {
-                move_direction = "up_left";
-            }
-            if (i > 110 && i <= 115) {
-                move_direction = "down_right";
-            }
-            if (i > 115 && i <= 120) {
-                move_direction = "down_left";
-            }
-            //if (i > 100 && i <= 125) {
-            //    direction = "stand";
-            //}
-            actionLockCounter = 0;
-        }
+        move_direction = "down";
+//        actionLockCounter ++;
+//
+//        if (actionLockCounter == 120) {
+//
+//            Random random = new Random();
+//            int i = random.nextInt(0, 120) + 1;
+//            System.out.println("I = " + i);
+//
+//            if (i <= 15) {
+//                move_direction = "up";
+//            }
+//            if (i > 15 && i <= 30) {
+//                move_direction = "down";
+//            }
+//            if (i > 30 && i <= 45) {
+//                move_direction = "left";
+//            }
+//            if (i > 60 && i <= 75) {
+//                move_direction = "right";
+//            }
+//            if (i > 90 && i <= 105) {
+//                move_direction = "up_right";
+//            }
+//            if (i > 105 && i <= 110) {
+//                move_direction = "up_left";
+//            }
+//            if (i > 110 && i <= 115) {
+//                move_direction = "down_right";
+//            }
+//            if (i > 115 && i <= 120) {
+//                move_direction = "down_left";
+//            }
+//            //if (i > 100 && i <= 125) {
+//            //    direction = "stand";
+//            //}
+//            actionLockCounter = 0;
+//        }
     }
     public void speak() {
 

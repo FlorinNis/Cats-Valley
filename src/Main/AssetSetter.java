@@ -13,6 +13,9 @@ import Object.obstacle_log;
 import Object.tree;
 import Object.grass1;
 import Object.grass2;
+import Object.letter;
+import Object.Key_house2;
+import Object.bush;
 
 import Object.floare4;
 
@@ -40,7 +43,7 @@ public class AssetSetter {
             int y = tile[1];
             System.out.println("x: " + x + " y: " + y);
             if (isFarFromTrees(x, y) && isFarFromCollisionTiles(x, y)) {
-                int numberOfObjects = 5;
+                int numberOfObjects = 4;
                 for (int j = 0; j < numberOfObjects; j++) {
                     int var = random.nextInt(gp.grass[0].length);
 
@@ -112,8 +115,8 @@ public class AssetSetter {
                 treePositions.add(position);
 
                 gp.obj[0][8] = new tree(gp);
-                gp.obj[0][8].worldX = 59 * gp.tileSize;
-                gp.obj[0][8].worldY = 58 * gp.tileSize;
+                gp.obj[0][8].worldX = 58 * gp.tileSize;
+                gp.obj[0][8].worldY = 57 * gp.tileSize;
                 position[0] = 59;
                 position[1] = 56;
                 treePositions.add(position);
@@ -225,22 +228,27 @@ public class AssetSetter {
                 gp.obj[0][26].worldY = 69 * gp.tileSize;
 
                 gp.obj[0][27] = new Door(gp);
-                gp.obj[0][27].locked = false;
+                gp.obj[0][27].locked = true;
+                gp.obj[0][27].doorHouse = "Andre";
+                gp.obj[0][27].collision = false;
                 gp.obj[0][27].worldX = 11 * gp.tileSize;
                 gp.obj[0][27].worldY = 52 * gp.tileSize;
 
                 gp.obj[0][28] = new Door(gp);
-                gp.obj[0][27].locked = false;
+                gp.obj[0][28].locked = false;
+                gp.obj[0][28].collision = false;
                 gp.obj[0][28].worldX = 35 * gp.tileSize;
                 gp.obj[0][28].worldY = 51 * gp.tileSize;
 
                 gp.obj[0][29] = new Door(gp);
-                gp.obj[0][27].locked = false;
+                gp.obj[0][29].locked = false;
+                gp.obj[0][29].collision = false;
                 gp.obj[0][29].worldX = 36 * gp.tileSize;
                 gp.obj[0][29].worldY = 51 * gp.tileSize;
 
                 gp.obj[0][30] = new Door(gp);
-                gp.obj[0][27].locked = false;
+                gp.obj[0][30].locked = false;
+                gp.obj[0][30].collision = false;
                 gp.obj[0][30].worldX = 76 * gp.tileSize;
                 gp.obj[0][30].worldY = 62 * gp.tileSize;
 
@@ -248,35 +256,79 @@ public class AssetSetter {
                 gp.obj[0][31].worldX = 39 * gp.tileSize;
                 gp.obj[0][31].worldY = 69 * gp.tileSize;
 
-                gp.obj[0][32] = new sword1(gp);
-                gp.obj[0][32].worldX = 56 * gp.tileSize;
+                gp.obj[0][32] = new log(gp);
+                gp.obj[0][32].worldX = 55 * gp.tileSize;
                 gp.obj[0][32].worldY = 30 * gp.tileSize;
 
-                gp.obj[0][33] = new log(gp);
-                gp.obj[0][33].worldX = 55 * gp.tileSize;
-                gp.obj[0][33].worldY = 30 * gp.tileSize;
+                gp.obj[0][33] = new sword1(gp);
+                gp.obj[0][33].worldX = 55 * gp.tileSize + 20;
+                gp.obj[0][33].worldY = 30 * gp.tileSize - 30;
+
+                gp.obj[0][34] = new Key(gp);
+                gp.obj[0][35] = new letter(gp);
+                gp.obj[0][36] = new Key_house2(gp);
+
+                gp.obj[0][37] = new bush(gp);
+                gp.obj[0][37].worldX = 53 * gp.tileSize;
+                gp.obj[0][37].worldY = 67 * gp.tileSize;
+
+                gp.obj[0][38] = new bush(gp);
+                gp.obj[0][38].worldX = 47 * gp.tileSize;
+                gp.obj[0][38].worldY = 63 * gp.tileSize;
+
+                gp.obj[0][39] = new bush(gp);
+                gp.obj[0][39].worldX = 36 * gp.tileSize;
+                gp.obj[0][39].worldY = 70 * gp.tileSize;
+
+                gp.obj[0][40] = new bush(gp);
+                gp.obj[0][40].worldX = 24 * gp.tileSize;
+                gp.obj[0][40].worldY = 59 * gp.tileSize;
+
+                gp.obj[0][41] = new bush(gp);
+                gp.obj[0][41].worldX = 32 * gp.tileSize;
+                gp.obj[0][41].worldY = 52 * gp.tileSize;
+
+                gp.obj[0][42] = new bush(gp);
+                gp.obj[0][42].worldX = 72 * gp.tileSize;
+                gp.obj[0][42].worldY = 58 * gp.tileSize;
+
+                gp.obj[0][43] = new bush(gp);
+                gp.obj[0][43].worldX = 49 * gp.tileSize;
+                gp.obj[0][43].worldY = 33 * gp.tileSize;
                 break;
             case 1:
                 break;
             case 2:
                 break;
             case 3:
-                gp.obj[3][34] = new Door(gp);
-                gp.obj[3][34].locked = false;
-                gp.obj[3][34].worldX = 36 * gp.tileSize;
-                gp.obj[3][34].worldY = 31 * gp.tileSize;
+                gp.obj[3][0] = new Door(gp);
+                gp.obj[3][0].locked = false;
+                gp.obj[3][0].collision = false;
+                gp.obj[3][0].worldX = 36 * gp.tileSize;
+                gp.obj[3][0].worldY = 31 * gp.tileSize;
+                gp.obj[3][34] = new Key(gp);
+                gp.obj[3][35] = new letter(gp);
+                gp.obj[3][36] = new Key_house2(gp);
                 break;
             case 4:
-                gp.obj[4][35] = new Door(gp);
-                gp.obj[4][35].locked = false;
-                gp.obj[4][35].worldX = 36 * gp.tileSize;
-                gp.obj[4][35].worldY = 31 * gp.tileSize;
+                gp.obj[4][0] = new Door(gp);
+                gp.obj[4][0].locked = false;
+                gp.obj[4][0].collision = false;
+                gp.obj[4][0].worldX = 36 * gp.tileSize;
+                gp.obj[4][0].worldY = 31 * gp.tileSize;
+                gp.obj[4][34] = new Key(gp);
+                gp.obj[4][35] = new letter(gp);
+                gp.obj[4][36] = new Key_house2(gp);
                 break;
             case 5:
-                gp.obj[5][36] = new Door(gp);
-                gp.obj[5][36].locked = false;
-                gp.obj[5][36].worldX = 36 * gp.tileSize;
-                gp.obj[5][36].worldY = 31 * gp.tileSize;
+                gp.obj[5][0] = new Door(gp);
+                gp.obj[5][0].locked = false;
+                gp.obj[5][0].collision = false;
+                gp.obj[5][0].worldX = 36 * gp.tileSize;
+                gp.obj[5][0].worldY = 31 * gp.tileSize;
+                gp.obj[5][34] = new Key(gp);
+                gp.obj[5][35] = new letter(gp);
+                gp.obj[5][36] = new Key_house2(gp);
                 break;
         }
 
@@ -299,17 +351,16 @@ public class AssetSetter {
 
 
 //        List<int[]> grassTiles = findTilesWithIndex(41);
-//
-//        int numberOfTrees = 20;
+////
+//        int numberOfTrees = 10;
 //        for (int i = 0; i < numberOfTrees; i++) {
-//            int[] position;
 //            boolean validPosition;
 //            do {
 //                position = grassTiles.get(random.nextInt(grassTiles.size()));
 //                validPosition = isValidTreePosition(position[0], position[1]) && isFarFromCollisionTiles(position[0], position[1]);;
 //            } while (!validPosition);
 //
-//            gp.obj[mapNum][i] = new tree(gp);
+//            gp.obj[mapNum][i] = new bush(gp);
 //            gp.obj[mapNum][i].worldX = position[0] * gp.tileSize;
 //            gp.obj[mapNum][i].worldY = position[1] * gp.tileSize;
 //            treePositions.add(position);
@@ -372,31 +423,35 @@ public class AssetSetter {
         return true;
     }
 
-    public void setNPC() {
+    public void setNPC(int index) {
 
         int mapNum = 0;
         //factory
         NPC_Factory factory = new NPC_Factory();
 
-//        gp.npc[3][0] = factory.getNPC(NPC_Type.PisicaSTART, gp);
-//        gp.npc[3][0].worldX = gp.tileSize * 33;
-//        gp.npc[3][0].worldY = gp.tileSize * 22;
-//
-        gp.npc[0][1] = factory.getNPC(NPC_Type.TUTORIAL, gp);
-        gp.npc[0][1].worldX = gp.tileSize * 39;
-        gp.npc[0][1].worldY = gp.tileSize * 72;
+        switch(index) {
+            case 0:
+                gp.npc[0][0] = factory.getNPC(NPC_Type.TUTORIAL, gp);
+                gp.npc[0][0].worldX = gp.tileSize * 39;
+                gp.npc[0][0].worldY = gp.tileSize * 72;
 
-        gp.npc[0][2] = factory.getNPC(NPC_Type.CAT, gp);
-        gp.npc[0][2].worldX = gp.tileSize * 40;
-        gp.npc[0][2].worldY = gp.tileSize * 68;
-//
-//        gp.npc[0][2] = factory.getNPC(NPC_Type.PisicaCASA, gp);
-//        gp.npc[0][2].worldX = gp.tileSize * 33;
-//        gp.npc[0][2].worldY = gp.tileSize * 75;
-//
-//        gp.npc[0][3] = factory.getNPC(NPC_Type.dungeonKeeper, gp);
-//        gp.npc[0][3].worldX = gp.tileSize * 75;
-//        gp.npc[0][3].worldY = gp.tileSize * 12;
+                gp.npc[0][1] = factory.getNPC(NPC_Type.CAT, gp);
+                gp.npc[0][1].worldX = gp.tileSize * 40;
+                gp.npc[0][1].worldY = gp.tileSize * 68;
+                break;
+            case 3:
+                gp.npc[3][0] = factory.getNPC(NPC_Type.PisicaCASA, gp);
+                gp.npc[3][0].worldX = gp.tileSize * 32;
+                gp.npc[3][0].worldY = gp.tileSize * 22;
+                break;
+            case 4:
+                gp.npc[4][0] = factory.getNPC(NPC_Type.PisicaSTART, gp);
+                gp.npc[4][0].worldX = gp.tileSize * 32;
+                gp.npc[4][0].worldY = gp.tileSize * 22;
+                break;
+            case 5:
+                break;
+        }
     }
 
     public void setMonster() {

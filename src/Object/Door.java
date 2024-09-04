@@ -19,7 +19,7 @@ public class Door extends Entity {
         down1 = setup("/Object/door");
         open = setup("/Object/door_unlocked");
         closed = setup("/Object/door");
-        doorHouse = "Andre";
+        doorHouse = "none";
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -29,6 +29,6 @@ public class Door extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         collision = true;
-        locked = false;
+        locked = true;
     }
 }

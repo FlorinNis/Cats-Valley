@@ -87,7 +87,7 @@ public class UI {
 
         //playState
         if(gp.gameState == gp.playState) {
-            drawTutorialText();
+            //drawTutorialText();
             drawDialogueBoxNPC();
             drawPlayerLife();
             drawItemHolding();

@@ -16,15 +16,15 @@ public class cat extends Entity {
         entity_type = "NPC";
         speed = 0;
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 40;
+        solidArea.y = 30;
+        solidArea.width = 20;
+        solidArea.height = 25;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        checkNPC.width = 140;
-        checkNPC.height = 140;
+        checkNPC.width = gp.tileSize * 3;
+        checkNPC.height = gp.tileSize * 3;
 
         getImage();
         setDialogue();
@@ -49,7 +49,7 @@ public class cat extends Entity {
 
     }
     public void setAction() {
-        move_direction = "down";
+        move_direction = "stand";
 //        actionLockCounter ++;
 //
 //        if (actionLockCounter == 120) {

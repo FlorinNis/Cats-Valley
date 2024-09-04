@@ -14,17 +14,19 @@ public class NPC_Pisica_1 extends Entity {
         name = "pisica1";
         draw_direction = "down";
         entity_type = "NPC";
-        speed = 1;
+        speed = 0;
 
-        solidArea.x = 3;
+        solidArea.x = 20;
         solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.width = 70;
+        solidArea.height = 64;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        checkNPC.width = 140;
-        checkNPC.height = 140;
+        checkNPC.x = 0;
+        checkNPC.y = 0;
+        checkNPC.width = gp.tileSize * 3;
+        checkNPC.height = gp.tileSize * 3;
 
         getImage();
         setDialogue();
@@ -47,8 +49,8 @@ public class NPC_Pisica_1 extends Entity {
 
         dialogues[0] = "Hey!";
         dialogues[1] = "When did you get here?";
-        dialogues[2] = "Where were you hiding?";
-        dialogues[3] = "Does not matter right now.";
+        dialogues[2] = "I am the Mayor of Sunny Valley.";
+        dialogues[3] = "A Valley with a population of a simple human house with cats.";
         dialogues[4] = "I need your help!";
         dialogues[5] = "You see, this place is not that safe. \n it's full of monsters";
         dialogues[6] = "For now, the dungeon is closed.";
@@ -75,45 +77,45 @@ public class NPC_Pisica_1 extends Entity {
 
     }
     public void setAction() {
-
-        actionLockCounter ++;
-
-        if (actionLockCounter == 120) {
-
-            Random random = new Random();
-            int i = random.nextInt(0, 120) + 1;
-            System.out.println("I = " + i);
-
-            if (i <= 15) {
-                System.out.println("Up");
-                move_direction = "up";
-            }
-            if (i > 15 && i <= 30) {
-                move_direction = "down";
-            }
-            if (i > 30 && i <= 45) {
-                move_direction = "left";
-            }
-            if (i > 60 && i <= 75) {
-                move_direction = "right";
-            }
-            if (i > 90 && i <= 105) {
-                move_direction = "up_right";
-            }
-            if (i > 105 && i <= 110) {
-                move_direction = "up_left";
-            }
-            if (i > 110 && i <= 115) {
-                move_direction = "down_right";
-            }
-            if (i > 115 && i <= 120) {
-                move_direction = "down_left";
-            }
-            //if (i > 100 && i <= 125) {
-            //    direction = "stand";
-            //}
-            actionLockCounter = 0;
-        }
+        move_direction = "down";
+//        actionLockCounter ++;
+//
+//        if (actionLockCounter == 120) {
+//
+//            Random random = new Random();
+//            int i = random.nextInt(0, 120) + 1;
+//            System.out.println("I = " + i);
+//
+//            if (i <= 15) {
+//                System.out.println("Up");
+//                move_direction = "up";
+//            }
+//            if (i > 15 && i <= 30) {
+//                move_direction = "down";
+//            }
+//            if (i > 30 && i <= 45) {
+//                move_direction = "left";
+//            }
+//            if (i > 60 && i <= 75) {
+//                move_direction = "right";
+//            }
+//            if (i > 90 && i <= 105) {
+//                move_direction = "up_right";
+//            }
+//            if (i > 105 && i <= 110) {
+//                move_direction = "up_left";
+//            }
+//            if (i > 110 && i <= 115) {
+//                move_direction = "down_right";
+//            }
+//            if (i > 115 && i <= 120) {
+//                move_direction = "down_left";
+//            }
+//            //if (i > 100 && i <= 125) {
+//            //    direction = "stand";
+//            //}
+//            actionLockCounter = 0;
+//        }
     }
     public void speak() {
 
@@ -139,12 +141,12 @@ public class NPC_Pisica_1 extends Entity {
                 //Primeste Misiunea sa duca scrisoarea
                 text++;
                 //Letter
-                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][27];
+                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][35];
                 gp.player.quest_letter_index = gp.player.invContor;
                 gp.player.itemsHeld[gp.player.invContor++].qty++;
                 gp.player.itemsHeldSize++;
                 //Key Andre House
-                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][28];
+                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][36];
                 gp.player.itemsHeld[gp.player.invContor++].qty++;
                 gp.player.itemsHeldSize++;
                 gp.player.hasAndreKey = true;
@@ -161,7 +163,7 @@ public class NPC_Pisica_1 extends Entity {
             super.speak();
             System.out.println(dialogueIndex);
             if(dialogueIndex == 25) {
-                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][0];
+                gp.player.itemsHeld[gp.player.invContor] = gp.obj[gp.currentMap][34];
                 gp.player.itemsHeld[gp.player.invContor++].qty++;
                 gp.player.itemsHeldSize++;
                 gp.player.hasDungeonKey = true;

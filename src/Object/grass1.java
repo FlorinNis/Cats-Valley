@@ -25,6 +25,12 @@ public class grass1 extends Entity {
         collision = false;
         pickedUp = false;
 
+        solidArea.x = 15;
+        solidArea.y = 40;
+        solidArea.width = 30;
+        solidArea.height = 30;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
     }
 
