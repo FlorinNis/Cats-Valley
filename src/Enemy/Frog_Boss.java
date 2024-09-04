@@ -15,7 +15,7 @@ Frog_Boss extends Entity {
         super(gp);
 
         name = "Frog Boss";
-        speed = 1;
+        speed = 3;
         maxLife = 50;
         life = maxLife;
         enemy_type = "Frog_Boss";

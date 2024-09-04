@@ -281,6 +281,7 @@ public class Entity {
                         case "Object":
                             break;
                         case "Projectile":
+                            System.out.println("Projectile" + speedX + " " + speedY);
                             worldX += speedX;
                             worldY += speedY;
                             break;
@@ -586,14 +587,14 @@ public class Entity {
                     break;
             }
             // Desenez coliziunile pentru o vizualizare mai buna
-//            g2.setColor(Color.BLUE);
-//            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
-//
-//            g2.setColor(Color.RED);
-//            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-//
-//            g2.setColor(Color.GREEN);
-//            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
+            g2.setColor(Color.BLUE);
+            g2.drawRect(screenX + checkNPC.x - gp.tileSize, screenY + checkNPC.y - gp.tileSize, checkNPC.width, checkNPC.height);
+
+            g2.setColor(Color.RED);
+            g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+
+            g2.setColor(Color.GREEN);
+            g2.drawRect(screenX + checkPlayer.x - gp.tileSize * 3, screenY + checkPlayer.y - gp.tileSize * 3, checkPlayer.width, checkPlayer.height);
         }
     }
 
@@ -667,6 +668,21 @@ public class Entity {
         // Draw the border of the health bar
         g2.setColor(Color.BLACK);
         g2.drawRect(barX, barY, barWidth, barHeight);
+    }
+
+    public BufferedImage setupPlayer(String imagePath) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+            image = uTool.scaleImage(image, gp.tileSize*2, gp.tileSize*2);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
     }
 
     public BufferedImage setup(String imagePath) {

@@ -84,7 +84,7 @@ public class TileManager {
         setup(47, "/new_tiles/grass13", false);
 
         //House
-        setup(70, "/new_tiles/PC0", true);
+        setup(69, "/new_tiles/PC0", true);
         setup(71, "/new_tiles/PC1", true);
         setup(72, "/new_tiles/PC10", true);
         setup(73, "/new_tiles/PC11", true);
@@ -139,33 +139,33 @@ public class TileManager {
         setup(122, "/new_tiles/PC6", true);
         setup(123, "/new_tiles/PC7", true);
         setup(124, "/new_tiles/PC8", true);
-        setup(125, "/new_tiles/PC9", true);
+        //setup(125, "/new_tiles/PC9", true);
         //Dungeon
         setup(67, "/new_tiles/Dungeon/mossy_podea", false);
-        setup(126, "/new_tiles/Dungeon/PD1", true);
-        setup(127, "/new_tiles/Dungeon/PD10", true);
-        setup(128, "/new_tiles/Dungeon/PD11", true);
-        setup(129, "/new_tiles/Dungeon/PD12", true);
-        setup(130, "/new_tiles/Dungeon/PD13", true);
-        setup(131, "/new_tiles/Dungeon/PD14", true);
-        setup(132, "/new_tiles/Dungeon/PD15", true);
-        setup(133, "/new_tiles/Dungeon/PD16", true);
-        setup(134, "/new_tiles/Dungeon/PD17", true);
-        setup(135, "/new_tiles/Dungeon/PD18", true);
-        setup(136, "/new_tiles/Dungeon/PD19", true);
-        setup(137, "/new_tiles/Dungeon/PD2", true);
-        setup(138, "/new_tiles/Dungeon/PD20", true);
-        setup(139, "/new_tiles/Dungeon/PD21", true);
-        setup(140, "/new_tiles/Dungeon/PD3", true);
-        setup(141, "/new_tiles/Dungeon/PD4", true);
-        setup(142, "/new_tiles/Dungeon/PD5", true);
-        setup(143, "/new_tiles/Dungeon/PD6", true);
-        setup(144, "/new_tiles/Dungeon/PD67", true);
-        setup(145, "/new_tiles/Dungeon/PD68", true);
-        setup(146, "/new_tiles/Dungeon/PD69", true);
-        setup(147, "/new_tiles/Dungeon/PD7", true);
-        setup(148, "/new_tiles/Dungeon/PD8", true);
-        setup(149, "/new_tiles/Dungeon/PD9", true);
+        setup(125, "/new_tiles/Dungeon/PD1", true);
+        setup(126, "/new_tiles/Dungeon/PD10", true);
+        setup(127, "/new_tiles/Dungeon/PD11", true);
+        setup(128, "/new_tiles/Dungeon/PD12", true);
+        setup(129, "/new_tiles/Dungeon/PD13", true);
+        setup(130, "/new_tiles/Dungeon/PD14", true);
+        setup(131, "/new_tiles/Dungeon/PD15", true);
+        setup(132, "/new_tiles/Dungeon/PD16", true);
+        setup(133, "/new_tiles/Dungeon/PD17", true);
+        setup(134, "/new_tiles/Dungeon/PD18", true);
+        setup(135, "/new_tiles/Dungeon/PD19", true);
+        setup(136, "/new_tiles/Dungeon/PD2", true);
+        setup(137, "/new_tiles/Dungeon/PD20", true);
+        setup(138, "/new_tiles/Dungeon/PD21", true);
+        setup(139, "/new_tiles/Dungeon/PD3", true);
+        setup(140, "/new_tiles/Dungeon/PD4", true);
+        setup(141, "/new_tiles/Dungeon/PD5", true);
+        setup(142, "/new_tiles/Dungeon/PD6", true);
+        setup(143, "/new_tiles/Dungeon/PD67", false);
+        setup(144, "/new_tiles/Dungeon/PD68", false);
+        setup(145, "/new_tiles/Dungeon/PD69", false);
+        setup(146, "/new_tiles/Dungeon/PD7", true);
+        setup(147, "/new_tiles/Dungeon/PD8", true);
+        setup(148, "/new_tiles/Dungeon/PD9", true);
 
         setup(150, "/new_tiles/perete_casa", true);
 

@@ -246,6 +246,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
             for (int i = 0; i < projectiles.size(); i++) {
+                System.out.println("update" + i);
                 projectiles.get(i).update();
             }
         }

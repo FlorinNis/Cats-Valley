@@ -13,7 +13,7 @@ Green_Slime extends Entity {
         super(gp);
 
         name = "Green Slime";
-        speed = 1;
+        speed = 3;
         maxLife = 4;
         life = maxLife;
         enemy_type = "Slime";

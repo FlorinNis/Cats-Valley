@@ -42,7 +42,7 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
-        solidArea = new Rectangle(30, 30, 30, 60);
+        solidArea = new Rectangle(70, 75, 45, 100);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         setDefaultValues();
@@ -60,50 +60,50 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
 
-        up1 = setup("/player/New_Player/florinwalkback1");
-        up2 = setup("/player/New_Player/florinwalkback2");
-        up3 = setup("/player/New_Player/florinwalkback3");
+        up1 = setupPlayer("/player/New_Player/florinwalkback1");
+        up2 = setupPlayer("/player/New_Player/florinwalkback2");
+        up3 = setupPlayer("/player/New_Player/florinwalkback3");
 
-        down1 = setup("/player/New_Player/florinwalkfront1");
-        down2 = setup("/player/New_Player/florinwalkfront2");
-        down3 = setup("/player/New_Player/florinwalkfront3");
+        down1 = setupPlayer("/player/New_Player/florinwalkfront1");
+        down2 = setupPlayer("/player/New_Player/florinwalkfront2");
+        down3 = setupPlayer("/player/New_Player/florinwalkfront3");
 
-        left1 = setup("/player/New_Player/florinwalkleft1");
-        left2 = setup("/player/New_Player/florinwalkleft2");
-        left3 = setup("/player/New_Player/florinwalkleft3");
+        left1 = setupPlayer("/player/New_Player/florinwalkleft1");
+        left2 = setupPlayer("/player/New_Player/florinwalkleft2");
+        left3 = setupPlayer("/player/New_Player/florinwalkleft3");
 
-        right1 = setup("/player/New_Player/florinwalkright1");
-        right2 = setup("/player/New_Player/florinwalkright2");
-        right3 = setup("/player/New_Player/florinwalkright3");
+        right1 = setupPlayer("/player/New_Player/florinwalkright1");
+        right2 = setupPlayer("/player/New_Player/florinwalkright2");
+        right3 = setupPlayer("/player/New_Player/florinwalkright3");
 
-        stand1 = setup("/player/New_Player/florinwalkfront1");
-        stand2 = setup("/player/New_Player/florinwalkfront1");
-        stand3 = setup("/player/New_Player/florinwalkfront1");
+        stand1 = setupPlayer("/player/New_Player/florinwalkfront1");
+        stand2 = setupPlayer("/player/New_Player/florinwalkfront1");
+        stand3 = setupPlayer("/player/New_Player/florinwalkfront1");
 
-        up_left1 = setup("/player/New_Player/florinwalkdiagleftup1");
-        up_left2 = setup("/player/New_Player/florinwalkdiagleftup2");
-        up_left3 = setup("/player/New_Player/florinwalkdiagleftup3");
+        up_left1 = setupPlayer("/player/New_Player/florinwalkdiagleftup1");
+        up_left2 = setupPlayer("/player/New_Player/florinwalkdiagleftup2");
+        up_left3 = setupPlayer("/player/New_Player/florinwalkdiagleftup3");
 
-        up_right1 = setup("/player/New_Player/florinwalkdiagrightup1");
-        up_right2 = setup("/player/New_Player/florinwalkdiagrightup2");
-        up_right3 = setup("/player/New_Player/florinwalkdiagrightup3");
+        up_right1 = setupPlayer("/player/New_Player/florinwalkdiagrightup1");
+        up_right2 = setupPlayer("/player/New_Player/florinwalkdiagrightup2");
+        up_right3 = setupPlayer("/player/New_Player/florinwalkdiagrightup3");
 
-        down_left1 = setup("/player/New_Player/florinwalkdiagleftdown1");
-        down_left2 = setup("/player/New_Player/florinwalkdiagleftdown2");
-        down_left3 = setup("/player/New_Player/florinwalkdiagleftdown3");
+        down_left1 = setupPlayer("/player/New_Player/florinwalkdiagleftdown1");
+        down_left2 = setupPlayer("/player/New_Player/florinwalkdiagleftdown2");
+        down_left3 = setupPlayer("/player/New_Player/florinwalkdiagleftdown3");
 
-        down_right1 = setup("/player/New_Player/florinwalkdiagrightdown1");
-        down_right2 = setup("/player/New_Player/florinwalkdiagrightdown2");
-        down_right3 = setup("/player/New_Player/florinwalkdiagrightdown3");
+        down_right1 = setupPlayer("/player/New_Player/florinwalkdiagrightdown1");
+        down_right2 = setupPlayer("/player/New_Player/florinwalkdiagrightdown2");
+        down_right3 = setupPlayer("/player/New_Player/florinwalkdiagrightdown3");
 
-        up_dash = setup("/Effects/dash_up_down");
-        down_dash = setup("/Effects/dash_up_down");
-        left_dash = setup("/Effects/dash_left_right");
-        right_dash = setup("/Effects/dash_left_right");
-        left_diag_dash = setup("/Effects/dash_left_diag");
-        right_diag_dash = setup("/Effects/dash_right_diag");
-        up_dash1 = setup("/Effects/up_dash_1");
-        up_dash2 = setup("/Effects/up_dash_2");
+        up_dash = setupPlayer("/Effects/player_up_dash");
+        down_dash = setupPlayer("/Effects/player_dash_down");
+        left_dash = setupPlayer("/Effects/player_left_dash");
+        right_dash = setupPlayer("/Effects/player_right_dash");
+        left_diag_dash = setupPlayer("/Effects/player_down_left_dash");
+        right_diag_dash = setupPlayer("/Effects/player_down_right_dash");
+        up_dash1 = setupPlayer("/Effects/player_up_left_dash");
+        up_dash2 = setupPlayer("/Effects/player_up_right_dash");
 
 
         up1_sword = setupScaleForSword("/Player/player_sword_1/up_1_sword_1");
@@ -644,6 +644,9 @@ public class Player extends Entity{
                     if (spriteNum == 2) {
                         image = up_dash;
                     }
+                    if (spriteNum == 3) {
+                        image = up_dash;
+                    }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
                         image = up1;
@@ -670,6 +673,9 @@ public class Player extends Entity{
                         image = down_dash;
                     }
                     if (spriteNum == 2) {
+                        image = down_dash;
+                    }
+                    if (spriteNum == 3) {
                         image = down_dash;
                     }
                 }else if(!hasSword){
@@ -699,6 +705,9 @@ public class Player extends Entity{
                     if (spriteNum == 2) {
                         image = left_dash;
                     }
+                    if (spriteNum == 3) {
+                        image = left_dash;
+                    }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
                         image = left1;
@@ -726,6 +735,9 @@ public class Player extends Entity{
                     if (spriteNum == 2) {
                         image = right_dash;
                     }
+                    if (spriteNum == 3) {
+                        image = right_dash;
+                    }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
                         image = right1;
@@ -748,10 +760,13 @@ public class Player extends Entity{
             case "up_right":
                 if(isDashing){
                     if (spriteNum == 1) {
-                        image = right_diag_dash;
+                        image = up_dash2;
                     }
                     if (spriteNum == 2) {
-                        image = right_diag_dash;
+                        image = up_dash2;
+                    }
+                    if (spriteNum == 3) {
+                        image = up_dash2;
                     }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
@@ -775,10 +790,13 @@ public class Player extends Entity{
             case "up_left":
                 if(isDashing){
                     if (spriteNum == 1) {
-                        image = left_diag_dash;
+                        image = up_dash1;
                     }
                     if (spriteNum == 2) {
-                        image = left_diag_dash;
+                        image = up_dash1;
+                    }
+                    if (spriteNum == 3) {
+                        image = up_dash1;
                     }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
@@ -807,6 +825,9 @@ public class Player extends Entity{
                     if (spriteNum == 2) {
                         image = right_diag_dash;
                     }
+                    if (spriteNum == 3) {
+                        image = right_diag_dash;
+                    }
                 }else if(!hasSword){
                     if (spriteNum == 1) {
                         image = down_right1;
@@ -832,6 +853,9 @@ public class Player extends Entity{
                         image = left_diag_dash;
                     }
                     if (spriteNum == 2) {
+                        image = left_diag_dash;
+                    }
+                    if (spriteNum == 3) {
                         image = left_diag_dash;
                     }
                 }else if(!hasSword){
