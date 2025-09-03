@@ -2,6 +2,7 @@ package Main;
 
 import Enemy.Frog_Boss;
 import Enemy.Green_Slime;
+import Entity.Entity;
 import Entity.NPC_Factory;
 import Entity.NPC_Type;
 import Object.Key;
@@ -29,6 +30,32 @@ public class AssetSetter {
     GamePanel gp;
     Random random = new Random();
     Set<int[]> treePositions = new HashSet<>();
+
+    public void initializeAssets() {
+        LoadingScreen loadingScreen = new LoadingScreen();
+        loadingScreen.showLoading();
+
+        Thread generationThread = new Thread(() -> {
+            try {
+                int totalSteps = 2; // Total tasks: setGrass and setObject
+                int counter = 0;
+
+                setGrass();
+                counter++;
+                loadingScreen.updateProgress((counter * 100) / totalSteps);
+
+                setObject(0);
+                counter++;
+                loadingScreen.updateProgress((counter * 100) / totalSteps);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                loadingScreen.hideLoading();
+            }
+        });
+        generationThread.start();
+    }
 
     public AssetSetter(GamePanel gp) {
 

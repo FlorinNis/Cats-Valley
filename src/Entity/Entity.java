@@ -277,15 +277,15 @@ public class Entity {
                         case "right":
                             worldX += speed;
                             break;
-
-                        case "Object":
-                            break;
-                        case "Projectile":
-                            System.out.println("Projectile" + speedX + " " + speedY);
-                            worldX += speedX;
-                            worldY += speedY;
-                            break;
                     }
+                    break;
+                case "Object":
+                    break;
+                case "Projectile":
+                    System.out.println("Projectile" + speedX + " " + speedY);
+                    worldX += speedX;
+                    worldY += speedY;
+                    break;
             }
         }
 
@@ -677,7 +677,7 @@ public class Entity {
 
         try{
             image = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
-            image = uTool.scaleImage(image, gp.tileSize*2, gp.tileSize*2);
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         }catch(IOException e) {
             e.printStackTrace();
         }

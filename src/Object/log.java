@@ -14,14 +14,13 @@ public class log extends Entity {
         object_type = "log";
         pickedUp = false;
         down1 = setup("/Object/New_Objects/log");
-        //itemDescription = "What does it open?...";
         dashable = true;
         collision = true;
 
-        solidArea.x = 24;
-        solidArea.y = 25;
-        solidArea.width = 45;
-        solidArea.height = 30;
+        solidArea.x = gp.tileSize/4;
+        solidArea.y = gp.tileSize/2;
+        solidArea.width = gp.tileSize/2;
+        solidArea.height = gp.tileSize/4;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

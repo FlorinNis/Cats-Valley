@@ -15,14 +15,13 @@ public class tree extends Entity {
         down3 = setupForTree("/Object/New_Objects/copac_3");
         entity_type = "Object";
         object_type = "tree";
-        //itemDescription = "What does it open?...";
         collision = true;
         pickedUp = false;
 
-        solidArea.x = 120;
-        solidArea.y = 80;
-        solidArea.width = 120;
-        solidArea.height = 50;
+        solidArea.x = gp.tileSize;
+        solidArea.y = gp.tileSize/2;
+        solidArea.width = gp.tileSize*2;
+        solidArea.height = gp.tileSize;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

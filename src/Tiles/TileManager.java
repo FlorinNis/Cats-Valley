@@ -139,7 +139,7 @@ public class TileManager {
         setup(122, "/new_tiles/PC6", true);
         setup(123, "/new_tiles/PC7", true);
         setup(124, "/new_tiles/PC8", true);
-        //setup(125, "/new_tiles/PC9", true);
+        setup(68, "/new_tiles/PC9", true);
         //Dungeon
         setup(67, "/new_tiles/Dungeon/mossy_podea", false);
         setup(125, "/new_tiles/Dungeon/PD1", true);

@@ -18,13 +18,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     //screen settings
     final int originalTileSize = 32; //32x32 tile
-    int scale = 3;
+    int scale = 2;
 
     public final int tileSize = originalTileSize * scale; //96x96 tile
     public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol;  //1920 pixels
-    public final int screenHeight = tileSize * maxScreenRow; //1152 pixels
+    public final int screenHeight = tileSize * maxScreenRow; //1056 pixels
 
     //world settings
     public final int maxWorldCol = 100;
@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.addMouseListener(mouseH);
         this.setFocusable(true);
-        projectiles = new ArrayList<>();
+        //projectiles = new ArrayList<>();
     }
 
     public void setupGame() {
@@ -101,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setObject();
 //        aSetter.setNPC();
 //        aSetter.setMonster();
-        loadCurrentMap(0);
+        //loadCurrentMap(0);
 
         playMusic(0);
         music.fc.setValue(-20.0f);
@@ -131,8 +131,9 @@ public class GamePanel extends JPanel implements Runnable {
         if(index == 0) {
             if(!once[index]) {
                 //showLoadingScreen(g2);
-                aSetter.setObject(index);
-                aSetter.setGrass();
+//                aSetter.setObject(index);
+//                aSetter.setGrass();
+                aSetter.initializeAssets();
                 aSetter.setNPC(index);
                 aSetter.setMonster();
                 once[index] = true;
@@ -245,8 +246,8 @@ public class GamePanel extends JPanel implements Runnable {
                     monster[currentMap][i].update();
                 }
             }
-            for (int i = 0; i < projectiles.size(); i++) {
-                System.out.println("update" + i);
+            for (int i = 1; i < projectiles.size(); i++) {
+                //System.out.println("update" + i);
                 projectiles.get(i).update();
             }
         }
@@ -316,7 +317,8 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             });
             //draw projectile
-            for (int i = 0; i < projectiles.size(); i++) {
+            for (int i = 1; i < projectiles.size(); i++) {
+                //System.out.println("draw" + i);
                 projectiles.get(i).draw(g2);
             }
 

@@ -17,10 +17,10 @@ public class bush extends Entity {
         collision = true;
         pickedUp = false;
 
-        solidArea.x = 5;
-        solidArea.y = 40;
-        solidArea.width = 70;
-        solidArea.height = 40;
+        solidArea.x = 0;
+        solidArea.y = gp.tileSize/2;
+        solidArea.width = gp.tileSize;
+        solidArea.height = gp.tileSize/2;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }

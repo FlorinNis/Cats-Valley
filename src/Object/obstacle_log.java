@@ -14,14 +14,13 @@ public class obstacle_log extends Entity {
         object_type = "obstacle_log";
         pickedUp = false;
         down1 = setup("/Object/New_Objects/log_dash");
-        //itemDescription = "What does it open?...";
         dashable = true;
         collision = true;
 
-        solidArea.x = 8;
-        solidArea.y = 72;
-        solidArea.width = 92;
-        solidArea.height = 25;
+        solidArea.x = 0;
+        solidArea.y = gp.tileSize/4*3;
+        solidArea.width = gp.tileSize;
+        solidArea.height = gp.tileSize/4;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

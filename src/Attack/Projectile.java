@@ -36,6 +36,7 @@ public class Projectile extends Entity {
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         double directionX = deltaX / distance;
         double directionY = deltaY / distance;
+        System.out.println("Direction X: " + directionX + ", Direction Y: " + directionY);
         speedX = (int) (directionX * speed);
         speedY = (int) (directionY * speed);
     }

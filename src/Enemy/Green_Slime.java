@@ -48,7 +48,7 @@ Green_Slime extends Entity {
     public void setAction() {
 
         actionLockCounter ++;
-        System.out.println("playerNearby: " + playerNearby);
+        //System.out.println("playerNearby: " + playerNearby);
 
         if (playerNearby) {
             followPlayer(this);

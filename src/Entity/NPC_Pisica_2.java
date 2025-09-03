@@ -15,10 +15,10 @@ public class NPC_Pisica_2 extends Entity {
         entity_type = "NPC";
         speed = 0;
 
-        solidArea.x = 20;
-        solidArea.y = 18;
-        solidArea.width = 70;
-        solidArea.height = 64;
+        solidArea.x = 10;
+        solidArea.y = gp.tileSize/2;
+        solidArea.width = gp.tileSize-20;
+        solidArea.height = gp.tileSize/2;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
