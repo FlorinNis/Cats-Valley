@@ -84,7 +84,7 @@ public class TileManager {
         setup(47, "/new_tiles/grass13", false);
 
         //House
-        setup(69, "/new_tiles/PC0", true);
+        setup(70, "/new_tiles/PC0", true);
         setup(71, "/new_tiles/PC1", true);
         setup(72, "/new_tiles/PC10", true);
         setup(73, "/new_tiles/PC11", true);

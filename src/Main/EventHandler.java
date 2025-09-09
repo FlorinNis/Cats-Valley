@@ -62,12 +62,12 @@ public class EventHandler {
                 gp.player.stopMoving();
 
                 //casa mare
-            } else if (hit(0, 35, 51, "any") == true) {
+            } else if (hit(0, 36, 51, "any") == true) {
                 gp.playSF(5);
                 gp.loadCurrentMap(4);
                 teleport(4, 36, 30);
                 gp.player.stopMoving();
-            } else if (hit(0, 36, 51, "any") == true) {
+            } else if (hit(0, 35, 51, "any") == true) {
                 gp.playSF(5);
                 gp.loadCurrentMap(4);
                 teleport(4, 36, 30);
@@ -103,10 +103,24 @@ public class EventHandler {
                 gp.player.stopMoving();
             }
             else if (hit(0, 57, 19, "any") == true){
-                teleport(0, 76, 62);
+                //teleport(0, 76, 62);
                 gp.playSF(5);
                 teleport(1, 15, 14);
+
             }
+            else if (hit(0, 56, 19, "any") == true) {
+                teleport(1, 15, 14);
+            }
+            else if (hit(0, 58, 19, "any") == true) {
+                teleport(1, 15, 14);
+            }
+            else if (hit(0, 59, 19, "any") == true) {
+                teleport(1, 15, 14);
+            }
+            else if (hit(1, 15, 14, "any") == true) {
+                teleport(0, 58, 19);
+            }
+
         }
 
 

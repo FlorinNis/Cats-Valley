@@ -21,10 +21,10 @@ Frog_Boss extends Entity {
         enemy_type = "Frog_Boss";
         entity_type = "Enemy";
 
-        solidArea.x = 10;
-        solidArea.y = 48;
-        solidArea.width = 160;
-        solidArea.height = 120;
+        solidArea.x = 0;
+        solidArea.y = 0;
+        solidArea.width = gp.tileSize*4-20;
+        solidArea.height = gp.tileSize*4-20;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         move_direction = "Frog_Boss";

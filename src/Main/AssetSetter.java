@@ -37,16 +37,16 @@ public class AssetSetter {
 
         Thread generationThread = new Thread(() -> {
             try {
-                int totalSteps = 2; // Total tasks: setGrass and setObject
-                int counter = 0;
-
-                setGrass();
-                counter++;
-                loadingScreen.updateProgress((counter * 100) / totalSteps);
-
+                //int totalSteps = 2; // Total tasks: setGrass and setObject
+                //int counter = 0;
                 setObject(0);
-                counter++;
-                loadingScreen.updateProgress((counter * 100) / totalSteps);
+                setGrass();
+                //counter++;
+                //loadingScreen.updateProgress((counter * 100) / totalSteps);
+
+
+                //counter++;
+                //loadingScreen.updateProgress((counter * 100) / totalSteps);
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -15,12 +15,12 @@ public class LoadingScreen extends JWindow{
         loadingLabel.setOpaque(true);
         loadingLabel.setBackground(Color.BLACK);
 
-        progressBar = new JProgressBar(0, 100);
-        progressBar.setStringPainted(true);
+        //progressBar = new JProgressBar(0, 100);
+        //progressBar.setStringPainted(true);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(loadingLabel, BorderLayout.CENTER);
-        panel.add(progressBar, BorderLayout.SOUTH);
+        //panel.add(progressBar, BorderLayout.SOUTH);
 
         add(panel);
         //add(loadingLabel);
@@ -33,9 +33,9 @@ public class LoadingScreen extends JWindow{
         setVisible(true);
     }
 
-    public void updateProgress(int value) {
-        progressBar.setValue(value);
-    }
+    //public void updateProgress(int value) {
+       // progressBar.setValue(value);
+    //}
 
     public void hideLoading() {
         setVisible(false);

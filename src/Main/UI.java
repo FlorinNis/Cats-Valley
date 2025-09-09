@@ -280,6 +280,8 @@ public class UI {
                     gp.player.handItem[--equipmentIndex] = null;
                     equipPressed = false;
                     gp.player.hasSword = false;
+                    gp.player.solidArea.x= 10;
+                    gp.player.solidAreaDefaultX= gp.player.solidArea.x;
                     item.equiped = false;
                 }
                 else if(gp.player.handItem[equipmentIndex] == null) {
@@ -288,6 +290,9 @@ public class UI {
                     equipmentIndex++;
                     equipPressed = false;
                     gp.player.hasSword = true;
+                    gp.player.solidArea.x= gp.tileSize/2;
+                    gp.player.solidAreaDefaultX= gp.player.solidArea.x;
+                    //gp.player.solidArea.height= gp.tileSize*2;
                 }
             }
         }else g2.drawString("Qty: " + item.qty, infoBoxX + gp.tileSize / 2, infoBoxY + gp.tileSize * 5);
